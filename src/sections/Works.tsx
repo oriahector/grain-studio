@@ -9,7 +9,7 @@ const items = [
   {
     title: 'GROSSO NAPOLETANO',
     tag: 'PHOTOGRAPHY',
-    image: '/images/bici.jpg',
+    image: '/images/grosso.jpg',
   },
   {
     title: 'LUNAR',
@@ -22,7 +22,7 @@ export function Works() {
   return (
     <section
       id="works"
-      className="section container-px mx-auto py-28 text-[--color-fg] bg-[--color-bg]"
+      className="section container-px mx-auto text-[--color-fg] bg-[--color-bg]"
     >
       <h2 className="text-center text-15xl text-[--color-accent] tracking-tight font-anton">
         WORKS
@@ -34,7 +34,7 @@ export function Works() {
             key={it.title}
             className="group relative overflow-hidden bg-black text-white"
           >
-            <div className="relative aspect-[16/7] w-full overflow-hidden">
+            <div className="relative aspect-[16/4] w-full overflow-hidden">
               <img
                 src={it.image}
                 alt={it.title}

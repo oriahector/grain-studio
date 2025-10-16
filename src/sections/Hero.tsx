@@ -5,12 +5,16 @@ export function Hero() {
   return (
     <section id="hero" className="section relative container-px mx-auto flex min-h-screen flex-col items-start justify-end gap-6 pb-20">
       <div className="absolute inset-0 -z-10">
-        <img
-          src="/images/bici.jpg"
-          alt="Background"
-          className="h-full w-full object-cover opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="h-full w-full object-cover"
+        >
+          <source src="/images/video.MP4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-white/30 to-white/20" />
       </div>
       <h1 className="max-w-3xl text-15xl font-anton tracking-tight leading-none text-right">
         GRAIN<br />

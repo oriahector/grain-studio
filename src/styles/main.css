@@ -8,11 +8,22 @@
   --spacing-container: 1rem;
   --radius-lg: 0.75rem;
   --text-10xl: 9rem;
+  --text-xxl: 11rem;
   --text-15xl: 15rem;
 }
 
 :root {
   scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--color-accent);
+  color: white;
 }
 
 .container-px {
