@@ -5,10 +5,12 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement>
 export function Button({ className = '', ...props }: Props) {
   return (
     <button
-      className={
-        'inline-flex items-center justify-center rounded-[--radius-lg] px-4 py-2 font-medium ring-1 ring-white/15 shadow-sm hover:opacity-90 focus:outline-none focus-visible:ring-2 ' +
-        'bg-[--color-accent] text-accent ' + className
-      }
+      className={`
+        relative inline-flex cursor-pointer items-center justify-center px-4 py-2 text-3xl focus:outline-none
+        after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current 
+        after:transition-all after:duration-300 after:ease-out hover:after:w-full uppercase
+        ${className}
+      `}
       {...props}
     />
   )

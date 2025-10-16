@@ -6,9 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        'mango': ['Mango Grotesque', 'sans-serif'],
-      },
     },
   },
   plugins: [],
