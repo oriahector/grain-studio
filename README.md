@@ -5,6 +5,3 @@
 pnpm i   # o npm/yarn
 pnpm dev
 ```
-
-Para Tailwind v4 no necesitas config; se importa en `src/styles/main.css`.
-Tokens de tema en `@theme`.
