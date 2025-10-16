@@ -24,7 +24,7 @@ export function Works() {
       id="works"
       className="section container-px mx-auto py-28 text-[--color-fg] bg-[--color-bg]"
     >
-      <h2 className="text-center text-6xl md:text-7xl font-black text-[--color-accent] tracking-tight mb-14">
+      <h2 className="text-center text-6xl md:text-7xl font-black text-[--color-accent] tracking-tight mb-14 font-mango">
         WORKS
       </h2>
 

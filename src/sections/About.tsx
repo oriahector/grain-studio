@@ -2,7 +2,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="section container-px mx-auto py-32 bg-accent "
+      className="section container-px mx-auto py-32 bg-accent font-mango"
     >
       <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 items-start">
         <div>
