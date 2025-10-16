@@ -4,7 +4,7 @@ const items = [
   {
     title: 'ORNA GROUP',
     tag: 'WEB DEVELOPMENT',
-    image: '/images/bici.jpg',
+    image: '/images/orna.jpg',
   },
   {
     title: 'GROSSO NAPOLETANO',
