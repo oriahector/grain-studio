@@ -1,50 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Item, itemsData } from '../data/worksData'
 
-type Item = {
-  title: string
-  tag: string
-  image: string
-  url: string
-}
-
-const itemsData: Item[] = [
-  {
-    title: 'TREE BROTHERS',
-    tag: 'WEB DEVELOPMENT',
-    image: '/images/tree.jpg',
-    url: 'https://treebrothers.com'
-  },
-  {
-    title: 'GROSSO NAPOLETANO',
-    tag: 'PHOTOGRAPHY',
-    image: '/images/grosso.jpg',
-    url: 'https://www.instagram.com/p/DJZVlNEKySJ/?img_index=1'
-  },
-  {
-    title: 'ORNA & CIRCA',
-    tag: 'WEB DEVELOPMENT',
-    image: '/images/orna.jpg',
-    url: 'https://www.ornagroup.com/'
-  },
-  {
-    title: 'BAR PIMENTEL',
-    tag: 'PHOTOGRAPHY',
-    image: '/images/pimentel.jpg',
-    url: 'https://barpimentel.com'
-  },
-  {
-    title: 'BUCLE CAFÉ',
-    tag: 'PHOTOGRAPHY',
-    image: '/images/bucle.jpg',
-    url: 'https://www.instagram.com/p/DPL8RIvDNTP/?img_index=1'
-  },
-  {
-    title: 'DONDE ÁLEX BARBERÍA',
-    tag: 'PHOTOGRAPHY AND WEB DEVELOPMENT',
-    image: '/images/alex.jpg',
-    url: 'https://newproject.com'
-  }
-]
 
 export function Works() {
   const [items] = useState<Item[]>(itemsData)
@@ -69,19 +25,16 @@ export function Works() {
 
   // open sequence: mount then toggle open to trigger CSS enter animation
   function openPanel(item: Item) {
-    console.log('[Works] openPanel called ->', item?.title) // <-- debug
     setSelected(item)
     setMounted(true)
     // next frame toggle open so transitions run
     requestAnimationFrame(() => {
       setOpen(true)
-      console.log('[Works] setOpen(true)') // <-- debug
     })
   }
 
   // start close animation, then unmount after duration
   function startClose() {
-    console.log('[Works] startClose') // <-- debug
     setOpen(false)
     // match this timeout with CSS transition duration below (520ms)
     if (closeTimer.current) window.clearTimeout(closeTimer.current)
@@ -89,7 +42,6 @@ export function Works() {
       setMounted(false)
       setSelected(null)
       closeTimer.current = null
-      console.log('[Works] unmounted') // <-- debug
     }, 520)
   }
 
@@ -150,11 +102,11 @@ export function Works() {
           <aside
             role="dialog"
             aria-modal="true"
-            className="fixed right-0 top-0 h-full w-full bg-white text-black shadow-xl panel"
+            className="fixed right-0 top-0 h-full w-full bg-white text-accent shadow-xl panel"
           >
             <div className="p-6 h-full flex flex-col">
               <div className="mb-4 flex items-center">
-                 <button
+                <button
                   aria-label="Cerrar"
                   onClick={closePanel}
                   className="close-btn mr-4"
@@ -164,39 +116,60 @@ export function Works() {
                   </svg>
                 </button>
                 <h3 className="text-2xl font-semibold">GRAIN STUDIO</h3>
-               
               </div>
 
-              <div className="flex-1 overflow-auto flex flex-col md:flex-row gap-6">
-                <section className="panel-left w-full md:w-1/4 pr-0 md:pr-6 fixed bottom-0">
-      
-                  <h2 className="">{selected ? selected.title : ''}</h2>
-                  <p className="text-m mb-4">2025</p>
-                  <div className="prose max-w-none text-gray-700">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus
-                      ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
-                    </p>
-                    <p>
-                      Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
-                      lacinia arcu eget nulla.
-                    </p>
+              <div className="flex-1 overflow-auto flex flex-col md:flex-row gap-6 ">
+                <section className="panel-left w-full md:w-1/4 pr-0 md:pr-6 md:fixed bottom-0">
+                  <h2>{selected ? selected.title : ''}</h2>
+                  <p className="text-m mb-4">{selected?.year}</p>
+                  <div className="max-w-none text-gray-700">
+                    <p className='font-sans leading-none mb-4'>{selected?.desc}</p>
                   </div>
-                  <h4 className="text-sm text-[--color-accent] font-light mb-10 mt-3">{selected?.tag}</h4>
+                  <h4 className="text-sm text-[--color-accent] mb-10 mt-3">{selected?.tag}</h4>
+
+                  <div className="flex flex-col gap-1 mb-6">
+                    {selected?.url && (
+                      <a
+                        href={selected.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-xs text-[--color-accent] hover:underline font-sans"
+                      >
+                        Visit Site
+                        <svg className="ml-1" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                          <path d="M5 12h14M13 5l6 7-6 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
+                    )}
+
+                    {selected?.urlSecondary && (
+                      <a
+                        href={selected.urlSecondary}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-xs text-[--color-accent] hover:underline font-sans"
+                      >
+                        Visit Site
+                        <svg className="ml-1" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                          <path d="M5 12h14M13 5l6 7-6 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                 </section>
 
-                <aside className="panel-right w-full md:w-3/4 flex flex-col items-stretch gap-4 md:ml-[25%]">
-                  <div className="h-64 md:h-full bg-gray-100">
-                    {selected ? (
-                      <>
-                      <img src={selected.image} alt={selected.title} className="object-cover w-full h-full" />
-                       <img src={selected.image} alt={selected.title} className="object-cover w-full h-full" />
-                        <img src={selected.image} alt={selected.title} className="object-cover w-full h-full" />
-                         <img src={selected.image} alt={selected.title} className="object-cover w-full h-full" />
-                         </>
-                    ) : (
-                      <div className="text-gray-400">Vista previa</div>
-                    )}
+                <aside className="panel-right w-full md:w-3/4 flex flex-col items-stretch gap-4 md:ml-[25%] md:absolute top-0 h-full md:overflow-scroll">
+                  <div className="h-64 md:h-full">
+                    {selected && (
+                      selected?.gallery?.map((item, index) => (
+                        <img
+                          key={index}
+                          src={item.imgSrc}
+                          alt={item.alt || `Gallery image ${index + 1}`}
+                          className='mb-4'
+                        />
+                      )))
+                    }
                   </div>
                 </aside>
               </div>
