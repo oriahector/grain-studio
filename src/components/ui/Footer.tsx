@@ -3,7 +3,7 @@ import { InstagramIcon } from "../icons/Instagram"
 const socialLinks = [
   {
     name: 'Instagram',
-    url: 'https://instagram.com/grainstudio',
+    url: 'https://instagram.com/wearegrainstudio',
     icon: InstagramIcon
   },
   // Aquí puedes agregar más redes sociales según necesites
