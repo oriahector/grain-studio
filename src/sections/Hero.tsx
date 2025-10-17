@@ -20,7 +20,7 @@ export function Hero() {
         GRAIN<br />
         STUDIO
       </h1>
-      <div className="ml-auto flex gap-3 text-accent">
+      <div className="ml-auto flex gap-3 text-accent text-3xl">
         <Button><a href="#contact">Start a project</a></Button>
       </div>
     </section>
