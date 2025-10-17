@@ -1,18 +1,17 @@
 import React from 'react'
-import { useSections } from '@/lib/sections'
-import { useScrollSpy } from '@/hooks/useScrollSpy'
+
 import { Button } from './Button'
 
 const links = [
   { id: 'works', label: 'Works' },
   { id: 'services', label: 'Services' },
   { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Let’s talk' },
+  { id: 'contact', label: 'Contact' },
 ] as const
 
 export function NavBar() {
-  const { ids } = useSections()
-  const active = useScrollSpy(ids)
+
+  
   const [hasScrolled, setHasScrolled] = React.useState(false)
 
   React.useEffect(() => {
@@ -30,8 +29,7 @@ export function NavBar() {
         hasScrolled ? 'bg-white text-accent' : 'text-accent'
       }`}>
       <div className="container-px mx-auto flex h-20 items-center justify-between">
-        {/* <a href="#hero" className="font-bold tracking-tight">GRAIN<span className="opacity-70">/</span>STUDIO</a> */}
-        <nav className="flex gap-6 text-[length:var(--text-3xl)] w-full justify-between font-extrabold uppercase">
+        <nav className="flex md:text-3xl text-xl w-full justify-between uppercase">
           {links.map((l) => (
             <Button
               key={l.id}

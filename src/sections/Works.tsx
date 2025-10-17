@@ -41,7 +41,7 @@ export function Works() {
   return (
     <section
       id="works"
-      className="section container-px mx-auto text-[--color-fg] bg-[--color-bg]"
+      className="section container-px pt-20 md:pt-36 mx-auto text-[--color-fg] bg-[--color-bg]"
     >
       <h2 className="text-center text-[length:var(--title-size)] text-[--color-accent] tracking-tight font-anton">
         WORKS
@@ -66,7 +66,7 @@ export function Works() {
                   <h3 className="text-[length:var(--text-5xl)] md:text-[length:var(--text-7xl)] mb-1 leading-none">
                     {it.title}
                   </h3>
-                  <span className="text-xs md:text-sm text-[--color-accent] font-semibold font-sans">
+                  <span className="text-xs md:text-sm text-[--color-accent] font-semibold font-arimo">
                     {it.tag}
                   </span>
                 </div>

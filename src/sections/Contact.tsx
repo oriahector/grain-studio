@@ -69,11 +69,11 @@ export function Contact() {
     >
       <div className="text-center w-full">
         <h2 className="text-[length:var(--title-size)] leading-none mb-10">
-            CONTACT
+            LET'S TALK
         </h2>
 
         <form
-          className="w-full mt-20 max-w-3xl grid gap-4 md:grid-cols-2 font-sans uppercase ml-auto text-2xl font-semibold"
+          className="w-full mt-20 max-w-3xl grid gap-4 md:grid-cols-2 font-arimo uppercase ml-auto text-2xl font-semibold"
           onSubmit={handleSubmit}
         >
           <input
@@ -112,7 +112,6 @@ export function Contact() {
             {status === 'sending' && <p>Sending...</p>}
             {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
           </div>
-          
           
           {status==='error' && <p>There was an error sending the message: {errorMsg}</p>}
         </form>
