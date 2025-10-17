@@ -105,11 +105,11 @@ export function Contact() {
             rows={5}
             className="md:col-span-2 rounded-none border-b-3 border-[--color-bg]/40 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
           />
-          <div className="md:col-span-2 flex justify-center mt-6">
-            <Button className="text-2xl" type="submit">Send</Button>
+          <div className="md:col-span-2 flex justify-start mt-6">
+            <Button className="text-2xl" type="submit">{status === 'idle' ? 'Send' : 'Sending...'}</Button>
           </div>
-          {status==='ok' && <p className="md:col-span-2 text-green-700 text-sm text-center">¡Mensaje enviado!</p>}
-          {status==='error' && <p className="md:col-span-2 text-red-700 text-sm text-center">Error al enviar: {errorMsg}</p>}
+          {status==='ok' && <p className="md:col-span-2 text-green-700 text-sm text-center">Message sent successfully!</p>}
+          {status==='error' && <p className="md:col-span-2 text-red-700 text-sm text-center">There was an error sending the message: {errorMsg}</p>}
         </form>
       </div>
     </section>

@@ -56,14 +56,14 @@ export function Works() {
               rel="noopener noreferrer"
               className="group relative overflow-hidden bg-black text-white block"
             >
-              <div className="relative aspect-[16/4] w-full overflow-hidden">
+              <div className="relative aspect-[16/4] w-full overflow-hidden min-h-40 md:min-h-auto max-h-60">
                 <img
                   src={it.image}
                   alt={it.title}
                   className="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-60"
                 />
                 <div className="absolute inset-0 flex flex-col p-6 sm:p-10 bg-gradient-to-b from-black/80 via-black/40 to-black-10">
-                  <h3 className="text-[length:var(--text-5xl)] md:text-[length:var(--text-7xl)] mb-1">
+                  <h3 className="text-[length:var(--text-5xl)] md:text-[length:var(--text-7xl)] mb-1 leading-none">
                     {it.title}
                   </h3>
                   <span className="text-xs md:text-sm text-[--color-accent] font-semibold font-sans">
