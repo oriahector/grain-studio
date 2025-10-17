@@ -7,9 +7,8 @@
   --color-accent: #2851B8;
   --spacing-container: 1rem;
   --radius-lg: 0.75rem;
-  --text-10xl: 9rem;
-  --text-xxl: 11rem;
-  --text-15xl: 15rem;
+  /* Responsive heading sizes */
+  --title-size: clamp(3.5rem, 12vw, 7rem); /* Nuevo tamaño más reducido para títulos de sección */
 }
 
 :root {

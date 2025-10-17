@@ -31,7 +31,7 @@ export function NavBar() {
       }`}>
       <div className="container-px mx-auto flex h-20 items-center justify-between">
         {/* <a href="#hero" className="font-bold tracking-tight">GRAIN<span className="opacity-70">/</span>STUDIO</a> */}
-        <nav className="flex gap-6 text-3xl w-full justify-between font-extrabold uppercase">
+        <nav className="flex gap-6 text-[length:var(--text-3xl)] w-full justify-between font-extrabold uppercase">
           {links.map((l) => (
             <Button
               key={l.id}

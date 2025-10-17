@@ -37,11 +37,11 @@ export function Works() {
       id="works"
       className="section container-px mx-auto text-[--color-fg] bg-[--color-bg]"
     >
-      <h2 className="text-center text-15xl text-[--color-accent] tracking-tight font-anton">
+      <h2 className="text-center text-[length:var(--title-size)] text-[--color-accent] tracking-tight font-anton">
         WORKS
       </h2>
 
-      <ul className="flex flex-col gap-8">
+      <ul className="flex flex-col gap-4 md:gap-8">
         {items.map((it) => (
           <li key={it.title}>
             <a
@@ -56,8 +56,8 @@ export function Works() {
                   alt={it.title}
                   className="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-60"
                 />
-                <div className="absolute inset-0 flex flex-col p-6 sm:p-10 bg-gradient-to-b from-black/90 via-black/50 to-black-10">
-                  <h3 className="text-5xl md:text-7xl mb-1">
+                <div className="absolute inset-0 flex flex-col p-6 sm:p-10 bg-gradient-to-b from-black/80 via-black/40 to-black-10">
+                  <h3 className="text-[length:var(--text-5xl)] md:text-[length:var(--text-7xl)] mb-1">
                     {it.title}
                   </h3>
                   <span className="text-xs md:text-sm text-[--color-accent] font-semibold font-sans">

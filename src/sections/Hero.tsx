@@ -16,12 +16,12 @@ export function Hero() {
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-white/30 to-white/20" />
       </div>
-      <h1 className="max-w-3xl text-15xl font-anton tracking-tight leading-none text-right">
+      <h1 className="max-w-3xl text-[length:var(--title-size)] ] font-anton tracking-tight leading-none text-right">
         GRAIN<br />
         STUDIO
       </h1>
       <div className="ml-auto flex gap-3 text-accent">
-        <a href="#contact"><Button>Start a project</Button></a>
+        <Button><a href="#contact">Start a project</a></Button>
       </div>
     </section>
   )

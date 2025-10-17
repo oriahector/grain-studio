@@ -67,7 +67,7 @@ export function Contact() {
       className="section container-px py-32 bg-[--color-fg] text-[--color-bg]"
     >
       <div className="text-center w-full">
-        <h2 className="text-15xl leading-none mb-10">
+        <h2 className="text-[length:var(--title-size)] leading-none mb-10">
             CONTACT
         </h2>
 
@@ -101,7 +101,7 @@ export function Contact() {
             name="message"
             value={formData.message}
             onChange={onChange}
-            placeholder="Let's talk about you have above your arms"
+            placeholder="Let’s talk about you"
             rows={5}
             className="md:col-span-2 rounded-none border-b-3 border-[--color-bg]/40 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
           />
