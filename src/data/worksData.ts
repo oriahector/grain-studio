@@ -52,16 +52,17 @@ export const itemsData: Item[] = [
         ]
     },
     {
-        title: 'DONDE ÁLEX BARBERÍA',
+        title: 'ScandicGo',
         tag: 'PHOTOGRAPHY',
-        image: '/images/alex.jpg',
-        desc: 'Lifestyle photoshoot for a men’s barbershop, capturing the textures, precision, and character of the space to build engaging social media content.',
+        image: '/images/scandic.jpg',
+        desc: 'Content photography for Scandic Go Stockholm, reflecting the hotel’s personality and the welcoming, contemporary style of the Scandic brand.',
         year: '2025',
         gallery: [
-            { imgSrc: '/images/alex1.png', alt: 'Donde Alex' },
-                        { imgSrc: '/images/alex2.png', alt: 'Donde Alex' },
-                                   { imgSrc: '/images/alex3.png', alt: 'Donde Alex' },
-                                                  { imgSrc: '/images/alex4.png', alt: 'Donde Alex' },
+            { imgSrc: '/images/scandic1.png', alt: 'Scandic Go' },
+            { imgSrc: '/images/scandic2.png', alt: 'Scandic Go' },
+            { imgSrc: '/images/scandic3.png', alt: 'Scandic Go' },
+            { imgSrc: '/images/scandic4.png', alt: 'Scandic Go' },
+            { imgSrc: '/images/scandic5.png', alt: 'Scandic Go' },
         ]
     }
 ]
