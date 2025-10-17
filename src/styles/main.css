@@ -10,7 +10,7 @@
   --spacing-container: 1rem;
   --radius-lg: 0.75rem;
   /* Responsive heading sizes */
-  --title-size: clamp(4rem, 12vw, 10rem); /* Nuevo tamaño más reducido para títulos de sección */
+  --title-size: clamp(4rem, 12vw, 14rem); /* Nuevo tamaño más reducido para títulos de sección */
 }
 
 :root {

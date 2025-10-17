@@ -64,7 +64,7 @@ export function Works() {
             <button
               type="button"
               onClick={() => { console.log('click item', it.title); openPanel(it) }} // <-- debug
-              className="group relative overflow-hidden bg-black text-white block w-full text-left"
+              className="group relative overflow-hidden bg-black text-white block w-full text-left cursor-pointer"
             >
               <div className="relative aspect-[16/4] w-full overflow-hidden min-h-40 md:min-h-auto max-h-60">
                 <img
