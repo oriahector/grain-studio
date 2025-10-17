@@ -29,6 +29,12 @@ const items = [
     image: '/images/bucle.jpg',
     url: 'https://www.instagram.com/p/DPL8RIvDNTP/?img_index=1'
   },
+  {
+    title: 'DONDE ÁLEX BARBERÍA',
+    tag: 'PHOTOGRAPHY AND WEB DEVELOPMENT',
+    image: '/images/alex.jpg',
+    url: 'https://newproject.com'
+  }
 ]
 
 export function Works() {
