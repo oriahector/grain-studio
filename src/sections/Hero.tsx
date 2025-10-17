@@ -12,7 +12,7 @@ export function Hero() {
           playsInline
           className="h-full w-full object-cover"
         >
-          <source src="/images/video.MP4" type="video/mp4" />
+          <source src="/images/video_final.mov" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-white/30 to-white/20" />
       </div>

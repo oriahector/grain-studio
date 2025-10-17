@@ -73,22 +73,22 @@ export function Contact() {
         </h2>
 
         <form
-          className="w-full mt-20 max-w-3xl grid gap-4 md:grid-cols-2 font-arimo uppercase ml-auto text-2xl font-semibold"
+          className="w-full mt-20 max-w-3xl grid gap-4 md:grid-cols-2 font-arimo ml-auto text-2xl font-semibold"
           onSubmit={handleSubmit}
         >
           <input
             name="name"
             value={formData.name}
             onChange={onChange}
-            placeholder="Nombre"
-            className="rounded-none border-b-3 border-[--color-bg]/40 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
+            placeholder="Name"
+            className="rounded-none border-b-3 border-[--color-bg]/40 bg-transparent py-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
           />
           <input
             name="lastName"
             value={formData.lastName}
             onChange={onChange}
-            placeholder="Apellidos"
-            className="rounded-none border-b-3 border-[--color-bg]/40 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
+            placeholder="Surnames"
+            className="rounded-none border-b-3 border-[--color-bg]/40 bg-transparent py-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
           />
           <input
             type="email"
@@ -96,7 +96,7 @@ export function Contact() {
             value={formData.email}
             onChange={onChange}
             placeholder="Email"
-            className="md:col-span-2 rounded-none border-b-3 border-[--color-bg]/40 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
+            className="md:col-span-2 rounded-none border-b-3 border-[--color-bg]/40 bg-transparent py-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
           />
           <textarea
             name="message"
@@ -104,11 +104,11 @@ export function Contact() {
             onChange={onChange}
             placeholder="Let’s talk about you"
             rows={5}
-            className="md:col-span-2 rounded-none border-b-3 border-[--color-bg]/40 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
+            className="md:col-span-2 rounded-none border-b-3 border-[--color-bg]/40 bg-transparent py-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none focus:border-[--color-bg] uppercase"
           />
           
-          <div className="md:col-span-2 flex justify-start mt-6 text-2xl">
-            {status !== 'sending' && <Button className="text-2xl" type="submit">Send </Button> }
+          <div className="md:col-span-2 flex justify-start mt-6 text-2xl md:text-5xl uppercase">
+            {status !== 'sending' && <Button type="submit">Send </Button> }
             {status === 'sending' && <p>Sending...</p>}
             {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
           </div>
