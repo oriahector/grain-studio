@@ -1,6 +1,3 @@
-import React from 'react'
-import { Button } from '@/components/ui/Button'
-
 export function Hero() {
   return (
     <section id="hero" className="section relative container-px mx-auto flex min-h-screen flex-col items-start justify-end gap-6 pb-20">
