@@ -12,7 +12,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="container-px py-10 text-md bg-accent text-white">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center font-arimo text-md md:text-2xl">
         <div>
           © {new Date().getFullYear()} Grain Studio • All rights reserved
         </div>

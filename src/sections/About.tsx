@@ -6,10 +6,10 @@ export function About() {
     >
       <div className="mx-auto max-w-6xl grid gap-5 md:grid-cols-2 items-start text-xl md:text-2xl font-arimo">
           <p className="text-white">
-         At Grain Studio, we build at the intersection of design, code, and brand strategy. We are a multidisciplinary team crafting websites, digital identities, and visual systems that move with purpose. Our process combines strategic thinking and technical precision — every project begins with an idea, shaped through rhythm, motion, and interaction until it becomes something tangible.
+   <strong>Grain Studio</strong> is a creative practice rooted in web development, shaped by design, brand strategy, and photography. Our work lives where technology meets aesthetics — translating ideas into fast, intentional, and beautifully structured digital experiences. We build websites and visual systems that move with rhythm and precision, merging strategy and craft to create brands that feel alive on screen. Every project is approached with a developer’s logic and a designer’s eye, balancing clarity, performance, and emotion.
           </p>
           <p className=" text-white">
-         From concept to launch, we translate brands into <strong>interactive stories</strong> through web design, development, and photography. We work closely with our clients to define their visual language and build interfaces that express their identity in motion. Whether we’re creating a brand from the ground up or reimagining an existing one, our goal is always the same: to design and develop with clarity, culture, and craft.
+            Behind Grain Studio are <a className="underline" href="https://www.linkedin.com/in/hmartinezoria/" target="_blank" rel="noopener noreferrer">Héctor</a> and <a className="underline" href="https://www.linkedin.com/in/clara-morrondo/" target="_blank" rel="noopener noreferrer">Clara</a>, two creatives who share a belief that design and code should coexist seamlessly. Together, we craft digital ecosystems that are thoughtful, fast, and culturally aware — from concept to launch. Whether defining a new identity or building a web experience from the ground up, we focus on what matters most: precision in development, meaning in design, and care in every detail.
           </p>
         </div>
          <h2 className="text-[length:var(--title-size)] text-white leading-none font-anton w-full mt-10">
