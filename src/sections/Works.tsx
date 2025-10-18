@@ -85,20 +85,16 @@ export function Works() {
           </li>
         ))}
       </ul>
-
-      {/* panel mounted only when `mounted` true; `open` toggles classes for enter/exit */}
       {mounted && (
         <div
           aria-hidden={!open}
           className={`fixed inset-0 z-50 panel-container ${open ? 'open' : 'closing'}`}
         >
-          {/* overlay */}
           <div
             onClick={closePanel}
             className="absolute inset-0 bg-black/60 overlay"
           />
 
-          {/* panel (100% width) */}
           <aside
             role="dialog"
             aria-modal="true"
