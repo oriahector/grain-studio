@@ -12,7 +12,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="container-px py-10 text-md bg-accent text-white">
-      <div className="flex justify-between items-center font-arimo text-md md:text-2xl">
+      <div className="flex justify-between items-center font-arimo text-md md:text-lg">
         <div>
           © {new Date().getFullYear()} Grain Studio
         </div>
@@ -26,7 +26,7 @@ export function Footer() {
               className="hover:opacity-80 transition-opacity"
               aria-label={`Follow us on ${social.name}`}
             >
-              <social.icon className="w-6 h-6" />
+              <social.icon className="size-5" />
             </a>
           ))}
         </div>

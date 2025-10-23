@@ -87,7 +87,7 @@ export function Works() {
                   <h3 className="text-base md:text-lg font-semibold text-fg mb-1">
                     {it.title}
                   </h3>
-                  <span className="inline-block text-[10px] md:text-xs text-accent font-semibold font-arimo uppercase tracking-wider px-2 py-0.5 rounded-full border border-accent bg-transparent">
+                  <span className="inline-block text-[10px] md:text-xs text-white font-semibold font-arimo uppercase tracking-wider px-2 py-0.5 rounded-full border border-white bg-transparent">
                     {it.tag}
                   </span>
                 </div>

@@ -20,7 +20,7 @@ export function Button({
   
   const sizeClasses = {
     sm: "px-4 py-2 text-xl",
-    md: "text-lg md:text-2xl ",
+    md: "text-lg md:text-2xl",
     lg: "px-8 py-4 text-3xl"
   }
   

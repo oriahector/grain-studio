@@ -39,7 +39,7 @@
 
 .container-px {
   font-family: var(--font-anton);
-  padding-inline: clamp(1rem, 6vw, 4rem);
+  padding-inline: clamp(0.1rem, 6vw, 4rem);
 }
 
 .section {
