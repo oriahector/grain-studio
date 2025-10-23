@@ -5,7 +5,6 @@ import { Button } from './Button'
 const links = [
   { id: 'works', label: 'Works' },
   { id: 'services', label: 'Services' },
-  { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ] as const
 
@@ -26,24 +25,28 @@ export function NavBar() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        hasScrolled ? 'bg-white text-accent' : 'text-accent'
+        hasScrolled ? 'bg-accent text-white' : 'text-white'
       }`}>
       <div className="container-px mx-auto flex h-20 items-center justify-between">
-        <nav className="flex md:text-3xl text-xl w-full justify-between uppercase">
-          {links.map((l) => (
-            <Button
-              key={l.id}
-              onClick={() => {
-                document.querySelector(`#${l.id}`)?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className={[
-                'transition-opacity hover:opacity-100 p-0',
-              ].join(' ')}
-            >
-              {l.label}
-            </Button>
-          ))}
-        </nav>
+        <div className="w-full flex items-center justify-between">
+          <div className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Go to top">
+            <div className=" uppercase tracking-wide text-lg md:text-2xl flex items-center">Grain             <img src="images/grain.svg" alt="icon" className="w-2 h-2 object-contain " /> Studio</div>
+          </div>
+
+          <nav className="flex items-center gap-1 md:gap-6 md:text-2xl text-lg">
+            {links.map((l) => (
+              <Button
+                key={l.id}
+                onClick={() => {
+                  document.querySelector(`#${l.id}`)?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className={[' transition-opacity hover:opacity-100 p-0'].join(' ')}
+              >
+                {l.label}
+              </Button>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   )

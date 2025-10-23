@@ -1,12 +1,11 @@
 @import "tailwindcss";
 @theme {
-    --font-arimo: "Barlow Condensed", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-arimo: "PT Mono", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-anton: "Anton", sans-serif;
-
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --color-bg: var(--color-neutral-950);
   --color-fg: var(--color-neutral-100);
-  --color-accent: #2851B8;
+  --color-accent: #002fa7;
   --spacing-container: 1rem;
   --radius-lg: 0.75rem;
   /* Responsive heading sizes */
@@ -15,15 +14,17 @@
 
 :root {
   scroll-behavior: smooth;
+  background-color:  var(--color-accent);
+
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: white;
+  background-color: white;
+  color: var(--color-accent);
 }
 
 ::-moz-selection {
-  background-color: var(--color-accent);
+  background-color: var(--color-bg);
   color: white;
 }
 
@@ -33,6 +34,37 @@
 }
 
 .section {
-  color: var(--color-accent);
+  color: white;
   scroll-margin-top: 5rem;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+@keyframes spinOrganic {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(180deg);
+  }
+  70% {
+    transform: rotate(220deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-organic {
+  animation: spinOrganic 6s ease-in-out infinite;
+  transform-origin: center center;
 }

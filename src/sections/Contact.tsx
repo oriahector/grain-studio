@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from '@/components/ui/Button'
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string
-const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
+const SERVICE_ID = 'service_jal7ujh'
+const TEMPLATE_ID = 'template_z527x3l'
+const PUBLIC_KEY  = '_3QOseFGEi4azjh7v'
 
 export function Contact() {
   const [formData, setFormData] = React.useState({
@@ -87,7 +87,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="section container-px py-32 bg-[--color-fg] text-[--color-bg]"
+      className="section container-px py-32 bg-[--color-fg] text-white"
     >
       <div className="text-center w-full">
         <h2 className="text-[length:var(--title-size)] leading-none mb-10">
@@ -99,7 +99,7 @@ export function Contact() {
           className="w-full mt-20 max-w-3xl grid gap-4 md:grid-cols-2 font-arimo ml-auto text-2xl font-semibold"
           onSubmit={handleSubmit}
         >
-                    <div className="relative">
+        <div className="relative">
             <input
               name="name"
               value={formData.name}

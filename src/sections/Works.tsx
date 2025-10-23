@@ -52,38 +52,47 @@ export function Works() {
   return (
     <section
       id="works"
-      className="section container-px pt-20 md:pt-36 mx-auto text-[--color-fg] bg-[--color-bg]"
+      className="section container-px pb-20 pt-20 md:pt-36 mx-auto text-[--color-fg] bg-[--color-bg]"
     >
       <h2 className="text-center text-[length:var(--title-size)] text-[--color-accent] tracking-tight font-anton">
         WORKS
       </h2>
 
-      <ul className="flex flex-col gap-4 md:gap-8">
-        {items.map((it) => (
-          <li key={it.title}>
-            <button
-              type="button"
-              onClick={() => { console.log('click item', it.title); openPanel(it) }} // <-- debug
-              className="group relative overflow-hidden bg-black text-white block w-full text-left cursor-pointer"
-            >
-              <div className="relative aspect-[16/4] w-full overflow-hidden min-h-40 md:min-h-auto max-h-60">
-                <img
-                  src={it.image}
-                  alt={it.title}
-                  className="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-60"
-                />
-                <div className="absolute inset-0 flex flex-col p-6 sm:p-10 bg-gradient-to-b from-black/80 via-black/40 to-black-10">
-                  <h3 className="text-[length:var(--text-5xl)] md:text-[length:var(--text-7xl)] mb-1 leading-none">
+      <ul className="works-masonry">
+        {items.map((it, idx) => {
+          // larger heights so images appear bigger
+          const heights = [320, 420, 260, 360, 400, 300]
+          const h = heights[idx % heights.length]
+          return (
+            <li key={it.title} className="works-item">
+              <button
+                type="button"
+                onClick={() => {
+                if (it.url || it.urlSecondary || it.gallery) {
+                  openPanel(it)
+                }}}
+                className="group relative overflow-hidden block w-full text-left cursor-pointer"
+              >
+                <div className="relative w-full overflow-hidden" style={{ height: `${h}px` }}>
+                  <img
+                    src={it.image}
+                    alt={it.title}
+                    className="h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="meta mt-2 px-0">
+                  <h3 className="text-base md:text-lg font-semibold text-[--color-fg] mb-1">
                     {it.title}
                   </h3>
-                  <span className="text-xs md:text-sm text-[--color-accent] font-semibold font-arimo">
+                  <span className="inline-block text-[10px] md:text-xs text-[--color-accent] font-semibold font-arimo uppercase tracking-wider px-2 py-0.5 rounded-full border border-[--color-accent] bg-transparent">
                     {it.tag}
                   </span>
                 </div>
-              </div>
-            </button>
-          </li>
-        ))}
+              </button>
+            </li>
+          )
+        })}
       </ul>
       {mounted && (
         <div
@@ -162,7 +171,8 @@ export function Works() {
                           key={index}
                           src={item.imgSrc}
                           alt={item.alt || `Gallery image ${index + 1}`}
-                          className='mb-4'
+                          className='mb-4 panel-gallery-img'
+                          style={{ ['--i' as any]: index }}
                         />
                       )))
                     }
@@ -175,6 +185,30 @@ export function Works() {
       )}
 
       <style>{`
+        /* Masonry using CSS columns */
+        .works-masonry {
+          column-gap: 1.5rem;
+          column-fill: balance;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+
+        /* responsive column count */
+        .works-masonry { column-count: 1; }
+        @media (min-width: 768px) { .works-masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .works-masonry { column-count: 3; } }
+
+        .works-item {
+          display: inline-block;
+          width: 100%;
+          break-inside: avoid;
+          margin: 0 0 1.5rem;
+        }
+
+        /* ensure images scale within column flow */
+        .works-item img { display: block; width: 100%; height: 100%; }
+
         /* PANEL timings */
         :root {
           --panel-duration: 520ms;
@@ -204,20 +238,22 @@ export function Works() {
           opacity: 0;
           transition: opacity var(--overlay-duration) ease;
         }
+
+        /* PANEL reveal using clip-path wipe from right -> left */
         .panel {
-          transform: translateX(100%);
-          transition: transform var(--panel-duration) cubic-bezier(0.22,1,0.36,1), opacity 240ms ease;
+          clip-path: inset(0 100% 0 0);
+          transition: clip-path var(--panel-duration) cubic-bezier(0.22,1,0.36,1), opacity 240ms ease;
           opacity: 0.99;
-          will-change: transform, opacity;
+          will-change: clip-path, opacity;
         }
 
         /* ENTER (open) */
         .panel-container.open .overlay { opacity: 1; }
-        .panel-container.open .panel { transform: translateX(0%); }
+        .panel-container.open .panel { clip-path: inset(0 0 0 0); }
 
-        /* EXIT (closing) - remove 'open' class, panel translates back */
+        /* EXIT (closing) - remove 'open' class, panel wipes back */
         .panel-container.closing .overlay { opacity: 0; transition: opacity var(--overlay-duration) ease; }
-        .panel-container.closing .panel { transform: translateX(100%); }
+        .panel-container.closing .panel { clip-path: inset(0 100% 0 0); }
 
         /* staggered content */
         .panel-left {
@@ -239,6 +275,18 @@ export function Works() {
           transform: translateY(0) scale(1);
           opacity: 1;
           transition-delay: 140ms;
+        }
+
+        /* staggered gallery images when panel opens */
+        .panel-gallery-img {
+          opacity: 0;
+          transform: translateY(8px) scale(0.995);
+          transition: transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 320ms ease;
+        }
+        .panel-container.open .panel-gallery-img {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          transition-delay: calc(var(--i) * 80ms + 120ms);
         }
 
         /* reduced motion */
