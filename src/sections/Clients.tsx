@@ -45,7 +45,7 @@ export function Clients() {
                     >
                         <span className="inline-flex items-center">
                             {clients.map((c, i) => (
-                                <span key={`a-${i}`} className="inline-flex items-center text-[28px] md:text-[120px] font-arimo">
+                                <span key={`a-${i}`} className="inline-flex items-center text-2xl md:text-5xl font-arimo p-5">
                                     <span
                                         onPointerEnter={(e) => handlePointerEnter(e, c.type)}
                                         onPointerMove={handlePointerMove}
@@ -61,7 +61,7 @@ export function Clients() {
 
                         <span className="inline-flex items-center" aria-hidden="true">
                             {clients.map((c, i) => (
-                                <span key={`b-${i}`} className="inline-flex items-center text-[28px] md:text-[120px] font-arimo">
+                                <span key={`b-${i}`} className="inline-flex items-center text-2xl md:text-5xl font-arimo p-5">
                                     <span
                                         onPointerEnter={(e) => handlePointerEnter(e, c.type)}
                                         onPointerMove={handlePointerMove}

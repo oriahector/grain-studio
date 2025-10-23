@@ -33,14 +33,14 @@ export function NavBar() {
             <div className=" uppercase tracking-wide text-lg md:text-2xl flex items-center">Grain             <img src="images/grain.svg" alt="icon" className="w-2 h-2 object-contain " /> Studio</div>
           </div>
 
-          <nav className="flex items-center gap-1 md:gap-6 md:text-2xl text-lg">
+          <nav className="flex items-center gap-1 md:gap-6">
             {links.map((l) => (
               <Button
                 key={l.id}
+           
                 onClick={() => {
                   document.querySelector(`#${l.id}`)?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className={[' transition-opacity hover:opacity-100 p-0'].join(' ')}
               >
                 {l.label}
               </Button>

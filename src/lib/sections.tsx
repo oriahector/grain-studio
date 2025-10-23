@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react'
 
-export const SECTION_IDS = ['works','services','about','contact'] as const
+export const SECTION_IDS = ['works','services','clients','contact'] as const
 export type SectionId = typeof SECTION_IDS[number]
 
 type Ctx = {

@@ -1,32 +1,28 @@
 import React from 'react'
 import { Button } from '@/components/ui/Button'
-
-const SERVICE_ID = 'service_jal7ujh'
-const TEMPLATE_ID = 'template_z527x3l'
-const PUBLIC_KEY  = '_3QOseFGEi4azjh7v'
+import { SectionTitle } from '@/components/ui/SectionTitle'
+import { FormField } from '@/components/ui/FormField'
+import { EMAIL_CONFIG } from '@/config/constants'
+import type { ContactFormData, FormErrors, FormStatus } from '@/types'
 
 export function Contact() {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<ContactFormData>({
     name: '',
     lastName: '',
     email: '',
     message: '',
   })
-  const [errors, setErrors] = React.useState({
+  const [errors, setErrors] = React.useState<FormErrors>({
     name: false,
     lastName: false,
     email: false,
     message: false
   })
-  const [status, setStatus] = React.useState<'idle'|'sending'|'ok'|'error'>('idle')
+  const [status, setStatus] = React.useState<FormStatus>('idle')
   const [errorMsg, setErrorMsg] = React.useState('')
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((s) => ({ ...s, [name]: value }))
-  }
 
-  const validateForm = () => {
+  const handleValidateForm = () => {
     const newErrors = {
       name: formData.name.trim() === '',
       lastName: formData.lastName.trim() === '',
@@ -40,7 +36,7 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!validateForm()) {
+    if (!handleValidateForm()) {
       return
     }
 
@@ -48,14 +44,14 @@ export function Contact() {
     setStatus('sending')
 
     try {
-      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      if (!EMAIL_CONFIG.SERVICE_ID || !EMAIL_CONFIG.TEMPLATE_ID || !EMAIL_CONFIG.PUBLIC_KEY) {
         throw new Error('Faltan variables de entorno de EmailJS')
       }
 
       const payload = {
-        service_id: SERVICE_ID,
-        template_id: TEMPLATE_ID,
-        user_id: PUBLIC_KEY,
+        service_id: EMAIL_CONFIG.SERVICE_ID,
+        template_id: EMAIL_CONFIG.TEMPLATE_ID,
+        user_id: EMAIL_CONFIG.PUBLIC_KEY,
         template_params: {
           name: formData.name,
           lastName: formData.lastName,
@@ -77,9 +73,9 @@ export function Contact() {
 
       setStatus('ok')
       setFormData({ name: '', lastName: '', email: '', message: '' })
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus('error')
-      setErrorMsg(err?.message ?? 'Error desconocido')
+      setErrorMsg(err instanceof Error ? err.message : 'Error desconocido')
     }
   }
 
@@ -90,95 +86,66 @@ export function Contact() {
       className="section container-px py-32 bg-[--color-fg] text-white"
     >
       <div className="text-center w-full">
-        <h2 className="text-[length:var(--title-size)] leading-none mb-10">
+        <SectionTitle className="mb-10 text-5xl md:text-7xl">
             LET'S TALK
-        </h2>
+        </SectionTitle>
 
         <form
           noValidate
-          className="w-full mt-20 max-w-3xl grid gap-4 md:grid-cols-2 font-arimo ml-auto text-2xl font-semibold"
-          onSubmit={handleSubmit}
+          className="w-full mt-20 max-w-3xl flex flex-col gap-4 font-arimo ml-auto text-2xl font-semibold"
+          onSubmit={(e) => { void handleSubmit(e) }}
         >
-        <div className="relative">
-            <input
-              name="name"
-              value={formData.name}
-              onChange={(e) => {
-                setFormData(prev => ({ ...prev, name: e.target.value }))
-                setErrors(prev => ({ ...prev, name: false }))
-              }}
-              placeholder="Name"
-              className={`w-full rounded-none border-b-3 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none uppercase transition-colors ${
-                errors.name ? 'border-red-700' : 'border-[--color-bg]/40 focus:border-[--color-bg]'
-              }`}
-            />
-            {errors.name && (
-              <span className="absolute right-0 top-1/2 -translate-y-1/2 uppercase text-red-700">
-                Field Required
-              </span>
-            )}
-          </div>
-          <div className="relative">
-            <input
-              name="lastName"
-              value={formData.lastName}
-              onChange={(e) => {
-                setFormData(prev => ({ ...prev, lastName: e.target.value }))
-                setErrors(prev => ({ ...prev, lastName: false }))
-              }}
-              placeholder="Surname"
-              className={`w-full rounded-none border-b-3 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none uppercase transition-colors ${
-                errors.lastName ? 'border-red-700' : 'border-[--color-bg]/40 focus:border-[--color-bg]'
-              }`}
-            />
-            {errors.lastName && (
-              <span className="absolute right-0 top-1/2 -translate-y-1/2 uppercase text-red-700">
-                Field Required
-              </span>
-            )}
-          </div>
-          <div className="relative md:col-span-2">
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => {
-                setFormData(prev => ({ ...prev, email: e.target.value }))
-                setErrors(prev => ({ ...prev, email: false }))
-              }}
-              placeholder="Email"
-              className={`w-full rounded-none border-b-3 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none uppercase transition-colors ${
-                errors.email ? 'border-red-700' : 'border-[--color-bg]/40 focus:border-[--color-bg]'
-              }`}
-            />
-            {errors.email && (
-              <span className="absolute right-0 top-1/2 -translate-y-1/2 uppercase text-red-700">
-                Valid Email required
-              </span>
-            )}
-          </div>
-          <div className="relative md:col-span-2">
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={(e) => {
-                setFormData(prev => ({ ...prev, message: e.target.value }))
-                setErrors(prev => ({ ...prev, message: false }))
-              }}
-              placeholder="Let's talk about you have above your arms"
-              rows={5}
-              className={`w-full rounded-none border-b-3 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none uppercase transition-colors ${
-                errors.message ? 'border-red-700' : 'border-[--color-bg]/40 focus:border-[--color-bg]'
-              }`}
-            />
-            {errors.message && (
-              <span className="absolute right-0 top-4 text-red-700 uppercase">
-                Field Required
-              </span>
-            )}
-          </div>
+        <div className="flex justify-between gap-4">
+          <FormField
+            name="name"
+            value={formData.name}
+            onChange={(e) => {
+              setFormData(prev => ({ ...prev, name: e.target.value }))
+              setErrors(prev => ({ ...prev, name: false }))
+            }}
+            placeholder="Name"
+            error={errors.name}
+            errorMessage="Field Required"
+          />
+          <FormField
+            name="lastName"
+            value={formData.lastName}
+            onChange={(e) => {
+              setFormData(prev => ({ ...prev, lastName: e.target.value }))
+              setErrors(prev => ({ ...prev, lastName: false }))
+            }}
+            placeholder="Surname"
+            error={errors.lastName}
+            errorMessage="Field Required"
+          />
+        </div>
+        <FormField
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={(e) => {
+            setFormData(prev => ({ ...prev, email: e.target.value }))
+            setErrors(prev => ({ ...prev, email: false }))
+          }}
+          placeholder="Email"
+          error={errors.email}
+          errorMessage="Valid Email required"
+        />
+        <FormField
+          name="message"
+          value={formData.message}
+          onChange={(e) => {
+            setFormData(prev => ({ ...prev, message: e.target.value }))
+            setErrors(prev => ({ ...prev, message: false }))
+          }}
+          placeholder="Let's talk about you have above your arms"
+          error={errors.message}
+          errorMessage="Field Required"
+          textarea
+          rows={5}
+        />
           
-          <div className="md:col-span-2 flex justify-start mt-6 text-2xl md:text-5xl uppercase">
+          <div className="flex justify-start mt-6 text-lg md:text-2xl uppercase">
             {status !== 'sending' && <Button type="submit">Send </Button> }
             {status === 'sending' && <p>Sending...</p>}
             {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
