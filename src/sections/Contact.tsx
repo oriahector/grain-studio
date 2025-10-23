@@ -92,7 +92,7 @@ export function Contact() {
 
         <form
           noValidate
-          className="w-full mt-20 max-w-3xl flex flex-col gap-4 font-arimo ml-auto text-2xl font-semibold"
+          className="w-full mt-20 max-w-3xl flex flex-col gap-4 font-arimo ml-auto  text-xl md:text-2xl font-semibold"
           onSubmit={(e) => { void handleSubmit(e) }}
         >
         <div className="flex justify-between gap-4">
@@ -142,11 +142,12 @@ export function Contact() {
           error={errors.message}
           errorMessage="Field Required"
           textarea
+          className='resize-none'
           rows={5}
         />
           
-          <div className="flex justify-start mt-6 text-lg md:text-2xl uppercase">
-            {status !== 'sending' && <Button type="submit">Send </Button> }
+          <div className="flex justify-start text-lg md:text-2xl uppercase">
+            {status !== 'sending' && <Button size="lg" type="submit">Send </Button> }
             {status === 'sending' && <p>Sending...</p>}
             {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
           </div>

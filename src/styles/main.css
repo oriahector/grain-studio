@@ -24,6 +24,7 @@
 
 :root {
   scroll-behavior: smooth;
+
   background-color: var(--color-accent);
 }
 

@@ -19,9 +19,9 @@ export function Button({
   }
   
   const sizeClasses = {
-    sm: "px-4 py-2 text-xl",
-    md: "text-lg md:text-2xl",
-    lg: "px-8 py-4 text-3xl"
+    sm: "p-2 text-xl",
+    md: "p-2 text-lg md:text-2xl",
+    lg: "p-2 text-xl md:text-3xl"
   }
   
   const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : ""

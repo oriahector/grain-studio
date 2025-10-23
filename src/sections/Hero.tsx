@@ -1,7 +1,7 @@
 export function Hero() {
   return (
     <>
-      <section id="hero" className="section reveal container-px mx-auto flex flex-col h-[70vh] items-start justify-end gap-6 mb-20 bg-accent">
+      <section id="hero" className="section reveal container-px mx-auto flex flex-col h-[70vh] items-start justify-end gap-6 mt-20  mb-10 md:my-20 bg-accent">
         <div className="flex flex-col space-between items-end md:flex-row gap-2">
           <p className="text-5xl md:text-7xl md:w-4/6 text-white font-anton uppercase transform  animate-fadeIn text-right md:text-left">
             <img src="images/grain.svg" alt="icon" className="object-contain float-left  spin-organic" />
@@ -12,7 +12,7 @@ export function Hero() {
           </p>
         </div>
       </section>
-          <section id="hero-video" className="section px-10">
+          <section id="hero-video" className="section md:px-10 container-px">
             <div className="relative w-full h-auto">
               <video
                 autoPlay
