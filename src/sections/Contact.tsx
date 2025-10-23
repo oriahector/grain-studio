@@ -107,7 +107,7 @@ export function Contact() {
                 setFormData(prev => ({ ...prev, name: e.target.value }))
                 setErrors(prev => ({ ...prev, name: false }))
               }}
-              placeholder="Nombre"
+              placeholder="Name"
               className={`w-full rounded-none border-b-3 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none uppercase transition-colors ${
                 errors.name ? 'border-red-700' : 'border-[--color-bg]/40 focus:border-[--color-bg]'
               }`}
@@ -126,7 +126,7 @@ export function Contact() {
                 setFormData(prev => ({ ...prev, lastName: e.target.value }))
                 setErrors(prev => ({ ...prev, lastName: false }))
               }}
-              placeholder="Apellidos"
+              placeholder="Surname"
               className={`w-full rounded-none border-b-3 bg-transparent p-3 text-[--color-bg] placeholder-[--color-bg]/70 outline-none uppercase transition-colors ${
                 errors.lastName ? 'border-red-700' : 'border-[--color-bg]/40 focus:border-[--color-bg]'
               }`}
