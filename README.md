@@ -117,4 +117,4 @@ pnpm deploy
 
 ## 📄 License
 
-© 2024 Grain Studio. All rights reserved.
+© 2025 Grain Studio. All rights reserved.
