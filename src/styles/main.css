@@ -24,7 +24,6 @@
 
 :root {
   scroll-behavior: smooth;
-
   background-color: var(--color-accent);
 }
 
@@ -77,4 +76,9 @@
 .spin-organic {
   animation: spinOrganic 6s ease-in-out infinite;
   transform-origin: center center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0;
 }

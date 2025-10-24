@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/',
+  base: '/grain-studio',
   plugins: [react(), tailwindcss()],
   server: {
     port: 5173,
