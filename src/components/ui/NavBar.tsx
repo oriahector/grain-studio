@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion, useScroll } from "motion/react"
 
 import { Button } from './Button'
 
@@ -9,6 +10,7 @@ const links = [
 ] as const
 
 export function NavBar() {
+  const { scrollYProgress } = useScroll()
 
   
   const [hasScrolled, setHasScrolled] = React.useState(false)
@@ -27,6 +29,11 @@ export function NavBar() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
         hasScrolled ? 'bg-accent text-white' : 'text-white'
       }`}>
+   <motion.div
+  id="scroll-indicator"
+  style={{ scaleX: scrollYProgress, originX: 0 }}
+  className="fixed top-0 left-0 right-0 h-1 bg-white"
+/>
       <div className="container-px mx-auto flex h-20 items-center justify-between">
         <div className="w-full flex items-center justify-between">
           <div className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Go to top">
