@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
-
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  base: '/grain-studio',
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/grain-studio/' : '/',
   plugins: [react(), tailwindcss()],
   server: {
     port: 5173,
@@ -15,4 +14,4 @@ export default defineConfig({
       '@': '/src',
     },
   },
-})
+}))
