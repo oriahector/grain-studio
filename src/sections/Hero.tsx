@@ -21,7 +21,7 @@ export function Hero() {
                 playsInline
                 className="w-full h-auto object-cover block"
               >
-                <source src="images/video_final.mov" type="video/mp4" />
+                <source src="images/video_hero.mp4" type="video/mp4" />
               </video>
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" />
             </div>
