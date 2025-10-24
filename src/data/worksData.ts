@@ -28,7 +28,7 @@ export const itemsData: Item[] = [
     {
         title: 'TREE BROTHERS',
         tag: 'WEB DEVELOPMENT',
-        image: 'images/tree.jpg',
+        image: 'images/treebrothers.gif',
         desc: 'Developed the digital platform for Tree Brothers, highlighting their eco-friendly Christmas tree collection and recycling services. Focused on a warm, approachable design and a seamless customer journey.',
         url: 'https://www.treebrothersltd.com/',
         year: '2025',
@@ -44,14 +44,13 @@ export const itemsData: Item[] = [
      {
         title: 'ORNA Group',
         tag: 'WEB DEVELOPMENT',
-        image: 'images/orna.jpg',
+        image: 'images/orna_phone.png',
         desc: 'Full development of Orna Group’s UK website, showcasing their circular process that transforms Christmas trees into eco-friendly products. Modern design with smooth animations and an intuitive user experience.',
         url: 'https://www.ornagroup.com/',
         year: '2025',
         gallery: [
-             { imgSrc: 'images/orna2.png', alt: 'Tree Brothers' },
+            { imgSrc: 'images/orna2.png', alt: 'Tree Brothers' },
             { imgSrc: 'images/orna_phone.png', alt: 'Tree Brothers' },
-        
             { imgSrc: 'images/orna.jpg', alt: 'Tree Brothers' },
             { imgSrc: 'images/orna1.png', alt: 'Tree Brothers Gif' },
             
