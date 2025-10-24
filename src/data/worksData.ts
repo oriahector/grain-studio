@@ -28,7 +28,7 @@ export const itemsData: Item[] = [
     {
         title: 'TREE BROTHERS',
         tag: 'WEB DEVELOPMENT',
-        image: 'images/tree1.png',
+        image: 'images/treebrothers.gif',
         desc: 'Developed the digital platform for Tree Brothers, highlighting their eco-friendly Christmas tree collection and recycling services. Focused on a warm, approachable design and a seamless customer journey.',
         url: 'https://www.treebrothersltd.com/',
         year: '2025',
