@@ -1,13 +1,51 @@
-import React from 'react'
-import { SERVICES } from '@/config/constants'
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
+import { SERVICES } from "@/config/constants";
 
 export function Services() {
+  const sectionRef = useRef(null);
+
   return (
-    <section id="services" className="section md:container-px mx-auto py-20 md:py-36 text-center font-anton bg-white">
-      <p className="mb-6 text-3xl font-medium tracking-widest text-accent">(SERVICES)</p>
-      <ul className="font-extrabold leading-none uppercase text-accent text-5xl md:text-9xl">
-        {SERVICES.map((s) => (<li key={s}>{s}</li>))}
+    <section
+      id="services"
+      ref={sectionRef}
+      className="relative section md:container-px mx-auto py-20 md:py-36 text-center font-anton bg-white"
+    >
+      <p className="mb-6 text-3xl font-medium tracking-widest text-accent">
+        (SERVICES)
+      </p>
+
+      <ul className="font-extrabold leading-none uppercase text-accent text-5xl md:text-9xl space-y-8">
+        {SERVICES.map((s, i) => (
+          <ServiceItem key={s} label={s}/>
+        ))}
       </ul>
     </section>
-  )
+  );
+}
+
+function ServiceItem({ label }: { label: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount: 0.4, once: false });
+
+  return (
+    <motion.li
+      ref={ref}
+      initial={{ opacity: 0.3, scale: 0.9 }}
+      animate={
+        inView
+          ? { opacity: 1, scale: 1.05 }
+          : { opacity: 0.3, scale: 0.9 }
+      }
+      transition={{
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1], 
+        opacity: { duration: 0.5 },
+        scale: { duration: 0.5 },
+      }}
+      className="transition-transform duration-300 will-change-transform"
+    >
+      {label}
+    </motion.li>
+  );
 }

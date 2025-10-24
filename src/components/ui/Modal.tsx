@@ -29,7 +29,7 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
             <button
               aria-label="Cerrar"
               onClick={onClose}
-              className="close-btn mr-4"
+              className="close-btn mr-4 bg-accent text-white rounded-full size-8 flex items-center justify-center cursor-pointer hover:bg-accent/80 transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                 <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
