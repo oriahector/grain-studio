@@ -70,7 +70,7 @@ export function Hero() {
                   delay: 0.2,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="text-right text-xl md:w-1/3 md:text-left md:text-sm"
+                className="text-right text-md md:w-1/3 md:text-left md:text-lg"
               >
                 Behind Grain Studio are{' '}
                 <a

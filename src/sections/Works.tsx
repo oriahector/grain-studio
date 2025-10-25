@@ -117,12 +117,7 @@ export function Works() {
       </div>
 
       {/* Works Modal */}
-      <Modal
-        isOpen={mounted && open}
-        onClose={closePanel}
-        title="GRAIN STUDIO"
-        size="full"
-      >
+      <Modal isOpen={mounted && open} onClose={closePanel} title="GRAIN STUDIO">
         <div className="flex flex-col gap-6 md:flex-row md:relative">
           {/* Left Panel - Info */}
           <section className="flex flex-col gap-4 items-start md:sticky md:top-0 md:w-1/3 lg:w-1/4 md:self-start flex-shrink-0">
