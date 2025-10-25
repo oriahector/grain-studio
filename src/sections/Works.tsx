@@ -108,7 +108,7 @@ export function Works() {
       >
         <div className="flex-1 overflow-auto flex flex-col md:flex-row gap-6">
           <section className="panel-left w-full md:w-1/4 pr-0 md:pr-6 md:fixed bottom-0 mb-6 flex flex-col gap-4 items-start text-klein">
-          <h2 class="text-xl font-anton">{selected ? selected.title : ''} - {selected?.year}</h2>
+          <h2 className="text-xl font-anton">{selected ? selected.title : ''} - {selected?.year}</h2>
           <span className="inline-block text-2xs md:text-xs -mt-2 text-klein uppercase tracking-wider px-2 py-0.5 rounded-full border border-klein bg-transparent">
                     {selected?.tag}
                   </span>
