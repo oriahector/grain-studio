@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { IconX } from '@tabler/icons-react';
-import { motion } from 'motion/react';
+import { motion, useScroll } from 'motion/react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,6 +18,9 @@ export function Modal({
   title,
   size = 'lg',
 }: ModalProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ container: contentRef });
+
   // Manejo de tecla ESC
   useEffect(() => {
     if (!isOpen) return;
@@ -98,7 +101,7 @@ export function Modal({
       >
         {/* Header */}
         {title && (
-          <div className="flex flex-shrink-0 items-center justify-between border-b border-gray-200 px-5 py-4 md:px-6">
+          <div className="relative flex flex-shrink-0 items-center justify-between px-5 py-4 md:px-6">
             <h2
               id="modal-title"
               className="text-lg font-anton uppercase tracking-wide text-klein md:text-xl"
@@ -120,6 +123,14 @@ export function Modal({
             >
               <IconX size={20} className="cursor-pointer" />
             </button>
+            {/* Scroll Progress Bar */}
+            <motion.div
+              style={{
+                scaleX: scrollYProgress,
+                transformOrigin: '0%',
+              }}
+              className="absolute left-0 bottom-0 right-0 h-1 bg-klein z-10 md:rounded-tl-xl overflow-hidden"
+            />
           </div>
         )}
 
@@ -142,7 +153,10 @@ export function Modal({
         )}
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto px-5 py-4 md:px-6 md:py-5">
+        <div
+          ref={contentRef}
+          className="flex-1 overflow-y-auto px-5 py-4 md:px-6 md:py-5"
+        >
           {children}
         </div>
       </motion.aside>
