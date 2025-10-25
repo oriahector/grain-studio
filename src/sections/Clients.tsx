@@ -1,18 +1,33 @@
 import React, { useRef, useState } from 'react';
+import clsx from 'clsx';
+
+interface Client {
+  name: string;
+  type: string;
+}
+
+interface Tooltip {
+  visible: boolean;
+  text: string;
+  x: number;
+  y: number;
+}
+
+const CLIENTS: Client[] = [
+  { name: "Kiehl's", type: 'UGC Content' },
+  { name: "Group L'Oreal", type: 'UGC Content' },
+  { name: 'WETACA', type: 'UGC Content' },
+  { name: 'Grosso Napoletano', type: 'Photography' },
+  { name: 'Orna Group', type: 'Web Development' },
+  { name: 'CIRCA Waste', type: 'Web Development' },
+  { name: 'Tree Brothers', type: 'Web Development' },
+  { name: 'ScandicGo', type: 'Photography' },
+];
+
+const MARQUEE_OFFSET = -50; // -50% because content is duplicated
 
 export function Clients() {
-  const clients = [
-    { name: "Kiehl's", type: 'UGC Content' },
-    { name: "Group L'Oreal", type: 'UGC Content' },
-    { name: 'WETACA', type: 'UGC Content' },
-    { name: 'Grosso Napoletano', type: 'Photography' },
-    { name: 'Orna Group', type: 'Web Development' },
-    { name: 'CIRCA Waste', type: 'Web Development' },
-    { name: 'Tree Brothers', type: 'Web Development' },
-    { name: 'ScandicGo', type: 'Photography' },
-  ];
-
-  const [tooltip, setTooltip] = useState({
+  const [tooltip, setTooltip] = useState<Tooltip>({
     visible: false,
     text: '',
     x: 0,
@@ -20,124 +35,122 @@ export function Clients() {
   });
   const tipRef = useRef<HTMLDivElement | null>(null);
 
-  function handlePointerEnter(e: React.PointerEvent, name: string) {
-    // capture pointer so we receive move/leave events even if animation moves the element
+  const handlePointerEnter = (e: React.PointerEvent, name: string) => {
     (e.target as Element).setPointerCapture?.(e.pointerId);
-    setTooltip((t) => ({ ...t, visible: true, text: name }));
-  }
+    setTooltip((prev) => ({ ...prev, visible: true, text: name }));
+  };
 
-  function handlePointerMove(e: React.PointerEvent) {
-    // position tooltip near pointer
-    const offsetY = -18; // place slightly above cursor
-    const offsetX = 18; // move to the right so it's not under the cursor
-    setTooltip((t) => ({
-      ...t,
+  const handlePointerMove = (e: React.PointerEvent) => {
+    const offsetY = -18;
+    const offsetX = 18;
+    setTooltip((prev) => ({
+      ...prev,
       x: e.clientX + offsetX,
       y: e.clientY + offsetY,
     }));
-  }
+  };
 
-  function handlePointerLeave(e: React.PointerEvent) {
+  const handlePointerLeave = (e: React.PointerEvent) => {
     try {
       (e.target as Element).releasePointerCapture?.(e.pointerId);
-    } catch {}
-    setTooltip((t) => ({ ...t, visible: false }));
-  }
+    } catch {
+      // Ignore error
+    }
+    setTooltip((prev) => ({ ...prev, visible: false }));
+  };
 
   return (
-    <div className="bg-white text-klein">
+    <section className="bg-white text-klein">
       <div className="overflow-hidden">
         <div className="relative">
+          {/* Marquee Track */}
           <div
-            className="marquee-track inline-block whitespace-nowrap will-change-transform"
+            className="inline-block whitespace-nowrap will-change-transform my-4"
+            style={
+              {
+                animation: 'marquee 22s linear infinite',
+                '--marquee-duration': '22s',
+              } as React.CSSProperties
+            }
             aria-hidden="false"
           >
-            <span className="inline-flex items-center">
-              {clients.map((c, i) => (
-                <span
+            {/* First set of clients */}
+            <div className="inline-flex items-center">
+              {CLIENTS.map((client, i) => (
+                <div
                   key={`a-${i}`}
-                  className="inline-flex items-center text-2xl md:text-4xl  p-5"
+                  className="inline-flex items-center gap-15 px-5 text-2xl md:text-4xl"
                 >
-                  <span
-                    onPointerEnter={(e) => handlePointerEnter(e, c.type)}
+                  <button
+                    type="button"
+                    onPointerEnter={(e) => handlePointerEnter(e, client.type)}
                     onPointerMove={handlePointerMove}
                     onPointerLeave={handlePointerLeave}
-                    className="client-name"
+                    className="block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-klein"
+                    aria-label={`${client.name} - ${client.type}`}
                   >
-                    {c.name}
-                  </span>
-                  <span className="mx-15">|</span>
-                </span>
+                    {client.name}
+                  </button>
+                  <span className="select-none">|</span>
+                </div>
               ))}
-            </span>
+            </div>
 
-            <span className="inline-flex items-center" aria-hidden="true">
-              {clients.map((c, i) => (
-                <span
+            {/* Duplicated set for seamless loop */}
+            <div className="inline-flex items-center" aria-hidden="true">
+              {CLIENTS.map((client, i) => (
+                <div
                   key={`b-${i}`}
-                  className="inline-flex items-center text-2xl md:text-4xl  p-5"
+                  className="inline-flex items-center gap-15 px-5 text-2xl md:text-4xl"
                 >
-                  <span
-                    onPointerEnter={(e) => handlePointerEnter(e, c.type)}
-                    onPointerMove={handlePointerMove}
-                    onPointerLeave={handlePointerLeave}
-                    className="client-name"
-                  >
-                    {c.name}
+                  <span className="block" aria-hidden="true">
+                    {client.name}
                   </span>
-                  <span className="mx-15">|</span>
-                </span>
+                  <span className="select-none">|</span>
+                </div>
               ))}
-            </span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Tooltip element */}
+      {/* Tooltip */}
       <div
         ref={tipRef}
-        className={`pointer-events-none fixed z-50 ${tooltip.visible ? 'opacity-100' : 'opacity-0'}`}
+        className={clsx(
+          'pointer-events-none fixed z-50 transition-opacity duration-150',
+          tooltip.visible ? 'opacity-100' : 'opacity-0'
+        )}
         style={{ left: tooltip.x, top: tooltip.y }}
+        role="tooltip"
         aria-hidden={!tooltip.visible}
       >
-        <div
-          className="px-3 py-1 rounded-md text-sm shadow-md"
-          style={{
-            whiteSpace: 'nowrap',
-            backgroundColor: 'rgba(8,10,20,0.6)',
-            color: 'rgba(255,255,255,0.98)',
-            boxShadow: '0 8px 30px rgba(2,6,23,0.7)',
-            backdropFilter: 'blur(6px)',
-          }}
-        >
+        <div className="rounded-md bg-black/60 px-3 py-1 text-sm font-semibold text-white shadow-lg backdrop-blur-md">
           {tooltip.text}
         </div>
       </div>
 
+      {/* Marquee hover pause effect */}
       <style>{`
-        :root { --marquee-duration: 22s; }
-
-        .marquee-track {
-          animation: marquee var(--marquee-duration) linear infinite;
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(${MARQUEE_OFFSET}%);
+          }
         }
-        .marquee-track:hover {
+
+        [style*='animation: marquee']:hover {
           animation-play-state: paused;
         }
 
-        .client-name { display: inline-block; }
-
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); } /* mueve la mitad porque el contenido está duplicado */
-        }
-
         @media (prefers-reduced-motion: reduce) {
-          .marquee-track { animation: none !important; }
+          [style*='animation: marquee'] {
+            animation: none !important;
+          }
         }
-                @media (prefers-reduced-motion: reduce) {
-                    .pointer-events-none { transition: none !important; }
-                }
       `}</style>
-    </div>
+    </section>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,23 +14,38 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
   return (
     <div
       aria-hidden={!isOpen}
-      className="fixed inset-0 z-50 panel-container mx-auto"
+      className="fixed inset-0 z-50 mx-auto pointer-events-auto"
       onClick={onClose}
+      role="presentation"
     >
-      <div className="absolute inset-0 bg-black/60 overlay" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/60 opacity-100 transition-opacity duration-320" />
 
+      {/* Panel */}
       <aside
         role="dialog"
         aria-modal="true"
-        className="fixed right-0 top-0 h-full w-full bg-white text-accent shadow-xl panel"
+        className={clsx(
+          'fixed right-0 top-0 h-full w-full bg-white text-accent shadow-xl',
+          'opacity-100 transition-all duration-520',
+          'clip-path-inset-0-0-0-0'
+        )}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-6 h-full flex flex-col">
-          <div className="mb-4 flex items-center">
+        <div className="flex h-full flex-col p-6">
+          {/* Header */}
+          <div className="mb-4 flex items-center gap-4">
             <button
-              aria-label="Close"
+              type="button"
+              aria-label="Close modal"
               onClick={onClose}
-              className="close-btn mr-4 border border-klein text-klein rounded-full size-8 flex items-center justify-center cursor-pointer hover:bg-klein hover:text-white transition-colors ease-in"
+              className={clsx(
+                'flex size-8 flex-shrink-0 items-center justify-center rounded-full',
+                'border border-klein text-klein',
+                'transition-all duration-180 ease-in',
+                'hover:bg-klein hover:text-white',
+                'focus:outline-none focus:ring-2 focus:ring-klein focus:ring-offset-2'
+              )}
             >
               <svg
                 width="16"
@@ -49,19 +65,21 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
                 />
               </svg>
             </button>
+
             {title && (
-              <div className=" uppercase tracking-wide text-lg md:text-2xl flex items-center text-klein font-anton">
-                Grain{' '}
+              <div className="flex items-center gap-2 uppercase tracking-wide text-klein">
+                <h2 className="text-lg font-anton md:text-2xl">{title}</h2>
                 <img
                   src="images/grain.svg"
-                  alt="icon"
-                  className="w-2 h-2 object-contain text-klein"
-                />{' '}
-                Studio
+                  alt="Grain Studio logo"
+                  className="h-2 w-2 object-contain"
+                />
               </div>
             )}
           </div>
-          {children}
+
+          {/* Content */}
+          <div className="flex-1 overflow-auto">{children}</div>
         </div>
       </aside>
     </div>

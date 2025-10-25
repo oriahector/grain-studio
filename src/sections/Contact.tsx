@@ -83,87 +83,89 @@ export function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      className="section container-px py-32 bg-[--color-fg] text-white"
-    >
-      <div className="text-center w-full">
-        <SectionTitle className="mb-10 text-5xl md:text-7xl">
-          LET'S TALK
-        </SectionTitle>
+    <section id="contact" className="section bg-[--color-fg] py-32 text-white">
+      <div className="section-container">
+        <div className="text-center w-full">
+          <SectionTitle className="mb-10 text-5xl md:text-7xl">
+            LET'S TALK
+          </SectionTitle>
 
-        <form
-          noValidate
-          className="w-full mt-20 max-w-3xl flex flex-col gap-4  ml-auto  text-xl md:text-2xl font-semibold"
-          onSubmit={(e) => {
-            void handleSubmit(e);
-          }}
-        >
-          <div className="flex justify-between gap-4">
+          <form
+            noValidate
+            className="ml-auto mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl font-semibold md:text-2xl"
+            onSubmit={(e) => {
+              void handleSubmit(e);
+            }}
+          >
+            <div className="flex justify-between gap-4">
+              <FormField
+                name="name"
+                value={formData.name}
+                onChange={(e) => {
+                  setFormData((prev) => ({ ...prev, name: e.target.value }));
+                  setErrors((prev) => ({ ...prev, name: false }));
+                }}
+                placeholder="Name"
+                error={errors.name}
+                errorMessage="Field Required"
+              />
+              <FormField
+                name="lastName"
+                value={formData.lastName}
+                onChange={(e) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    lastName: e.target.value,
+                  }));
+                  setErrors((prev) => ({ ...prev, lastName: false }));
+                }}
+                placeholder="Surname"
+                error={errors.lastName}
+                errorMessage="Field Required"
+              />
+            </div>
             <FormField
-              name="name"
-              value={formData.name}
+              name="email"
+              type="email"
+              value={formData.email}
               onChange={(e) => {
-                setFormData((prev) => ({ ...prev, name: e.target.value }));
-                setErrors((prev) => ({ ...prev, name: false }));
+                setFormData((prev) => ({ ...prev, email: e.target.value }));
+                setErrors((prev) => ({ ...prev, email: false }));
               }}
-              placeholder="Name"
-              error={errors.name}
-              errorMessage="Field Required"
+              placeholder="Email"
+              error={errors.email}
+              errorMessage="Valid Email required"
             />
             <FormField
-              name="lastName"
-              value={formData.lastName}
+              name="message"
+              value={formData.message}
               onChange={(e) => {
-                setFormData((prev) => ({ ...prev, lastName: e.target.value }));
-                setErrors((prev) => ({ ...prev, lastName: false }));
+                setFormData((prev) => ({ ...prev, message: e.target.value }));
+                setErrors((prev) => ({ ...prev, message: false }));
               }}
-              placeholder="Surname"
-              error={errors.lastName}
+              placeholder="Let's talk about you have above your arms"
+              error={errors.message}
               errorMessage="Field Required"
+              textarea
+              className="resize-none"
+              rows={5}
             />
-          </div>
-          <FormField
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={(e) => {
-              setFormData((prev) => ({ ...prev, email: e.target.value }));
-              setErrors((prev) => ({ ...prev, email: false }));
-            }}
-            placeholder="Email"
-            error={errors.email}
-            errorMessage="Valid Email required"
-          />
-          <FormField
-            name="message"
-            value={formData.message}
-            onChange={(e) => {
-              setFormData((prev) => ({ ...prev, message: e.target.value }));
-              setErrors((prev) => ({ ...prev, message: false }));
-            }}
-            placeholder="Let's talk about you have above your arms"
-            error={errors.message}
-            errorMessage="Field Required"
-            textarea
-            className="resize-none"
-            rows={5}
-          />
 
-          <div className="flex justify-start text-lg md:text-2xl uppercase">
-            {status !== 'sending' && (
-              <Button size="lg" type="submit">
-                Send{' '}
-              </Button>
+            <div className="flex justify-start text-lg md:text-2xl uppercase">
+              {status !== 'sending' && (
+                <Button size="lg" type="submit">
+                  Send{' '}
+                </Button>
+              )}
+              {status === 'sending' && <p>Sending...</p>}
+              {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
+            </div>
+
+            {status === 'error' && (
+              <p>There was an error sending the message: {errorMsg}</p>
             )}
-            {status === 'sending' && <p>Sending...</p>}
-            {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
-          </div>
-
-          {status === 'error' && (
-            <p>There was an error sending the message: {errorMsg}</p>
-          )}
-        </form>
+          </form>
+        </div>
       </div>
     </section>
   );

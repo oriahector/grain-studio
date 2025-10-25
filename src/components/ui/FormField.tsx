@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 interface FormFieldProps {
   name: string;
@@ -15,6 +16,9 @@ interface FormFieldProps {
   className?: string;
 }
 
+const BASE_CLASSES =
+  'w-full border-b-2 border-white/40 bg-transparent p-3 uppercase transition-colors duration-300 focus:border-white focus:outline-none';
+
 export function FormField({
   name,
   value,
@@ -25,13 +29,9 @@ export function FormField({
   type = 'text',
   textarea = false,
   rows = 5,
-  className = '',
+  className,
 }: FormFieldProps) {
-  const baseClasses =
-    'form-input border-b-3 border-white p-3 w-full focus:outline-none uppercase';
-  const errorClasses = error ? 'error' : 'border-bg/40';
-
-  const inputClasses = `${baseClasses} ${errorClasses} ${className}`;
+  const inputClasses = clsx(BASE_CLASSES, error && 'border-red-500', className);
 
   return (
     <div className="relative w-full">
@@ -42,6 +42,8 @@ export function FormField({
           onChange={onChange}
           placeholder={placeholder}
           rows={rows}
+          aria-invalid={error}
+          aria-describedby={error ? `${name}-error` : undefined}
           className={inputClasses}
         />
       ) : (
@@ -51,11 +53,18 @@ export function FormField({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          aria-invalid={error}
+          aria-describedby={error ? `${name}-error` : undefined}
           className={inputClasses}
         />
       )}
+
       {error && (
-        <span className="absolute right-0 top-1/2 -translate-y-1/2 uppercase text-red-700">
+        <span
+          id={`${name}-error`}
+          role="alert"
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-sm font-semibold uppercase text-red-500"
+        >
           {errorMessage}
         </span>
       )}

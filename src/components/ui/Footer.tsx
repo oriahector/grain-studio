@@ -11,22 +11,24 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="container-px py-3 text-md bg-klein text-white">
-      <div className="flex justify-between items-center  text-md md:text-lg">
-        <div>© {new Date().getFullYear()} Grain Studio</div>
-        <div className="flex gap-4">
-          {socialLinks.map((social) => (
-            <a
-              key={social.name}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-              aria-label={`Follow us on ${social.name}`}
-            >
-              <social.icon className="size-5" />
-            </a>
-          ))}
+    <footer className="bg-klein py-6 text-white md:py-8">
+      <div className="section-container">
+        <div className="flex items-center justify-between text-sm md:text-base">
+          <div>© {new Date().getFullYear()} Grain Studio</div>
+          <div className="flex gap-4">
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-80"
+                aria-label={`Follow us on ${social.name}`}
+              >
+                <social.icon className="size-5" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

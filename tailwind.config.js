@@ -7,14 +7,17 @@ export default {
         arimo: ['var(--font-arimo)', 'ui-sans-serif', 'system-ui'],
         anton: ['var(--font-anton)', 'sans-serif'],
         sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {
+        klein: '#002fa7',
         bg: 'var(--color-bg)',
         fg: 'var(--color-fg)',
         accent: 'var(--color-accent)',
       },
       spacing: {
         container: 'var(--spacing-container)',
+        15: '3.75rem',
       },
       borderRadius: {
         lg: 'var(--radius-lg)',
@@ -22,9 +25,9 @@ export default {
       fontSize: {
         title: 'var(--title-size)',
       },
-      animation: {
-        fadeIn: 'fadeIn 1.5s ease-out forwards',
-        spinOrganic: 'spinOrganic 6s ease-in-out infinite',
+      transitionDuration: {
+        320: '320ms',
+        520: '520ms',
       },
       opacity: {
         99: '0.99',
@@ -32,20 +35,6 @@ export default {
       scale: {
         99: '0.99',
         103: '1.03',
-      },
-      keyframes: {
-        fadeIn: {
-          to: {
-            opacity: '1',
-            transform: 'translateY(0)',
-          },
-        },
-        spinOrganic: {
-          '0%': { transform: 'rotate(0deg)' },
-          '40%': { transform: 'rotate(180deg)' },
-          '70%': { transform: 'rotate(220deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
       },
     },
   },

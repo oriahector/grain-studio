@@ -1,42 +1,82 @@
 @import 'tailwindcss';
+
 @theme {
-  /* fonts */
+  /* Typography */
   --font-mono:
     'PT Mono', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol';
   --font-anton: 'Anton', sans-serif;
-  /* colors */
+
+  /* Colors */
   --color-klein: #002fa7;
-  /* Responsive heading sizes */
+
+  /* Responsive sizing */
   --title-size: clamp(4rem, 12vw, 14rem);
 }
 
-:root {
-  scroll-behavior: smooth;
-  @apply font-mono bg-klein;
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-klein font-mono text-white;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-white text-klein;
+  }
+
+  ::-moz-selection {
+    @apply bg-[var(--color-bg)] text-white;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
-::selection {
-  background-color: white;
-  color: var(--color-accent);
+@layer components {
+  /* Container utility */
+  .container-px {
+    @apply px-[clamp(0.1rem,6vw,4rem)];
+  }
+
+  /* Base section styling */
+  .section {
+    @apply text-white scroll-mt-20;
+  }
+
+  /* Section container with max-width and margins */
+  .section-container {
+    @apply mx-auto max-w-[1880px] px-4 md:px-6 lg:px-8;
+  }
+
+  /* Smooth scroll link styling */
+  a {
+    @apply transition-opacity duration-300;
+
+    &:hover {
+      @apply opacity-80;
+    }
+  }
 }
 
-::-moz-selection {
-  background-color: var(--color-bg);
-  color: white;
-}
+@layer utilities {
+  /* Responsive text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
 
-.container-px {
-  padding-inline: clamp(0.1rem, 6vw, 4rem);
-}
-
-.section {
-  color: white;
-  scroll-margin-top: 5rem;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 0;
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }

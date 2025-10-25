@@ -9,17 +9,19 @@ export function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative section md:container-px mx-auto py-20 md:py-36 text-center font-anton bg-white"
+      className="section relative bg-white py-20 text-center font-anton md:py-36"
     >
-      <p className="mb-6 text-3xl font-medium tracking-widest text-klein">
-        (SERVICES)
-      </p>
+      <div className="section-container">
+        <p className="mb-6 text-3xl font-medium tracking-widest text-klein">
+          (SERVICES)
+        </p>
 
-      <ul className="font-extrabold leading-none uppercase text-klein text-5xl md:text-9xl space-y-8">
-        {SERVICES.map((s, i) => (
-          <ServiceItem key={s} label={s} />
-        ))}
-      </ul>
+        <ul className="space-y-8 text-5xl font-extrabold uppercase leading-none text-klein md:text-9xl">
+          {SERVICES.map((s) => (
+            <ServiceItem key={s} label={s} />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 interface SectionTitleProps {
   children: React.ReactNode;
@@ -6,20 +7,24 @@ interface SectionTitleProps {
   size?: 'title' | 'heading-2' | 'heading-3';
 }
 
+const SIZE_CLASSES = {
+  title: 'text-title',
+  'heading-2': 'text-4xl md:text-5xl',
+  'heading-3': 'text-2xl md:text-3xl',
+} as const;
+
 export function SectionTitle({
   children,
-  className = '',
+  className,
   size = 'title',
 }: SectionTitleProps) {
-  const sizeClasses = {
-    title: 'text-title',
-    'heading-2': 'text-heading-2',
-    'heading-3': 'text-heading-3',
-  };
-
   return (
     <h2
-      className={`${sizeClasses[size]} leading-none font-anton uppercase ${className}`}
+      className={clsx(
+        'font-anton uppercase leading-none',
+        SIZE_CLASSES[size],
+        className
+      )}
     >
       {children}
     </h2>

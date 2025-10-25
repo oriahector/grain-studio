@@ -1,139 +1,150 @@
 import { useEffect, useRef, useState } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Modal } from '@/components/ui/Modal';
+import { Pill } from '@/components/ui/Pill';
 import { Item, itemsData } from '../data/worksData';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/Button';
+import clsx from 'clsx';
 
 export function Works() {
   const [items] = useState<Item[]>(itemsData);
-  const [mounted, setMounted] = useState(false); // panel is in DOM
-  const [open, setOpen] = useState(false); // panel visible (class toggle)
+  const [mounted, setMounted] = useState(false);
+  const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Item | null>(null);
   const closeTimer = useRef<number | null>(null);
 
-  // manage body scroll + escape key when panel mounted
   useEffect(() => {
     document.body.style.overflow = mounted ? 'hidden' : '';
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape' && mounted) startClose();
-    }
-    window.addEventListener('keydown', onKey);
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mounted) {
+        startClose();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+
     return () => {
-      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = '';
       if (closeTimer.current) window.clearTimeout(closeTimer.current);
     };
   }, [mounted]);
 
-  // open sequence: mount then toggle open to trigger CSS enter animation
-  function openPanel(item: Item) {
+  const openPanel = (item: Item) => {
     setSelected(item);
     setMounted(true);
-    // next frame toggle open so transitions run
     requestAnimationFrame(() => {
       setOpen(true);
     });
-  }
+  };
 
-  // start close animation, then unmount after duration
-  function startClose() {
+  const startClose = () => {
     setOpen(false);
-    // match this timeout with CSS transition duration below (520ms)
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
     closeTimer.current = window.setTimeout(() => {
       setMounted(false);
       setSelected(null);
       closeTimer.current = null;
     }, 520);
-  }
+  };
 
-  function closePanel() {
+  const closePanel = () => {
     startClose();
-  }
+  };
+
+  const heights = [320, 420, 260, 360, 400, 300];
 
   return (
     <section
       id="works"
-      className="section container-px pb-20 pt-20 md:pt-36 mx-auto text-fg bg-klein"
+      className="section bg-klein pb-20 pt-10 text-fg md:pt-24"
     >
-      <SectionTitle className="text-center text-fg tracking-tight text-5xl md:text-7xl pb-10">
-        WORKS
-      </SectionTitle>
+      <div className="section-container">
+        <SectionTitle className="pb-10 text-center text-5xl tracking-tight text-fg md:text-7xl">
+          WORKS
+        </SectionTitle>
 
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-        {items.map((it, idx) => {
-          // larger heights so images appear bigger
-          const heights = [320, 420, 260, 360, 400, 300];
-          const h = heights[idx % heights.length];
-          return (
-            <motion.div
-              key={it.title}
-              layoutId={`work-${it.title}`}
-              className="break-inside-avoid mb-6"
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  if (it.url || it.urlSecondary || it.gallery) {
-                    openPanel(it);
-                  }
-                }}
-                className="group relative overflow-hidden block w-full text-left cursor-pointer"
+        <div className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3">
+          {items.map((item, idx) => {
+            const h = heights[idx % heights.length];
+
+            return (
+              <motion.div
+                key={item.title}
+                layoutId={`work-${item.title}`}
+                className="break-inside-avoid"
               >
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{ height: `${h}px` }}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (item.url || item.urlSecondary || item.gallery) {
+                      openPanel(item);
+                    }
+                  }}
+                  className={clsx(
+                    'group relative block w-full overflow-hidden text-left',
+                    (item.url || item.urlSecondary || item.gallery) &&
+                      'cursor-pointer'
+                  )}
                 >
-                  <img
-                    src={it.image}
-                    alt={it.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
+                  {/* Image Container */}
+                  <div
+                    className="relative w-full overflow-hidden"
+                    style={{ height: `${h}px` }}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
 
-                <div className="mt-2 px-0">
-                  <h3 className="text-base md:text-lg text-fg mb-1">
-                    {it.title}
-                  </h3>
-                  <span className="inline-block text-[10px] md:text-xs text-white font-semibold  uppercase tracking-wider px-2 py-0.5 rounded-full border border-white bg-transparent">
-                    {it.tag}
-                  </span>
-                </div>
-              </button>
-            </motion.div>
-          );
-        })}
+                  {/* Title & Tag */}
+                  <div className="mt-2">
+                    <h3 className="mb-2 text-base text-fg md:text-lg">
+                      {item.title}
+                    </h3>
+                    <Pill label={item.tag} variant="light" size="sm" />
+                  </div>
+                </button>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-      <Modal isOpen={mounted && open} onClose={closePanel} title="GRAIN STUDIO">
-        <div className="flex-1 overflow-auto flex flex-col md:flex-row gap-6">
-          <section className="panel-left w-full md:w-1/4 pr-0 md:pr-6 md:fixed bottom-0 mb-6 flex flex-col gap-4 items-start text-klein">
-            <h2 className="text-xl font-anton">
-              {selected ? selected.title : ''} - {selected?.year}
-            </h2>
-            <span className="inline-block text-2xs md:text-xs -mt-2 text-klein uppercase tracking-wider px-2 py-0.5 rounded-full border border-klein bg-transparent">
-              {selected?.tag}
-            </span>
 
-            <p className="leading-none text-black">{selected?.desc}</p>
+      {/* Works Modal */}
+      <Modal isOpen={mounted && open} onClose={closePanel} title="GRAIN STUDIO">
+        <div className="flex flex-col gap-6 md:flex-row">
+          {/* Left Panel - Info */}
+          <section className="flex flex-col gap-4 md:fixed md:bottom-0 md:mb-6 md:w-1/4 md:pr-6 items-start">
+            <h2 className="font-anton text-xl text-klein">
+              {selected?.title}
+              {selected?.year && (
+                <span className="ml-2 font-normal">- {selected.year}</span>
+              )}
+            </h2>
+
+            <Pill label={selected?.tag} variant="dark" size="sm" />
+
+            <p className="leading-relaxed text-black">{selected?.desc}</p>
 
             {selected?.url && (
               <Button
                 size="xs"
-                className="text-klein object-contain font-anton"
+                className="font-anton text-klein"
+                onClick={() => window.open(selected.url, '_blank')}
               >
-                <a
-                  href={selected.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit site
-                </a>
+                Visit site
               </Button>
             )}
           </section>
 
-          <aside className="panel-right w-full md:w-3/4 flex flex-col items-stretch gap-4 md:ml-[25%] md:absolute top-0 h-full md:overflow-scroll">
+          {/* Right Panel - Gallery */}
+          <aside className="flex flex-col gap-4 md:absolute md:right-0 md:top-0 md:h-full md:w-3/4 md:overflow-scroll md:ml-[25%]">
             <AnimatePresence>
               {selected && (
                 <motion.div
@@ -141,15 +152,22 @@ export function Works() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="h-64 md:h-full"
+                  className="flex flex-col gap-4"
                 >
                   {selected.gallery?.map((item, index) => (
-                    <img
+                    <motion.img
                       key={index}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: (index * 80 + 120) / 1000,
+                        duration: 0.3,
+                        ease: 'easeOut',
+                      }}
                       src={item.imgSrc}
                       alt={item.alt || `Gallery image ${index + 1}`}
-                      className="mb-4 panel-gallery-img"
-                      style={{ ['--i' as string]: index }}
+                      className="w-full object-cover"
+                      loading="lazy"
                     />
                   ))}
                 </motion.div>
