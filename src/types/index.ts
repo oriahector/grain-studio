@@ -57,7 +57,7 @@ export interface ButtonProps {
   children: React.ReactNode
   type?: 'button' | 'submit' | 'reset'
   variant?: 'primary' | 'secondary'
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   className?: string
   onClick?: () => void
   disabled?: boolean
