@@ -150,24 +150,29 @@ export function Works() {
 
           {/* Right Panel - Gallery (Scrollable) */}
           <aside className="flex-1 md:pl-8">
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {selected && (
                 <motion.div
+                  key={selected.title}
                   layoutId={`work-${selected.title}`}
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="flex flex-col gap-4"
                 >
                   {selected.gallery?.map((item, index) => (
                     <motion.img
                       key={index}
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: (index * 80 + 120) / 1000,
-                        duration: 0.3,
-                        ease: 'easeOut',
+                        delay: index * 0.08 + 0.15,
+                        duration: 0.6,
+                        ease: [0.22, 1, 0.36, 1], // easeOutQuart
                       }}
                       src={item.imgSrc}
                       alt={item.alt || `Gallery image ${index + 1}`}

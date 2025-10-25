@@ -25,7 +25,7 @@ export function Footer() {
                 className="transition-opacity hover:opacity-80"
                 aria-label={`Follow us on ${social.name}`}
               >
-                <social.icon className="size-5" />
+                <social.icon className="size-5 md:size-7" />
               </a>
             ))}
           </div>

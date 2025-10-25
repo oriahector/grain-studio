@@ -33,17 +33,20 @@ function ServiceItem({ label }: { label: string }) {
   return (
     <motion.li
       ref={ref}
-      initial={{ opacity: 0.3, scale: 0.9 }}
+      initial={{ opacity: 0.2, scale: 0.96, y: 20 }}
       animate={
-        inView ? { opacity: 1, scale: 1.05 } : { opacity: 0.3, scale: 0.9 }
+        inView
+          ? { opacity: 1, scale: 1.01, y: 0 }
+          : { opacity: 0.2, scale: 0.96, y: 20 }
       }
       transition={{
-        duration: 0.5,
-        ease: [0.25, 0.1, 0.25, 1],
-        opacity: { duration: 0.5 },
-        scale: { duration: 0.5 },
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1], // easeOutQuart - suave y elegante
+        opacity: { duration: 0.6 },
+        scale: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+        y: { duration: 0.6 },
       }}
-      className="transition-transform duration-300 will-change-transform"
+      className="will-change-transform"
     >
       {label}
     </motion.li>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { IconX } from '@tabler/icons-react';
+import { motion } from 'motion/react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -49,8 +50,6 @@ export function Modal({
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   const sizeClasses = {
     sm: 'max-w-lg',
     md: 'max-w-2xl',
@@ -59,28 +58,40 @@ export function Modal({
     full: 'w-full',
   };
 
+  if (!isOpen) return null;
+
   return (
     <div
-      aria-hidden={!isOpen}
       className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 lg:p-6"
       onClick={onClose}
       role="presentation"
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-200" />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+      />
 
       {/* Panel */}
-      <aside
+      <motion.aside
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
+        initial={{ opacity: 0, scale: 0.96, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{
+          duration: 0.4,
+          ease: [0.16, 1, 0.3, 1], // easeOutExpo
+          opacity: { duration: 0.3 },
+        }}
         className={clsx(
           'relative w-full h-full md:h-auto',
           sizeClasses[size],
           'bg-white shadow-2xl',
           'md:rounded-xl',
           'flex flex-col',
-          'animate-in fade-in zoom-in-95 duration-200',
           'max-h-screen md:max-h-[92vh]'
         )}
         onClick={(e) => e.stopPropagation()}
@@ -134,7 +145,7 @@ export function Modal({
         <div className="flex-1 overflow-y-auto px-5 py-4 md:px-6 md:py-5">
           {children}
         </div>
-      </aside>
+      </motion.aside>
     </div>
   );
 }
