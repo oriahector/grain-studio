@@ -91,7 +91,7 @@ export function Works() {
                 >
                   {/* Image Container */}
                   <div
-                    className="relative w-full overflow-hidden"
+                    className="relative w-full overflow-hidden rounded-lg"
                     style={{ height: `${h}px` }}
                   >
                     <img
@@ -117,11 +117,16 @@ export function Works() {
       </div>
 
       {/* Works Modal */}
-      <Modal isOpen={mounted && open} onClose={closePanel} title="GRAIN STUDIO">
-        <div className="flex flex-col gap-6 md:flex-row">
+      <Modal
+        isOpen={mounted && open}
+        onClose={closePanel}
+        title="GRAIN STUDIO"
+        size="full"
+      >
+        <div className="flex flex-col gap-6 md:flex-row md:relative">
           {/* Left Panel - Info */}
-          <section className="flex flex-col gap-4 md:fixed md:bottom-0 md:mb-6 md:w-1/4 md:pr-6 items-start">
-            <h2 className="font-anton text-xl text-klein">
+          <section className="flex flex-col gap-4 items-start md:sticky md:top-0 md:w-1/3 lg:w-1/4 md:self-start flex-shrink-0">
+            <h2 className="font-anton text-xl text-klein md:text-2xl">
               {selected?.title}
               {selected?.year && (
                 <span className="ml-2 font-normal">- {selected.year}</span>
@@ -130,7 +135,7 @@ export function Works() {
 
             <Pill label={selected?.tag} variant="dark" size="sm" />
 
-            <p className="leading-relaxed text-black">{selected?.desc}</p>
+            <p className="leading-relaxed text-gray-700">{selected?.desc}</p>
 
             {selected?.url && (
               <Button
@@ -143,8 +148,8 @@ export function Works() {
             )}
           </section>
 
-          {/* Right Panel - Gallery */}
-          <aside className="flex flex-col gap-4 md:absolute md:right-0 md:top-0 md:h-full md:w-3/4 md:overflow-scroll md:ml-[25%]">
+          {/* Right Panel - Gallery (Scrollable) */}
+          <aside className="flex-1 md:pl-8">
             <AnimatePresence>
               {selected && (
                 <motion.div
@@ -166,7 +171,7 @@ export function Works() {
                       }}
                       src={item.imgSrc}
                       alt={item.alt || `Gallery image ${index + 1}`}
-                      className="w-full object-cover"
+                      className="w-full object-cover rounded-lg"
                       loading="lazy"
                     />
                   ))}

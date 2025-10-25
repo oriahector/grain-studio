@@ -1,6 +1,5 @@
 {
   "name": "grain-portfolio",
-  "homepgae": "http://oriahector.github.io/grain-studio",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,11 +9,10 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.14",
     "clsx": "^2.1.1",
     "motion": "^12.23.24",
@@ -28,7 +26,6 @@
     "@vitejs/plugin-react": "^4.3.2",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^10.1.8",
-    "gh-pages": "^6.3.0",
     "prettier": "^3.3.3",
     "tailwindcss": "^4.1.14",
     "typescript": "^5.6.3",

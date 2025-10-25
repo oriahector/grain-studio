@@ -1,10 +1,10 @@
-import { InstagramIcon } from '../icons/Instagram';
+import { IconBrandInstagram } from '@tabler/icons-react';
 
 const socialLinks = [
   {
     name: 'Instagram' as const,
     url: 'https://instagram.com/wearegrainstudio',
-    icon: InstagramIcon,
+    icon: IconBrandInstagram,
   },
   // Aquí puedes agregar más redes sociales según necesites
 ];

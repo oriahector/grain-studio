@@ -1,85 +1,138 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
+import { IconX } from '@tabler/icons-react';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
 
-export function Modal({ isOpen, onClose, children, title }: ModalProps) {
+export function Modal({
+  isOpen,
+  onClose,
+  children,
+  title,
+  size = 'lg',
+}: ModalProps) {
+  // Manejo de tecla ESC
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  // Body scroll lock cuando modal está abierto
+  useEffect(() => {
+    if (isOpen) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  const sizeClasses = {
+    sm: 'max-w-lg',
+    md: 'max-w-2xl',
+    lg: 'max-w-5xl',
+    xl: 'max-w-7xl',
+    full: 'w-full',
+  };
 
   return (
     <div
       aria-hidden={!isOpen}
-      className="fixed inset-0 z-50 mx-auto pointer-events-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 lg:p-6"
       onClick={onClose}
       role="presentation"
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 opacity-100 transition-opacity duration-320" />
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-200" />
 
       {/* Panel */}
       <aside
         role="dialog"
         aria-modal="true"
+        aria-labelledby={title ? 'modal-title' : undefined}
         className={clsx(
-          'fixed right-0 top-0 h-full w-full bg-white text-accent shadow-xl',
-          'opacity-100 transition-all duration-520',
-          'clip-path-inset-0-0-0-0'
+          'relative w-full h-full md:h-auto',
+          sizeClasses[size],
+          'bg-white shadow-2xl',
+          'md:rounded-xl',
+          'flex flex-col',
+          'animate-in fade-in zoom-in-95 duration-200',
+          'max-h-screen md:max-h-[92vh]'
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex h-full flex-col p-6">
-          {/* Header */}
-          <div className="mb-4 flex items-center gap-4">
+        {/* Header */}
+        {title && (
+          <div className="flex flex-shrink-0 items-center justify-between border-b border-gray-200 px-5 py-4 md:px-6">
+            <h2
+              id="modal-title"
+              className="text-lg font-anton uppercase tracking-wide text-klein md:text-xl"
+            >
+              {title}
+            </h2>
+
+            {/* Close Button */}
             <button
               type="button"
-              aria-label="Close modal"
+              aria-label="Cerrar modal"
               onClick={onClose}
               className={clsx(
                 'flex size-8 flex-shrink-0 items-center justify-center rounded-full',
-                'border border-klein text-klein',
-                'transition-all duration-180 ease-in',
-                'hover:bg-klein hover:text-white',
+                'text-gray-400 hover:text-klein',
+                'transition-colors duration-150',
                 'focus:outline-none focus:ring-2 focus:ring-klein focus:ring-offset-2'
               )}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  d="M15 6l-6 6 6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <IconX size={20} className="cursor-pointer" />
             </button>
-
-            {title && (
-              <div className="flex items-center gap-2 uppercase tracking-wide text-klein">
-                <h2 className="text-lg font-anton md:text-2xl">{title}</h2>
-                <img
-                  src="images/grain.svg"
-                  alt="Grain Studio logo"
-                  className="h-2 w-2 object-contain"
-                />
-              </div>
-            )}
           </div>
+        )}
 
-          {/* Content */}
-          <div className="flex-1 overflow-auto">{children}</div>
+        {/* Close button sin header */}
+        {!title && (
+          <button
+            type="button"
+            aria-label="Cerrar modal"
+            onClick={onClose}
+            className={clsx(
+              'absolute right-4 top-4 z-10',
+              'flex size-8 items-center justify-center rounded-full',
+              'bg-white/90 text-gray-400 hover:text-klein shadow-lg',
+              'transition-colors duration-150',
+              'focus:outline-none focus:ring-2 focus:ring-klein focus:ring-offset-2'
+            )}
+          >
+            <IconX size={20} />
+          </button>
+        )}
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-5 py-4 md:px-6 md:py-5">
+          {children}
         </div>
       </aside>
     </div>

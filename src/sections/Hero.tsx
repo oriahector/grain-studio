@@ -71,7 +71,7 @@ export function Hero() {
       {/* Hero Video Section */}
       <section id="hero-video" className="section relative bg-klein py-10">
         <div className="section-container">
-          <div className="relative aspect-video w-full overflow-hidden">
+          <div className="relative aspect-video w-full overflow-hidden rounded-lg">
             <video
               autoPlay
               muted
