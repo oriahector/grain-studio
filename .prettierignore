@@ -1,0 +1,13 @@
+dist
+build
+node_modules
+.pnpm-store
+*.mp4
+*.mov
+*.gif
+*.jpg
+*.png
+*.svg
+.DS_Store
+pnpm-lock.yaml
+package-lock.json

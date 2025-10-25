@@ -1,21 +1,19 @@
-import { InstagramIcon } from "../icons/Instagram"
+import { InstagramIcon } from '../icons/Instagram';
 
 const socialLinks = [
   {
-    name: 'Instagram',
+    name: 'Instagram' as const,
     url: 'https://instagram.com/wearegrainstudio',
-    icon: InstagramIcon
+    icon: InstagramIcon,
   },
   // Aquí puedes agregar más redes sociales según necesites
-]
+];
 
 export function Footer() {
   return (
     <footer className="container-px py-3 text-md bg-klein text-white">
       <div className="flex justify-between items-center  text-md md:text-lg">
-        <div>
-          © {new Date().getFullYear()} Grain Studio
-        </div>
+        <div>© {new Date().getFullYear()} Grain Studio</div>
         <div className="flex gap-4">
           {socialLinks.map((social) => (
             <a
@@ -32,5 +30,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
