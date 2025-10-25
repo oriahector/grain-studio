@@ -10,7 +10,7 @@ export type Item = {
 }
 
 export const itemsData: Item[] = [
-         {
+    {
         title: 'Circa Waste',
         tag: 'WEB DEVELOPMENT',
         image: 'images/circa5.png',
@@ -41,7 +41,7 @@ export const itemsData: Item[] = [
         ]
     },
 
-     {
+    {
         title: 'ORNA Group',
         tag: 'WEB DEVELOPMENT',
         image: 'images/orna_phone.png',
@@ -53,7 +53,7 @@ export const itemsData: Item[] = [
             { imgSrc: 'images/orna_phone.png', alt: 'Tree Brothers' },
             { imgSrc: 'images/orna.jpg', alt: 'Tree Brothers' },
             { imgSrc: 'images/orna1.png', alt: 'Tree Brothers Gif' },
-            
+
         ]
     },
     {
@@ -84,23 +84,18 @@ export const itemsData: Item[] = [
         ]
     },
     {
-        title: 'Wetaca',
-        tag: 'UGC CONTENT',
-        image: 'images/wetaca.jpg',
+        title: 'DONDE ÁLEX BARBERÍA',
+        tag: 'PHOTOGRAPHY',
+        image: '/images/alex.jpg',
+        desc: 'Lifestyle photoshoot for a men’s barbershop, capturing the textures, precision, and character of the space to build engaging social media content.',
         year: '2025',
-    },
-    //    {
-    //     title: 'Disney Parks - Apple Watch App',
-    //     tag: 'UX/UI DESIGN',
-    //     image: 'images/disney1.png',
-    //     desc: 'Redesign of the Disney Parks Apple Watch app to enhance user experience and interface. The new design focuses on intuitive navigation, vibrant visuals, and seamless integration with Disney services, providing users with a magical experience on their wrists.',
-    //     year: '2025',
-    //     gallery: [
-    //         { imgSrc: 'images/disney1.png', alt: 'Disney Parks Apple Watch App' },
-    //         { imgSrc: 'images/disney2.png', alt: 'Disney Parks Apple Watch App' },
-    //         { imgSrc: 'images/disney3.png', alt: 'Disney Parks Apple Watch App' },
-    //     ]
-    // },
-   
-   
+        gallery: [
+            { imgSrc: '/images/alex1.png', alt: 'Donde Alex' },
+            { imgSrc: '/images/alex2.png', alt: 'Donde Alex' },
+            { imgSrc: '/images/alex3.png', alt: 'Donde Alex' },
+            { imgSrc: '/images/alex4.png', alt: 'Donde Alex' },
+        ]
+    }
+
+
 ]
