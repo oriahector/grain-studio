@@ -26,8 +26,8 @@ export function NavBar() {
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        hasScrolled ? 'bg-accent text-white' : 'text-white'
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 font-anton ${
+        hasScrolled ? 'bg-klein text-white' : 'text-white'
       }`}>
    <motion.div
   id="scroll-indicator"

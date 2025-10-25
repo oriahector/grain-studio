@@ -36,7 +36,7 @@ export function Clients() {
     }
 
     return (
-        <div className='bg-white'>
+        <div className='bg-white text-klein' >
             <div className="overflow-hidden">
                 <div className="relative">
                     <div
@@ -45,7 +45,7 @@ export function Clients() {
                     >
                         <span className="inline-flex items-center">
                             {clients.map((c, i) => (
-                                <span key={`a-${i}`} className="inline-flex items-center text-2xl md:text-4xl font-arimo p-5">
+                                <span key={`a-${i}`} className="inline-flex items-center text-2xl md:text-4xl  p-5">
                                     <span
                                         onPointerEnter={(e) => handlePointerEnter(e, c.type)}
                                         onPointerMove={handlePointerMove}
@@ -61,7 +61,7 @@ export function Clients() {
 
                         <span className="inline-flex items-center" aria-hidden="true">
                             {clients.map((c, i) => (
-                                <span key={`b-${i}`} className="inline-flex items-center text-2xl md:text-4xl font-arimo p-5">
+                                <span key={`b-${i}`} className="inline-flex items-center text-2xl md:text-4xl  p-5">
                                     <span
                                         onPointerEnter={(e) => handlePointerEnter(e, c.type)}
                                         onPointerMove={handlePointerMove}

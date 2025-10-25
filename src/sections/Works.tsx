@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { Modal } from '@/components/ui/Modal'
 import { Item, itemsData } from '../data/worksData'
-
+import { motion, AnimatePresence } from 'motion/react'
+import { Button } from '@/components/ui/Button'
 
 export function Works() {
   const [items] = useState<Item[]>(itemsData)
@@ -54,7 +55,7 @@ export function Works() {
   return (
     <section
       id="works"
-      className="section container-px pb-20 pt-20 md:pt-36 mx-auto text-fg bg-accent"
+      className="section container-px pb-20 pt-20 md:pt-36 mx-auto text-fg bg-klein"
     >
       <SectionTitle className="text-center text-fg tracking-tight text-5xl md:text-7xl pb-10">
         WORKS
@@ -66,7 +67,11 @@ export function Works() {
           const heights = [320, 420, 260, 360, 400, 300]
           const h = heights[idx % heights.length]
           return (
-            <div key={it.title} className="break-inside-avoid mb-6">
+            <motion.div 
+              key={it.title} 
+              layoutId={`work-${it.title}`} 
+              className="break-inside-avoid mb-6"
+            >
               <button
                 type="button"
                 onClick={() => {
@@ -87,12 +92,12 @@ export function Works() {
                   <h3 className="text-base md:text-lg text-fg mb-1">
                     {it.title}
                   </h3>
-                  <span className="inline-block text-[10px] md:text-xs text-white font-semibold font-arimo uppercase tracking-wider px-2 py-0.5 rounded-full border border-white bg-transparent">
+                  <span className="inline-block text-[10px] md:text-xs text-white font-semibold  uppercase tracking-wider px-2 py-0.5 rounded-full border border-white bg-transparent">
                     {it.tag}
                   </span>
                 </div>
               </button>
-            </div>
+            </motion.div>
           )
         })}
       </div>
@@ -102,59 +107,46 @@ export function Works() {
         title="GRAIN STUDIO"
       >
         <div className="flex-1 overflow-auto flex flex-col md:flex-row gap-6">
-          <section className="panel-left w-full md:w-1/4 pr-0 md:pr-6 md:fixed bottom-0">
-            <h2>{selected ? selected.title : ''}</h2>
-            <p className="text-m mb-4">{selected?.year}</p>
-            <div className="max-w-none text-gray-700">
-              <p className='font-sans leading-none mb-4'>{selected?.desc}</p>
-            </div>
-            <h4 className="text-sm text-accent mb-10 mt-3">{selected?.tag}</h4>
-
-            <div className="flex flex-col gap-1 mb-6">
+          <section className="panel-left w-full md:w-1/4 pr-0 md:pr-6 md:fixed bottom-0 mb-6 flex flex-col gap-4 items-start text-klein">
+          <h2 class="text-xl font-anton">{selected ? selected.title : ''} - {selected?.year}</h2>
+          <span className="inline-block text-2xs md:text-xs -mt-2 text-klein uppercase tracking-wider px-2 py-0.5 rounded-full border border-klein bg-transparent">
+                    {selected?.tag}
+                  </span>
+            
+          
+            <p className='leading-none text-black'>{selected?.desc}</p>
+     
               {selected?.url && (
-                <a
+                <Button size="xs" className='text-klein object-contain font-anton' ><a
                   href={selected.url}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-xs text-accent hover:underline font-sans"
-                >
-                  Visit Site
-                  <svg className="ml-1" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                    <path d="M5 12h14M13 5l6 7-6 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
+                  rel="noopener noreferrer">Visit site</a></Button>
               )}
-
-              {selected?.urlSecondary && (
-                <a
-                  href={selected.urlSecondary}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-xs text-accent hover:underline font-sans"
-                >
-                  Visit Site
-                  <svg className="ml-1" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                    <path d="M5 12h14M13 5l6 7-6 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              )}
-            </div>
           </section>
 
           <aside className="panel-right w-full md:w-3/4 flex flex-col items-stretch gap-4 md:ml-[25%] md:absolute top-0 h-full md:overflow-scroll">
-            <div className="h-64 md:h-full">
+            <AnimatePresence>
               {selected && (
-                selected?.gallery?.map((item, index) => (
-                  <img
-                    key={index}
-                    src={item.imgSrc}
-                    alt={item.alt || `Gallery image ${index + 1}`}
-                    className='mb-4 panel-gallery-img'
-                    style={{ ['--i' as string]: index }}
-                  />
-                )))
-              }
-            </div>
+                <motion.div
+                  layoutId={`work-${selected.title}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                 
+                  className="h-64 md:h-full"
+                >
+                  {selected.gallery?.map((item, index) => (
+                    <img
+                      key={index}
+                      src={item.imgSrc}
+                      alt={item.alt || `Gallery image ${index + 1}`}
+                      className="mb-4 panel-gallery-img"
+                      style={{ ['--i' as string]: index }}
+                    />
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </aside>
         </div>
       </Modal>

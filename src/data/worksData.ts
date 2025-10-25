@@ -28,7 +28,7 @@ export const itemsData: Item[] = [
     {
         title: 'TREE BROTHERS',
         tag: 'WEB DEVELOPMENT',
-        image: 'images/treebrothers.gif',
+        image: '/images/tree.jpg',
         desc: 'Developed the digital platform for Tree Brothers, highlighting their eco-friendly Christmas tree collection and recycling services. Focused on a warm, approachable design and a seamless customer journey.',
         url: 'https://www.treebrothersltd.com/',
         year: '2025',
@@ -73,14 +73,14 @@ export const itemsData: Item[] = [
     {
         title: 'GROSSO NAPOLETANO',
         tag: 'PHOTOGRAPHY',
-        image: 'images/grosso.jpg',
+        image: '/images/grosso.jpg',
         desc: 'Event photography for Grosso Napoletano’s unveiling of a limited-edition pizza. The session highlighted the craftsmanship, lively ambiance, and brand personality through candid and detail-rich shots.',
         year: '2024',
         gallery: [
-            { imgSrc: 'images/grosso1.png', alt: 'Grosso Napoletano 1' },
-            { imgSrc: 'images/grosso2.png', alt: 'Grosso Napoletano 1' },
-            { imgSrc: 'images/grosso3.png', alt: 'Grosso Napoletano 1' },
-            { imgSrc: 'images/grosso4.png', alt: 'Grosso Napoletano 1' },
+            { imgSrc: '/images/grosso1.png', alt: 'Grosso Napoletano 1' },
+            { imgSrc: '/images/grosso2.png', alt: 'Grosso Napoletano 1' },
+                        { imgSrc: '/images/grosso3.png', alt: 'Grosso Napoletano 1' },
+            { imgSrc: '/images/grosso4.png', alt: 'Grosso Napoletano 1' },
         ]
     },
     {

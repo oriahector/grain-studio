@@ -92,7 +92,7 @@ export function Contact() {
 
         <form
           noValidate
-          className="w-full mt-20 max-w-3xl flex flex-col gap-4 font-arimo ml-auto  text-xl md:text-2xl font-semibold"
+          className="w-full mt-20 max-w-3xl flex flex-col gap-4  ml-auto  text-xl md:text-2xl font-semibold"
           onSubmit={(e) => { void handleSubmit(e) }}
         >
         <div className="flex justify-between gap-4">
