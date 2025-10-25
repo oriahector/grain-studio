@@ -151,13 +151,15 @@ export function Contact() {
               rows={5}
             />
 
-            <div className="flex justify-start text-lg md:text-2xl uppercase">
+            <div className="flex justify-start text-lg md:text-2xl uppercase items-center gap-2">
               {status !== 'sending' && (
                 <Button size="lg" type="submit">
                   Send{' '}
                 </Button>
               )}
-              {status === 'sending' && <p>Sending...</p>}
+              {status === 'sending' && (
+                <p className="text-xl md:text-3xl py-2">Sending...</p>
+              )}
               {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
             </div>
 
