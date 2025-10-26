@@ -132,7 +132,7 @@ export function Works() {
 
             <Pill label={selected?.tag} variant="dark" size="sm" />
 
-            <p className="text-sm text-gray-700 md:text-base">
+            <p className="text-sm text-gray-900 md:text-base">
               {selected?.desc}
             </p>
 
