@@ -33,20 +33,26 @@ export function Hero() {
               {/* Main Heading */}
               <p className="text-right font-anton text-5xl uppercase leading-tight text-white md:w-2/3 md:text-left md:text-7xl">
                 <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
+                  initial={{ opacity: 0 }}
                   animate={
                     isInView
                       ? {
-                          scale: [1, 1.2, 1],
+                          x: [0, 10, -10, 0],
+                          y: [0, -15, 5, 0],
                           opacity: 1,
                         }
-                      : { scale: 0, opacity: 0 }
+                      : { opacity: 0 }
                   }
                   transition={{
-                    scale: {
-                      duration: 2,
+                    x: {
+                      duration: 4,
                       repeat: Infinity,
-                      ease: [0.4, 0, 0.6, 1], // easeInOut
+                      ease: [0.42, 0, 0.58, 1],
+                    },
+                    y: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: [0.42, 0, 0.58, 1],
                     },
                     opacity: {
                       duration: 0.6,

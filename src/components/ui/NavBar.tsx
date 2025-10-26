@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll } from 'motion/react';
 import clsx from 'clsx';
 import { IconPointFilled } from '@tabler/icons-react';
@@ -13,6 +13,7 @@ const LINKS = [
 export function NavBar() {
   const { scrollYProgress } = useScroll();
   const [hasScrolled, setHasScrolled] = React.useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -49,16 +50,37 @@ export function NavBar() {
       <div className="mx-auto flex h-20 items-center justify-between">
         <div className="section-container flex w-full items-center justify-between">
           {/* Logo */}
-          <Button
-            type="button"
+          <div
+            className="flex items-center text-lg md:text-2xl cursor-pointer uppercase"
             onClick={handleLogoClick}
-            size="md"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            role="button"
+            tabIndex={0}
             aria-label="Grain Studio - Go to top"
           >
             <span>Grain</span>
-            <IconPointFilled size={14} className="object-contain mx-0.5" />
+            <motion.span
+              animate={
+                isHovered
+                  ? {
+                      scale: [1, 1.5, 1],
+                    }
+                  : { scale: 1 }
+              }
+              transition={{
+                scale: {
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: [0.4, 0, 0.6, 1],
+                },
+              }}
+              className="mx-0.5 inline-block"
+            >
+              <IconPointFilled size={14} className="object-contain" />
+            </motion.span>
             <span>Studio</span>
-          </Button>
+          </div>
 
           {/* Navigation Links */}
           <nav className="flex items-center gap-2 md:gap-6">

@@ -81,7 +81,7 @@ export function Works() {
                     }
                   }}
                   className={clsx(
-                    'group relative block w-full overflow-hidden text-left',
+                    'group relative block w-full overflow-hidden text-left focus:outline-none',
                     (item.url || item.urlSecondary || item.gallery) &&
                       'cursor-pointer'
                   )}

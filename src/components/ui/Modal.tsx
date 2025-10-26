@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { IconX } from '@tabler/icons-react';
 import { motion, useMotionValue } from 'motion/react';
+import { IconPointFilled } from '@tabler/icons-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -85,20 +86,18 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
         {/* Header */}
         {title && (
           <div className="relative flex items-center justify-between px-5 py-4 md:px-6">
-            <h2
-              id="modal-title"
-              className="text-lg font-anton uppercase tracking-wide text-klein md:text-xl"
-            >
-              {title}
-            </h2>
-
+            <div className="flex items-center text-klein text-lg font-anton uppercase   md:text-xl">
+              <span id="modal-title">Grain</span>
+              <IconPointFilled size={14} className="object-contain" />
+              <span>Studio</span>
+            </div>
             <button
               type="button"
               aria-label="Cerrar modal"
               onClick={onClose}
-              className="flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-klein transition-colors focus:outline-none focus:ring-2 focus:ring-klein focus:ring-offset-2"
+              className="flex size-8 items-center justify-center rounded-full text-klein hover:text-white transition-colors ring-2 ring-klein hover:bg-klein cursor-pointer"
             >
-              <IconX size={20} className="cursor-pointer" />
+              <IconX size={20} />
             </button>
 
             {/* Scroll Progress Bar */}
