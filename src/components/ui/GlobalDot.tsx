@@ -52,7 +52,7 @@ export function GlobalDot() {
       initial={false}
       transition={{
         layout: {
-          duration: 0.8,
+          duration: 2,
           ease: [0.16, 1, 0.3, 1],
         },
       }}
