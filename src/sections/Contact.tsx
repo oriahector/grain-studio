@@ -86,9 +86,7 @@ export function Contact() {
     <section id="contact" className="section bg-[--color-fg] py-32 text-white">
       <div className="section-container">
         <div className="text-center w-full">
-          <SectionTitle className="mb-10 text-5xl md:text-7xl">
-            LET'S TALK
-          </SectionTitle>
+          <SectionTitle size="heading-2">LET'S TALK</SectionTitle>
 
           <form
             noValidate

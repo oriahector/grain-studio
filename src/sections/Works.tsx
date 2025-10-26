@@ -63,7 +63,7 @@ export function Works() {
       className="section bg-klein pb-20 pt-10 text-fg md:pt-24"
     >
       <div className="section-container">
-        <SectionTitle className="pb-10 text-center text-5xl tracking-tight text-fg md:text-7xl">
+        <SectionTitle size="heading-2" className="text-center pb-10">
           WORKS
         </SectionTitle>
 
