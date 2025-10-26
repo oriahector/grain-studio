@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, useScroll } from 'motion/react';
 import clsx from 'clsx';
 import { IconPointFilled } from '@tabler/icons-react';
@@ -13,7 +13,6 @@ const LINKS = [
 export function NavBar() {
   const { scrollYProgress } = useScroll();
   const [hasScrolled, setHasScrolled] = React.useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -53,26 +52,26 @@ export function NavBar() {
           <div
             className="flex items-center text-lg md:text-2xl cursor-pointer uppercase"
             onClick={handleLogoClick}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             role="button"
             tabIndex={0}
             aria-label="Grain Studio - Go to top"
           >
             <span>Grain</span>
             <motion.span
-              animate={
-                isHovered
-                  ? {
-                      scale: [1, 1.5, 1],
-                    }
-                  : { scale: 1 }
-              }
+              animate={{
+                x: [0, 2, -2, 0],
+                y: [0, -3, 1, 0],
+              }}
               transition={{
-                scale: {
-                  duration: 1.5,
+                x: {
+                  duration: 4,
                   repeat: Infinity,
-                  ease: [0.4, 0, 0.6, 1],
+                  ease: [0.42, 0, 0.58, 1],
+                },
+                y: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: [0.42, 0, 0.58, 1],
                 },
               }}
               className="mx-0.5 inline-block"
