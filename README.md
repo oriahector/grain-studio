@@ -131,7 +131,7 @@ Professional modal with scroll progress bar:
 
 - **Image Compression**: All images optimized with Sharp
 - **Lazy Loading**: Images load only when needed
-- **WebP Support**: Modern image formats for better compression
+- **WebP Only**: All images converted to WebP for maximum compression
 - **CDN Ready**: Assets organized for easy CDN deployment
 
 ### Build Optimizations
@@ -216,16 +216,35 @@ The project is configured for deployment on GitHub Pages:
 pnpm deploy
 ```
 
+## 🛠️ Available Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+
+# Image Optimization
+npm run convert:webp     # Convert images to WebP
+npm run cleanup:originals # Remove original images (JPG/PNG/GIF)
+
+# Code Quality
+npm run typecheck    # TypeScript type checking
+npm run lint         # ESLint code linting
+npm run format       # Prettier code formatting
+```
+
 ## 📊 Project Statistics
 
 | Metric                  | Value           |
 | ----------------------- | --------------- |
-| **Total Assets**        | 43 files        |
+| **Total Assets**        | 37 WebP files   |
 | **Projects**            | 6 main projects |
 | **Components**          | 8 UI components |
 | **TypeScript Coverage** | 100%            |
 | **Bundle Size**         | Optimized       |
 | **Performance Score**   | 95+             |
+| **Image Compression**   | 79.6% reduction |
 
 ## 🔄 Recent Updates
 
@@ -235,6 +254,8 @@ pnpm deploy
 - ✅ TypeScript strict mode enabled
 - ✅ Responsive design implemented
 - ✅ Accessibility improvements
+- ✅ WebP-only image system implemented
+- ✅ Original images cleaned up (31.5MB saved)
 
 ## 📄 License
 

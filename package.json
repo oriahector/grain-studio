@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "convert:webp": "node scripts/convert-to-webp.js",
+    "cleanup:originals": "node scripts/cleanup-original-images.js"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.35.0",
@@ -17,7 +19,8 @@
     "clsx": "^2.1.1",
     "motion": "^12.23.24",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

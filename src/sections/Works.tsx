@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Modal } from '@/components/ui/Modal';
 import { Pill } from '@/components/ui/Pill';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/Button';
@@ -94,10 +95,10 @@ export function Works() {
                     className="relative w-full overflow-hidden rounded-lg"
                     style={{ height: `${h}px` }}
                   >
-                    <img
+                    <OptimizedImage
                       src={item.image}
                       alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="h-full w-full transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
                   </div>
@@ -160,7 +161,7 @@ export function Works() {
                   className="flex flex-col gap-4"
                 >
                   {selected.gallery?.map((item, index) => (
-                    <motion.img
+                    <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -169,11 +170,14 @@ export function Works() {
                         duration: 0.6,
                         ease: [0.22, 1, 0.36, 1], // easeOutQuart
                       }}
-                      src={item.imgSrc}
-                      alt={item.alt || `Gallery image ${index + 1}`}
-                      className="w-full object-cover rounded-lg"
-                      loading="lazy"
-                    />
+                    >
+                      <OptimizedImage
+                        src={item.imgSrc}
+                        alt={item.alt || `Gallery image ${index + 1}`}
+                        className="w-full rounded-lg"
+                        loading="lazy"
+                      />
+                    </motion.div>
                   ))}
                 </motion.div>
               )}
