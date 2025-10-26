@@ -10,7 +10,7 @@ interface SectionTitleProps {
 const SIZE_CLASSES = {
   title: 'text-title',
   'heading-2': 'text-5xl md:text-7xl',
-  'heading-3': 'text-2xl md:text-3xl',
+  'heading-3': 'text-3xl md:text-5xl',
 } as const;
 
 export function SectionTitle({

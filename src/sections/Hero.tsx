@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { IconPointFilled } from '@tabler/icons-react';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 export function Hero() {
   const heroRef = useRef(null);
@@ -31,7 +32,10 @@ export function Hero() {
           >
             <div className="flex flex-col gap-2 md:flex-row md:items-end md:gap-8">
               {/* Main Heading */}
-              <p className="text-right font-anton text-5xl uppercase leading-tight text-white md:w-2/3 md:text-left md:text-7xl">
+              <SectionTitle
+                size="heading-2"
+                className="text-right leading-tight md:w-2/3 md:text-left"
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -66,8 +70,8 @@ export function Hero() {
                 <span className="ml-4">
                   We build websites and visual systems that move with rhythm and
                 </span>
-                precision
-              </p>
+                &nbsp;precision
+              </SectionTitle>
 
               {/* Subtitle */}
               <motion.p
