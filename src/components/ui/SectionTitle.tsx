@@ -11,7 +11,7 @@ interface SectionTitleProps {
 const SIZE_CLASSES = {
   title: 'text-title',
   'heading-2': 'text-5xl md:text-7xl',
-  'heading-3': 'text-2xl md:text-3xl',
+  'heading-3': 'text-xl md:text-3xl',
 } as const;
 
 export function SectionTitle({
@@ -31,7 +31,10 @@ export function SectionTitle({
       <span
         id={sectionId ? `section-title-dot-${sectionId}` : undefined}
         data-section-id={sectionId}
-        className="relative -ml-[70px] inline-block h-[70px] w-[70px] align-middle"
+        className={clsx(
+          'relative inline-block h-[70px] w-[70px] align-middle',
+          sectionId !== 'hero' && '-ml-[70px]'
+        )}
       />
       {children}
     </h2>
