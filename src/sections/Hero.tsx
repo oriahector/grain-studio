@@ -49,7 +49,7 @@ export function Hero() {
                       ease: [0.16, 1, 0.3, 1],
                     },
                   }}
-                  src="images/grain.svg"
+                  src="images/general/grain.svg"
                   alt="Grain Studio icon"
                   className="float-left inline object-contain size-14 mt-4"
                 />
@@ -109,7 +109,7 @@ export function Hero() {
               playsInline
               className="h-full w-full object-cover"
             >
-              <source src="images/video_hero.mp4" type="video/mp4" />
+              <source src="images/general/video_hero.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 

@@ -56,7 +56,7 @@ export function NavBar() {
           >
             <span>Grain</span>
             <img
-              src="images/grain.svg"
+              src="images/general/grain.svg"
               alt="Grain Studio logo"
               className="h-2 w-2 object-contain"
             />
