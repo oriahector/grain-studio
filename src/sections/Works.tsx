@@ -131,7 +131,9 @@ export function Works() {
 
             <Pill label={selected?.tag} variant="dark" size="sm" />
 
-            <p className="leading-relaxed text-gray-700">{selected?.desc}</p>
+            <p className="text-gray-700 text-sm md:text-base">
+              {selected?.desc}
+            </p>
 
             {selected?.url && (
               <Button
