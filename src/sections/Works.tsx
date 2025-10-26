@@ -6,6 +6,7 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/Button';
+import { IconArrowUpRight, IconLink } from '@tabler/icons-react';
 import clsx from 'clsx';
 
 export function Works() {
@@ -138,10 +139,11 @@ export function Works() {
             {selected?.url && (
               <Button
                 size="xs"
-                className="font-anton text-klein"
+                className="font-anton text-klein flex items-center gap-1"
                 onClick={() => window.open(selected.url, '_blank')}
               >
                 Visit site
+                <IconArrowUpRight size={24} stroke={1} />
               </Button>
             )}
           </section>
