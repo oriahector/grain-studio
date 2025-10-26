@@ -82,7 +82,7 @@ export function NavBar() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex items-center gap-2 md:gap-6">
+          <nav className="flex items-center gap-3 md:gap-7">
             {LINKS.map((link) => (
               <Button
                 key={link.id}

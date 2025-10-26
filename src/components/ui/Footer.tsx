@@ -1,4 +1,4 @@
-import { IconBrandInstagram } from '@tabler/icons-react';
+import { IconBrandInstagram, IconCopyright } from '@tabler/icons-react';
 
 const socialLinks = [
   {
@@ -14,7 +14,10 @@ export function Footer() {
     <footer className="bg-klein py-6 text-white md:py-8">
       <div className="section-container">
         <div className="flex items-center justify-between text-sm md:text-base">
-          <div>© {new Date().getFullYear()} Grain Studio</div>
+          <div className="flex items-center gap-1">
+            <IconCopyright className="size-4" />
+            <span>{new Date().getFullYear()} Grain Studio</span>
+          </div>
           <div className="flex gap-4">
             {socialLinks.map((social) => (
               <a
@@ -25,7 +28,7 @@ export function Footer() {
                 className="transition-opacity hover:opacity-80"
                 aria-label={`Follow us on ${social.name}`}
               >
-                <social.icon className="size-5 md:size-7" />
+                <social.icon strokeWidth={1.5} className="size-6 md:size-8" />
               </a>
             ))}
           </div>

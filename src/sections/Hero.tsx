@@ -12,7 +12,7 @@ export function Hero() {
       <section
         id="hero"
         ref={heroRef}
-        className="section bg-klein relative flex min-h-[70vh] flex-col items-start justify-end gap-6 py-20 md:mt-20"
+        className="section bg-klein relative flex min-h-[70vh] flex-col items-start justify-end gap-6 py-10 md:mt-20 md:py-20"
       >
         <div className="section-container w-full">
           <motion.div
