@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll } from 'motion/react';
 import clsx from 'clsx';
+import { IconPointFilled } from '@tabler/icons-react';
 import { Button } from './Button';
 
 const LINKS = [
@@ -55,11 +56,7 @@ export function NavBar() {
             aria-label="Grain Studio - Go to top"
           >
             <span>Grain</span>
-            <img
-              src="images/general/grain.svg"
-              alt="Grain Studio logo"
-              className="h-2 w-2 object-contain"
-            />
+            <IconPointFilled size={14} className="object-contain mx-0.5" />
             <span>Studio</span>
           </Button>
 

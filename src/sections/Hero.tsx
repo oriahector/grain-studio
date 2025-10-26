@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
+import { IconPointFilled } from '@tabler/icons-react';
 
 export function Hero() {
   const heroRef = useRef(null);
@@ -31,28 +32,31 @@ export function Hero() {
             <div className="flex flex-col gap-2 md:flex-row md:items-end md:gap-8">
               {/* Main Heading */}
               <p className="text-right font-anton text-5xl uppercase leading-tight text-white md:w-2/3 md:text-left md:text-7xl">
-                <motion.img
-                  initial={{ rotate: 0, opacity: 0 }}
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
                   animate={
                     isInView
-                      ? { rotate: 360, opacity: 1 }
-                      : { rotate: 0, opacity: 0 }
+                      ? {
+                          scale: [1, 1.2, 1],
+                          opacity: 1,
+                        }
+                      : { scale: 0, opacity: 0 }
                   }
                   transition={{
-                    rotate: {
-                      duration: 20,
+                    scale: {
+                      duration: 2,
                       repeat: Infinity,
-                      ease: 'linear',
+                      ease: [0.4, 0, 0.6, 1], // easeInOut
                     },
                     opacity: {
                       duration: 0.6,
                       ease: [0.16, 1, 0.3, 1],
                     },
                   }}
-                  src="images/general/grain.svg"
-                  alt="Grain Studio icon"
-                  className="float-left inline object-contain size-14 mt-4"
-                />
+                  className="float-left inline-block mt-3"
+                >
+                  <IconPointFilled size={70} />
+                </motion.div>
                 <span className="ml-4">
                   We build websites and visual systems that move with rhythm and
                 </span>
