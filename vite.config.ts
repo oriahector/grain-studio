@@ -6,6 +6,7 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/' : '/',
   plugins: [react(), tailwindcss()],
   server: {
+    host: true,
     port: 5173,
     open: true,
   },
