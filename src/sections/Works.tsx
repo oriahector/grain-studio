@@ -60,10 +60,14 @@ export function Works() {
   return (
     <section
       id="works"
-      className="section bg-klein pb-20 pt-10 text-fg md:pt-24"
+      className="section bg-klein text-fg pt-10 pb-20 md:pt-24"
     >
       <div className="section-container">
-        <SectionTitle size="heading-2" className="text-center pb-10">
+        <SectionTitle
+          size="heading-2"
+          sectionId="works"
+          className="pb-10 text-center"
+        >
           WORKS
         </SectionTitle>
 
@@ -101,7 +105,7 @@ export function Works() {
 
                   {/* Title & Tag */}
                   <div className="mt-2">
-                    <h3 className="mb-2 text-base text-fg md:text-lg">
+                    <h3 className="text-fg mb-2 text-base md:text-lg">
                       {item.title}
                     </h3>
                     <Pill label={item.tag} variant="light" size="sm" />
@@ -115,10 +119,10 @@ export function Works() {
 
       {/* Works Modal */}
       <Modal isOpen={mounted && open} onClose={closePanel} title="GRAIN STUDIO">
-        <div className="flex flex-col gap-6 md:flex-row md:relative">
+        <div className="flex flex-col gap-6 md:relative md:flex-row">
           {/* Left Panel - Info */}
-          <section className="flex flex-col gap-4 items-start md:sticky md:top-0 md:w-1/3 lg:w-1/4 md:self-start flex-shrink-0">
-            <h2 className="font-anton text-xl text-klein md:text-2xl">
+          <section className="flex flex-shrink-0 flex-col items-start gap-4 md:sticky md:top-0 md:w-1/3 md:self-start lg:w-1/4">
+            <h2 className="font-anton text-klein text-xl md:text-2xl">
               {selected?.title}
               {selected?.year && (
                 <span className="ml-2 font-normal">- {selected.year}</span>
@@ -127,7 +131,7 @@ export function Works() {
 
             <Pill label={selected?.tag} variant="dark" size="sm" />
 
-            <p className="text-gray-700 text-sm md:text-base">
+            <p className="text-sm text-gray-700 md:text-base">
               {selected?.desc}
             </p>
 

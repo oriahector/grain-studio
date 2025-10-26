@@ -85,12 +85,14 @@ export function Contact() {
   return (
     <section id="contact" className="section bg-[--color-fg] py-32 text-white">
       <div className="section-container">
-        <div className="text-center w-full">
-          <SectionTitle size="heading-2">LET'S TALK</SectionTitle>
+        <div className="w-full text-center">
+          <SectionTitle size="heading-2" sectionId="contact">
+            LET'S TALK
+          </SectionTitle>
 
           <form
             noValidate
-            className="mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl font-semibold md:text-2xl mx-auto"
+            className="mx-auto mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl font-semibold md:text-2xl"
             onSubmit={(e) => {
               void handleSubmit(e);
             }}
@@ -149,14 +151,14 @@ export function Contact() {
               rows={5}
             />
 
-            <div className="flex justify-start text-lg md:text-2xl uppercase items-center gap-2">
+            <div className="flex items-center justify-start gap-2 text-lg uppercase md:text-2xl">
               {status !== 'sending' && (
                 <Button size="lg" type="submit">
                   Send{' '}
                 </Button>
               )}
               {status === 'sending' && (
-                <p className="text-xl md:text-3xl py-2">Sending...</p>
+                <p className="py-2 text-xl md:text-3xl">Sending...</p>
               )}
               {status === 'ok' && <p>&nbsp;| Message sent successfully!</p>}
             </div>

@@ -1,5 +1,6 @@
 import { NavBar } from '@/components/ui/NavBar';
 import { Footer } from '@/components/ui/Footer';
+import { GlobalDot } from '@/components/ui/GlobalDot';
 import { Hero } from '@/sections/Hero';
 import { Works } from '@/sections/Works';
 import { Services } from '@/sections/Services';
@@ -10,6 +11,7 @@ import { SectionProvider } from '@/lib/sections';
 export default function App() {
   return (
     <SectionProvider>
+      <GlobalDot />
       <NavBar />
       <main>
         <Hero />

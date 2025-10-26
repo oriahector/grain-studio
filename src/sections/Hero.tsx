@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { IconPointFilled } from '@tabler/icons-react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
 export function Hero() {
@@ -13,7 +12,7 @@ export function Hero() {
       <section
         id="hero"
         ref={heroRef}
-        className="section relative flex min-h-[70vh] flex-col items-start justify-end gap-6 bg-klein py-20 md:mt-20"
+        className="section bg-klein relative flex min-h-[70vh] flex-col items-start justify-end gap-6 py-20 md:mt-20"
       >
         <div className="section-container w-full">
           <motion.div
@@ -34,39 +33,9 @@ export function Hero() {
               {/* Main Heading */}
               <SectionTitle
                 size="heading-2"
+                sectionId="hero"
                 className="text-right leading-tight md:w-2/3 md:text-left"
               >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView
-                      ? {
-                          x: [0, 10, -10, 0],
-                          y: [0, -15, 5, 0],
-                          opacity: 1,
-                        }
-                      : { opacity: 0 }
-                  }
-                  transition={{
-                    x: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: [0.42, 0, 0.58, 1],
-                    },
-                    y: {
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: [0.42, 0, 0.58, 1],
-                    },
-                    opacity: {
-                      duration: 0.6,
-                      ease: [0.16, 1, 0.3, 1],
-                    },
-                  }}
-                  className="float-left inline-block mt-3"
-                >
-                  <IconPointFilled size={70} />
-                </motion.div>
                 <span className="ml-4">
                   We build websites and visual systems that move with rhythm and
                 </span>
@@ -84,7 +53,7 @@ export function Hero() {
                   delay: 0.2,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="text-right text-md md:w-1/3 md:text-left md:text-lg"
+                className="text-md text-right md:w-1/3 md:text-left md:text-lg"
               >
                 Behind Grain Studio are{' '}
                 <a
@@ -113,7 +82,7 @@ export function Hero() {
       </section>
 
       {/* Hero Video Section */}
-      <section id="hero-video" className="section relative bg-klein py-10">
+      <section id="hero-video" className="section bg-klein relative py-10">
         <div className="section-container">
           <div className="relative aspect-video w-full overflow-hidden rounded-lg">
             <video

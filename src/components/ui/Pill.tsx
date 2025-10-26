@@ -29,7 +29,7 @@ export function Pill({
   return (
     <span
       className={clsx(
-        'inline-flex w-fit items-center gap-1 rounded-full border bg-transparent font-semibold uppercase tracking-wider',
+        'inline-flex w-fit items-center gap-1 rounded-full border bg-transparent font-semibold tracking-wider uppercase',
         VARIANT_CLASSES[variant],
         SIZE_CLASSES[size],
         className

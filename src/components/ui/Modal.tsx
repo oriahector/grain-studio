@@ -80,13 +80,13 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
           ease: [0.16, 1, 0.3, 1],
           opacity: { duration: 0.3 },
         }}
-        className="relative w-full h-full md:h-auto bg-white shadow-2xl md:rounded-xl flex flex-col max-h-screen md:max-h-[92vh]"
+        className="relative flex h-full max-h-screen w-full flex-col bg-white shadow-2xl md:h-auto md:max-h-[92vh] md:rounded-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         {title && (
           <div className="relative flex items-center justify-between px-5 py-4 md:px-6">
-            <div className="flex items-center text-klein text-lg font-anton uppercase   md:text-xl">
+            <div className="text-klein font-anton flex items-center text-lg uppercase md:text-xl">
               <span id="modal-title">Grain</span>
               <IconPointFilled size={14} className="object-contain" />
               <span>Studio</span>
@@ -95,7 +95,7 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
               type="button"
               aria-label="Cerrar modal"
               onClick={onClose}
-              className="flex size-8 items-center justify-center rounded-full text-klein hover:text-white transition-colors ring-2 ring-klein hover:bg-klein cursor-pointer"
+              className="text-klein ring-klein hover:bg-klein flex size-8 cursor-pointer items-center justify-center rounded-full ring-2 transition-colors hover:text-white"
             >
               <IconX size={20} />
             </button>
@@ -103,7 +103,7 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
             {/* Scroll Progress Bar */}
             <motion.div
               style={{ scaleX: scrollYProgress, transformOrigin: '0%' }}
-              className="absolute left-0 bottom-0 right-0 h-1 bg-klein"
+              className="bg-klein absolute right-0 bottom-0 left-0 h-1"
             />
           </div>
         )}

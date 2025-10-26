@@ -60,12 +60,12 @@ export function Clients() {
   };
 
   return (
-    <section className="bg-white text-klein">
+    <section className="text-klein bg-white">
       <div className="overflow-hidden">
         <div className="relative">
           {/* Marquee Track */}
           <div
-            className="inline-block whitespace-nowrap will-change-transform my-4"
+            className="my-4 inline-block whitespace-nowrap will-change-transform"
             style={
               {
                 animation: 'marquee 22s linear infinite',
@@ -86,7 +86,7 @@ export function Clients() {
                     onPointerEnter={(e) => handlePointerEnter(e, client.type)}
                     onPointerMove={handlePointerMove}
                     onPointerLeave={handlePointerLeave}
-                    className="block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-klein"
+                    className="focus:ring-klein block focus:ring-2 focus:ring-offset-2 focus:outline-none"
                     aria-label={`${client.name} - ${client.type}`}
                   >
                     {client.name}

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { SERVICES } from '@/config/constants';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 export function Services() {
   const sectionRef = useRef(null);
@@ -9,14 +10,18 @@ export function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="section relative bg-white py-20 text-center font-anton md:py-36"
+      className="section font-anton relative bg-white py-20 text-center md:py-36"
     >
       <div className="section-container">
-        <p className="mb-6 text-3xl font-medium tracking-widest text-klein">
+        <SectionTitle
+          size="heading-3"
+          sectionId="services"
+          className="text-klein"
+        >
           (SERVICES)
-        </p>
+        </SectionTitle>
 
-        <ul className="space-y-8 text-5xl font-extrabold uppercase leading-none text-klein md:text-9xl">
+        <ul className="text-klein space-y-4 text-5xl leading-none font-extrabold uppercase md:space-y-8 md:text-9xl">
           {SERVICES.map((s) => (
             <ServiceItem key={s} label={s} />
           ))}

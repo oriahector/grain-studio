@@ -26,7 +26,7 @@
 
   /* Selection styling */
   ::selection {
-    @apply bg-white text-klein;
+    @apply text-klein bg-white;
   }
 
   ::-moz-selection {
@@ -47,7 +47,7 @@
 
   /* Base section styling */
   .section {
-    @apply text-white scroll-mt-20;
+    @apply scroll-mt-20 text-white;
   }
 
   /* Section container with max-width and margins */

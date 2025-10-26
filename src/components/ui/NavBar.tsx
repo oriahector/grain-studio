@@ -35,7 +35,7 @@ export function NavBar() {
   return (
     <header
       className={clsx(
-        'fixed left-0 right-0 top-0 z-50 font-anton transition-colors duration-300',
+        'font-anton fixed top-0 right-0 left-0 z-50 transition-colors duration-300',
         hasScrolled ? 'bg-klein text-white' : 'bg-transparent text-white'
       )}
     >
@@ -43,14 +43,14 @@ export function NavBar() {
       <motion.div
         id="scroll-indicator"
         style={{ scaleX: scrollYProgress, originX: 0 }}
-        className="fixed left-0 right-0 top-0 h-1 bg-white"
+        className="fixed top-0 right-0 left-0 h-1 bg-white"
       />
 
       <div className="mx-auto flex h-20 items-center justify-between">
         <div className="section-container flex w-full items-center justify-between">
           {/* Logo */}
           <div
-            className="flex items-center text-lg md:text-2xl cursor-pointer uppercase"
+            className="flex cursor-pointer items-center text-lg uppercase md:text-2xl"
             onClick={handleLogoClick}
             role="button"
             tabIndex={0}

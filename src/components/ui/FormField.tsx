@@ -63,7 +63,7 @@ export function FormField({
         <span
           id={`${name}-error`}
           role="alert"
-          className="absolute right-0 top-1/2 -translate-y-1/2 text-sm font-semibold uppercase text-red-500"
+          className="absolute top-1/2 right-0 -translate-y-1/2 text-sm font-semibold text-red-500 uppercase"
         >
           {errorMessage}
         </span>
