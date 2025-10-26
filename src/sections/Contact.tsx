@@ -92,7 +92,7 @@ export function Contact() {
 
           <form
             noValidate
-            className="ml-auto mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl font-semibold md:text-2xl"
+            className="mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl font-semibold md:text-2xl mx-auto"
             onSubmit={(e) => {
               void handleSubmit(e);
             }}

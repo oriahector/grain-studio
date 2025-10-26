@@ -4,7 +4,7 @@ import { Modal } from '@/components/ui/Modal';
 import { Pill } from '@/components/ui/Pill';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Button } from '@/components/ui/Button';
 import clsx from 'clsx';
 
@@ -72,11 +72,7 @@ export function Works() {
             const h = heights[idx % heights.length];
 
             return (
-              <motion.div
-                key={item.title}
-                layoutId={`work-${item.title}`}
-                className="break-inside-avoid"
-              >
+              <div key={item.title} className="break-inside-avoid">
                 <button
                   type="button"
                   onClick={() => {
@@ -111,7 +107,7 @@ export function Works() {
                     <Pill label={item.tag} variant="light" size="sm" />
                   </div>
                 </button>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -148,42 +144,29 @@ export function Works() {
 
           {/* Right Panel - Gallery (Scrollable) */}
           <aside className="flex-1 md:pl-8">
-            <AnimatePresence mode="wait">
-              {selected && (
-                <motion.div
-                  key={selected.title}
-                  layoutId={`work-${selected.title}`}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{
-                    duration: 0.4,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="flex flex-col gap-4"
-                >
-                  {selected.gallery?.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: index * 0.08 + 0.15,
-                        duration: 0.6,
-                        ease: [0.22, 1, 0.36, 1], // easeOutQuart
-                      }}
-                    >
-                      <OptimizedImage
-                        src={item.imgSrc}
-                        alt={item.alt || `Gallery image ${index + 1}`}
-                        className="w-full rounded-lg"
-                        loading="lazy"
-                      />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {selected && (
+              <div className="flex flex-col gap-4">
+                {selected.gallery?.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: index * 0.08 + 0.15,
+                      duration: 0.6,
+                      ease: [0.22, 1, 0.36, 1], // easeOutQuart
+                    }}
+                  >
+                    <OptimizedImage
+                      src={item.imgSrc}
+                      alt={item.alt || `Gallery image ${index + 1}`}
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            )}
           </aside>
         </div>
       </Modal>
