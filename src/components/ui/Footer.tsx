@@ -12,7 +12,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="bg-klein py-6 text-white md:py-8">
-      <div className="section-container mt-20e">
+      <div className="section-container mt-20">
         <p>
           Behind Grain Studio are{' '}
           <a
