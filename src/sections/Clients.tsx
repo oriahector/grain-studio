@@ -65,7 +65,7 @@ export function Clients() {
         <div className="relative">
           {/* Marquee Track */}
           <div
-            className="my-4 inline-block whitespace-nowrap will-change-transform"
+            className="my-4 inline-block whitespace-nowrap"
             style={
               {
                 animation: 'marquee 22s linear infinite',

@@ -51,7 +51,6 @@ function ServiceItem({ label }: { label: string }) {
         scale: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
         y: { duration: 0.6 },
       }}
-      className="will-change-transform"
     >
       {label}
     </motion.li>
