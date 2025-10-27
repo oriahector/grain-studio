@@ -16,26 +16,26 @@ export function Hero() {
 
   // Number of clips per row (adjust as needed)
   const clipsPerRow = 5;
-  const rows = 4;
+  const rows = 3;
 
   // Mixed media assets (videos, images, and text)
   const mediaAssets = [
     { type: 'image', url: '/images/circa-waste/circa1.webp' },
     { type: 'video', url: '/videos/tram.mp4' },
-    { type: 'text', text: 'We build webs that' },
+    { type: 'text', text: 'With' },
     { type: 'image', url: '/images/general/disney2.webp' },
     { type: 'image', url: '/images/donde-alex/alex.webp' },
     // 2nd row
-    { type: 'text', text: 'move with rhythm' },
+    { type: 'text', text: 'rhythm' },
     { type: 'image', url: '/images/tree-brothers/tree.webp' },
     { type: 'image', url: '/images/general/bucle.webp' },
     { type: 'video', url: '/videos/people.mp4' },
     { type: 'image', url: '/images/tree-brothers/treeshop.webp' },
+
     //3rd row
     { type: 'image', url: '/images/scandic-go/scandic2.webp' },
-
+    { type: 'text', text: '& precision' },
     { type: 'video', url: '/videos/tram.mp4' },
-    { type: 'text', text: 'and precision' },
     { type: 'video', url: '/videos/metro.mp4' },
 
     { type: 'image', url: '/images/general/bucle.webp' },
@@ -59,7 +59,7 @@ export function Hero() {
       <section
         id="hero"
         ref={heroRef}
-        className="section bg-klein relative mt-20 flex min-h-[70vh] flex-col items-start justify-end gap-6 py-10 md:py-20"
+        className="section bg-klein relative mt-20 flex min-h-[70vh] flex-col items-start justify-end py-0"
       >
         <div className="section-container w-full">
           <motion.div
@@ -83,46 +83,11 @@ export function Hero() {
                 sectionId="hero"
                 className="text-right leading-tight md:w-2/3 md:text-left"
               >
-                <span className="ml-4">
-                  We build websites and visual systems that move with rhythm and
+                <span className="mb-10">
+                  We build digital experiences grain by grain, crafting
+                  connections between people and brands.
                 </span>
-                &nbsp;precision
               </SectionTitle>
-
-              {/* Subtitle */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{
-                  duration: 0.8,
-                  delay: 0.2,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="text-md text-right md:w-1/3 md:text-left md:text-lg"
-              >
-                Behind Grain Studio are{' '}
-                <a
-                  className="underline transition-opacity hover:opacity-80"
-                  href="https://www.linkedin.com/in/hmartinezoria/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Héctor
-                </a>{' '}
-                and{' '}
-                <a
-                  className="underline transition-opacity hover:opacity-80"
-                  href="https://www.linkedin.com/in/clara-morrondo/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Clara
-                </a>
-                , two developers who share a belief that design and code should
-                coexist seamlessly.
-              </motion.p>
             </div>
           </motion.div>
         </div>
@@ -132,7 +97,7 @@ export function Hero() {
       <section
         ref={containerRef}
         id="hero-video"
-        className="section relative overflow-hidden py-10"
+        className="section relative overflow-hidden py-0 pt-10"
       >
         <div className="section-container">
           <div ref={videoGridRef} className="flex flex-col gap-2 md:gap-4">

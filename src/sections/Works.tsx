@@ -6,7 +6,7 @@ import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/Button';
-import { IconArrowUpRight, IconLink } from '@tabler/icons-react';
+import { IconArrowUpRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 
 export function Works() {
@@ -59,10 +59,7 @@ export function Works() {
   const heights = [320, 420, 260, 360, 400, 300];
 
   return (
-    <section
-      id="works"
-      className="section bg-klein text-fg pt-10 pb-20 md:pt-24"
-    >
+    <section id="works" className="section bg-klein text-fg">
       <div className="section-container">
         <SectionTitle
           size="heading-2"

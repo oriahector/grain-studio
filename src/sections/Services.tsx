@@ -10,7 +10,7 @@ export function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="section font-anton relative bg-white py-20 text-center md:py-36"
+      className="section font-anton relative bg-white text-center"
     >
       <div className="section-container">
         <SectionTitle

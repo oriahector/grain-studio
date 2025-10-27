@@ -47,7 +47,7 @@
 
   /* Base section styling */
   .section {
-    @apply scroll-mt-20 text-white;
+    @apply scroll-mt-20 py-20 text-white md:py-30;
   }
 
   /* Section container with max-width and margins */

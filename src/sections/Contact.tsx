@@ -84,7 +84,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="section bg-[--color-fg] py-32 text-white">
+    <section id="contact" className="section text-white">
       <div className="section-container">
         <div className="w-full text-center">
           <SectionTitle size="heading-2" sectionId="contact">
