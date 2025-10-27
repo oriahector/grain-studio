@@ -14,6 +14,9 @@ export function Hero() {
     offset: ['start end', 'end start'],
   });
 
+  // Slow down the scroll transformation - maps scroll to a slower range
+  const slowScrollProgress = useTransform(scrollYProgress, [0, 1], [0, 0.3]);
+
   // Number of clips per row (adjust as needed)
   const clipsPerRow = 5;
   const rows = 3;
@@ -21,8 +24,8 @@ export function Hero() {
   // Mixed media assets (videos, images, and text)
   const mediaAssets = [
     { type: 'image', url: '/images/circa-waste/circa1.webp' },
-    { type: 'video', url: '/videos/tram.mp4' },
     { type: 'text', text: 'With' },
+    { type: 'video', url: '/videos/tram.mp4' },
     { type: 'image', url: '/images/general/disney2.webp' },
     { type: 'image', url: '/images/donde-alex/alex.webp' },
     // 2nd row
@@ -59,7 +62,7 @@ export function Hero() {
       <section
         id="hero"
         ref={heroRef}
-        className="section bg-klein relative mt-20 flex min-h-[60vh] items-end py-0"
+        className="section relative mt-20 flex min-h-[60vh] items-end py-0"
       >
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.98 }}
@@ -86,7 +89,7 @@ export function Hero() {
         </motion.div>
       </section>
 
-      {/* Hero Video Grid Section */}
+      {/* Grid Section */}
       <section
         ref={containerRef}
         id="hero-video"
@@ -97,9 +100,9 @@ export function Hero() {
             {rowMedia.map((row, rowIndex) => {
               const isOdd = rowIndex % 2 === 0;
               const baseTranslate = useTransform(
-                scrollYProgress,
+                slowScrollProgress,
                 [0, 1],
-                isOdd ? ['0%', '-50%'] : ['0%', '50%']
+                isOdd ? ['-20%', '-50%'] : ['-5%', '20%']
               );
 
               return (

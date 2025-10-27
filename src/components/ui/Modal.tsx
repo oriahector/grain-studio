@@ -80,7 +80,7 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
           ease: [0.16, 1, 0.3, 1],
           opacity: { duration: 0.3 },
         }}
-        className="relative flex h-full max-h-screen w-full flex-col bg-white shadow-2xl md:h-auto md:max-h-[92vh] md:rounded-xl"
+        className="relative flex h-full max-h-screen w-full flex-col bg-white shadow-2xl md:h-auto md:max-h-[92vh] md:rounded-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
