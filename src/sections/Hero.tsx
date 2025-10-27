@@ -59,45 +59,38 @@ export function Hero() {
       <section
         id="hero"
         ref={heroRef}
-        className="section bg-klein relative mt-20 flex min-h-[70vh] flex-col items-start justify-end py-0"
+        className="section bg-klein relative mt-20 flex min-h-[60vh] items-end py-0"
       >
-        <div className="section-container w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.98 }}
-            animate={
-              isInView
-                ? { opacity: 1, y: 0, scale: 1 }
-                : { opacity: 0, y: 30, scale: 0.98 }
-            }
-            transition={{
-              duration: 0.8,
-              ease: [0.16, 1, 0.3, 1],
-              opacity: { duration: 0.6 },
-            }}
-            className="w-full"
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.98 }}
+          animate={
+            isInView
+              ? { opacity: 1, y: 0, scale: 1 }
+              : { opacity: 0, y: 30, scale: 0.98 }
+          }
+          transition={{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            opacity: { duration: 0.6 },
+          }}
+          className="section-container"
+        >
+          <SectionTitle
+            size="heading-2"
+            sectionId="hero"
+            className="text-right leading-tight md:w-2/3 md:text-left"
           >
-            <div className="flex flex-col gap-2 md:flex-row md:items-end md:gap-8">
-              {/* Main Heading */}
-              <SectionTitle
-                size="heading-2"
-                sectionId="hero"
-                className="text-right leading-tight md:w-2/3 md:text-left"
-              >
-                <span className="mb-10">
-                  We build digital experiences grain by grain, crafting
-                  connections between people and brands.
-                </span>
-              </SectionTitle>
-            </div>
-          </motion.div>
-        </div>
+            We build digital experiences grain by grain, crafting connections
+            between people and brands.
+          </SectionTitle>
+        </motion.div>
       </section>
 
       {/* Hero Video Grid Section */}
       <section
         ref={containerRef}
         id="hero-video"
-        className="section relative overflow-hidden py-0 pt-10"
+        className="relative overflow-hidden pt-10"
       >
         <div className="section-container">
           <div ref={videoGridRef} className="flex flex-col gap-2 md:gap-4">
@@ -115,11 +108,10 @@ export function Hero() {
                   style={{ x: baseTranslate }}
                   className="flex gap-2 md:gap-4"
                 >
-                  {/* Duplicate the row to create seamless loop */}
                   {[...row, ...row].map((media, mediaIndex) => (
                     <motion.div
                       key={`${media.id}-${mediaIndex}`}
-                      className="relative aspect-video w-[180px] flex-shrink-0 overflow-hidden rounded-lg md:w-[400px]"
+                      className="aspect-video w-[180px] flex-shrink-0 overflow-hidden rounded-lg md:w-[400px]"
                     >
                       {media.type === 'text' ? (
                         <div className="flex h-full w-full items-center justify-center bg-white">
