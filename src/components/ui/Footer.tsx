@@ -1,10 +1,9 @@
-import { IconBrandInstagram, IconCopyright } from '@tabler/icons-react';
+import { IconCopyright } from '@tabler/icons-react';
 
 const socialLinks = [
   {
     name: 'Instagram' as const,
     url: 'https://instagram.com/wearegrainstudio',
-    icon: IconBrandInstagram,
   },
   // Aquí puedes agregar más redes sociales según necesites
 ];
@@ -50,7 +49,7 @@ export function Footer() {
                 className="transition-opacity hover:opacity-80"
                 aria-label={`Follow us on ${social.name}`}
               >
-                <social.icon strokeWidth={1.5} className="size-6 md:size-8" />
+                Instagram
               </a>
             ))}
           </div>
