@@ -28,7 +28,7 @@ export function Hero() {
 
   // Mixed media assets (videos, images, and text)
   const mediaAssets = [
-    { type: 'image', url: '/images/circa-waste/circa1.webp' },
+    { type: 'image', url: '/images/circa-waste/circa5.webp' },
     { type: 'video', url: '/videos/tram.mp4' },
     { type: 'text', text: 'with' },
     { type: 'image', url: '/images/general/disney2.webp' },
