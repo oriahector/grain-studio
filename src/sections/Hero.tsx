@@ -140,7 +140,7 @@ export function Hero() {
                           muted
                           loop
                           playsInline
-                          className="h-full w-full object-cover"
+                          className="h-full w-full object-cover opacity-80"
                         >
                           <source src={media.url} type="video/mp4" />
                         </video>
@@ -148,7 +148,7 @@ export function Hero() {
                         <img
                           src={media.url}
                           alt="Project showcase"
-                          className="h-full w-full object-cover"
+                          className="h-full w-full object-cover opacity-90"
                         />
                       )}
                     </motion.div>
