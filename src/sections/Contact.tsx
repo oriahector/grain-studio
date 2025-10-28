@@ -11,7 +11,7 @@ export function Contact() {
     useContactForm();
 
   return (
-    <section id="contact" className="section text-white">
+    <section id="contact" className="section mt-20 text-white">
       <div className="section-container">
         <div className="w-full text-center">
           <SectionTitle size="heading-2" sectionId="contact">
