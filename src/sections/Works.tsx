@@ -64,7 +64,7 @@ export function Works() {
   };
 
   return (
-    <section id="works" className="section bg-klein mt-20 text-white">
+    <section id="works" className="section bg-klein text-white">
       <div className="section-container">
         <SectionTitle
           size="heading-2"
