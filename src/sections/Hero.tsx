@@ -34,15 +34,14 @@ export function Hero() {
     { type: 'image', url: '/images/general/disney2.webp' },
     { type: 'image', url: '/images/donde-alex/alex.webp' },
     // 2nd row
-
     { type: 'image', url: '/images/tree-brothers/tree.webp' },
     { type: 'text', text: 'rhythm &' },
-    { type: 'image', url: '/images/general/bucle.webp' },
+    { type: 'image', url: '/images/scandic-go/scandic1.webp' },
     { type: 'video', url: '/videos/people.mp4' },
     { type: 'image', url: '/images/tree-brothers/treeshop.webp' },
     //3rd row
     { type: 'image', url: '/images/scandic-go/scandic2.webp' },
-    { type: 'video', url: '/videos/tram.mp4' },
+    { type: 'image', url: '/images/orna-group/orna_phone.webp' },
     { type: 'text', text: 'precision' },
     { type: 'video', url: '/videos/metro.mp4' },
     { type: 'image', url: '/images/general/bucle.webp' },
@@ -88,7 +87,11 @@ export function Hero() {
             className="text-right leading-tight md:w-2/3 md:text-left"
           >
             We build digital experiences grain by grain, crafting connections
-            between people and brands.
+            between people and brands
+            <span
+              id="section-title-dot-hero"
+              className="relative inline-block h-[40px] w-[40px] align-bottom"
+            />
           </SectionTitle>
         </motion.div>
       </section>
