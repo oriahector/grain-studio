@@ -115,7 +115,7 @@ export function Works() {
 
                   {/* Title & Tag */}
                   <div className="mt-2">
-                    <h3 className="mb-2 text-base text-white md:text-lg">
+                    <h3 className="mb-2 text-base text-white uppercase md:text-lg">
                       {item.title}
                     </h3>
                     <Pill

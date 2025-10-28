@@ -26,7 +26,7 @@ export const itemsData: Item[] = [
     ],
   },
   {
-    title: 'TREE BROTHERS',
+    title: 'Tree Brothers',
     tag: 'WEB DEVELOPMENT',
     image: 'images/tree-brothers/tree.webp',
     desc: 'Developed the digital platform for Tree Brothers, highlighting their eco-friendly Christmas tree collection and recycling services. Focused on a warm, approachable design and a seamless customer journey.',
@@ -72,7 +72,7 @@ export const itemsData: Item[] = [
     ],
   },
   {
-    title: 'GROSSO NAPOLETANO',
+    title: 'Grosso Napoletano',
     tag: 'PHOTOGRAPHY',
     image: 'images/grosso-napoletano/grosso.webp',
     desc: "Event photography for Grosso Napoletano's unveiling of a limited-edition pizza. The session highlighted the craftsmanship, lively ambiance, and brand personality through candid and detail-rich shots.",
@@ -97,7 +97,7 @@ export const itemsData: Item[] = [
     ],
   },
   {
-    title: 'DONDE ÁLEX BARBERÍA',
+    title: 'Donde Álex Barbería',
     tag: 'PHOTOGRAPHY',
     image: 'images/donde-alex/alex.webp',
     desc: "Lifestyle photoshoot for a men's barbershop, capturing the textures, precision, and character of the space to build engaging social media content.",
