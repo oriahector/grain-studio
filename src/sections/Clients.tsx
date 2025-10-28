@@ -7,6 +7,34 @@ import { MOTION_DURATIONS } from '@/config/constants';
 
 const MARQUEE_SPEED = -50; // pixels per second
 
+function ClientItem({
+  client,
+  showTooltip,
+  moveTooltip,
+  hideTooltip,
+}: {
+  client: (typeof CLIENTS)[number];
+  showTooltip: (text: string, x: number, y: number) => void;
+  moveTooltip: (x: number, y: number) => void;
+  hideTooltip: () => void;
+}) {
+  return (
+    <div className="inline-flex items-center gap-15 px-5 text-2xl md:text-4xl">
+      <button
+        type="button"
+        onMouseEnter={(e) => showTooltip(client.type, e.clientX, e.clientY)}
+        onMouseMove={(e) => moveTooltip(e.clientX, e.clientY)}
+        onMouseLeave={hideTooltip}
+        className="focus:ring-klein block focus:ring-2 focus:ring-offset-2 focus:outline-none"
+        aria-label={`${client.name} - ${client.type}`}
+      >
+        {client.name}
+      </button>
+      <span className="select-none">|</span>
+    </div>
+  );
+}
+
 export function Clients() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -34,51 +62,23 @@ export function Clients() {
     <>
       <section className="text-klein bg-white">
         <div className="overflow-hidden">
-          <div className="relative">
-            <motion.div
-              ref={containerRef}
-              className="my-4 inline-flex whitespace-nowrap"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              <div className="inline-flex items-center">
-                {CLIENTS.map((client, i) => (
-                  <div
-                    key={`a-${i}`}
-                    className="inline-flex items-center gap-15 px-5 text-2xl md:text-4xl"
-                  >
-                    <button
-                      type="button"
-                      onMouseEnter={(e) =>
-                        showTooltip(client.type, e.clientX, e.clientY)
-                      }
-                      onMouseMove={(e) => moveTooltip(e.clientX, e.clientY)}
-                      onMouseLeave={hideTooltip}
-                      className="focus:ring-klein block focus:ring-2 focus:ring-offset-2 focus:outline-none"
-                      aria-label={`${client.name} - ${client.type}`}
-                    >
-                      {client.name}
-                    </button>
-                    <span className="select-none">|</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="inline-flex items-center" aria-hidden="true">
-                {CLIENTS.map((client, i) => (
-                  <div
-                    key={`b-${i}`}
-                    className="inline-flex items-center gap-15 px-5 text-2xl md:text-4xl"
-                  >
-                    <span className="block" aria-hidden="true">
-                      {client.name}
-                    </span>
-                    <span className="select-none">|</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+          <motion.div
+            ref={containerRef}
+            className="my-4 inline-flex whitespace-nowrap"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Duplicamos para loop infinito */}
+            {[...CLIENTS, ...CLIENTS].map((client, i) => (
+              <ClientItem
+                key={`client-${i}`}
+                client={client}
+                showTooltip={showTooltip}
+                moveTooltip={moveTooltip}
+                hideTooltip={hideTooltip}
+              />
+            ))}
+          </motion.div>
         </div>
       </section>
 
