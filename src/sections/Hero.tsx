@@ -32,19 +32,18 @@ export function Hero() {
     { type: 'video', url: '/videos/tram.mp4' },
     { type: 'text', text: 'with' },
     { type: 'image', url: '/images/general/disney2.webp' },
-    { type: 'image', url: '/images/donde-alex/alex.webp' },
+
     // 2nd row
     { type: 'image', url: '/images/tree-brothers/tree.webp' },
     { type: 'text', text: 'rhythm &' },
     { type: 'image', url: '/images/scandic-go/scandic1.webp' },
     { type: 'video', url: '/videos/people.mp4' },
-    { type: 'image', url: '/images/tree-brothers/treeshop.webp' },
+
     //3rd row
     { type: 'image', url: '/images/scandic-go/scandic2.webp' },
     { type: 'image', url: '/images/orna-group/orna_phone.webp' },
     { type: 'text', text: 'precision' },
     { type: 'video', url: '/videos/metro.mp4' },
-    { type: 'image', url: '/images/general/bucle.webp' },
   ];
 
   // Generate media clips for each row
@@ -100,7 +99,7 @@ export function Hero() {
       <section
         ref={containerRef}
         id="hero-video"
-        className="relative overflow-hidden pt-10"
+        className="mx-auto flex overflow-hidden pt-10"
       >
         <div className="section-container">
           <div ref={videoGridRef} className="flex flex-col gap-2 md:gap-4">

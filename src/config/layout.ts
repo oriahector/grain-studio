@@ -3,7 +3,7 @@
  */
 export const LAYOUT = {
   GRID: {
-    CLIPS_PER_ROW: 5,
+    CLIPS_PER_ROW: 4,
     ROWS: 3,
   },
   WORK: {
