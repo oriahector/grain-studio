@@ -22,8 +22,8 @@ export function Services() {
         </SectionTitle>
 
         <ul className="text-klein space-y-4 text-5xl leading-none font-extrabold uppercase md:space-y-8 md:text-9xl">
-          {SERVICES.map((s) => (
-            <ServiceItem key={s} label={s} />
+          {SERVICES.map((s, index) => (
+            <ServiceItem key={s} label={s} index={index} />
           ))}
         </ul>
       </div>
@@ -31,25 +31,19 @@ export function Services() {
   );
 }
 
-function ServiceItem({ label }: { label: string }) {
+function ServiceItem({ label, index }: { label: string; index: number }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.4, once: false });
+  const inView = useInView(ref, { amount: 0.3, once: false });
 
   return (
     <motion.li
       ref={ref}
-      initial={{ opacity: 0.2, scale: 0.96, y: 20 }}
-      animate={
-        inView
-          ? { opacity: 1, scale: 1.01, y: 0 }
-          : { opacity: 0.2, scale: 0.96, y: 20 }
-      }
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1], // easeOutQuart - suave y elegante
-        opacity: { duration: 0.6 },
-        scale: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-        y: { duration: 0.6 },
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: [0.16, 1, 0.3, 1],
       }}
     >
       {label}
