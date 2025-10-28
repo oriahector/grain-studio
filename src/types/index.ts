@@ -41,14 +41,8 @@ export interface Service {
   icon?: string;
 }
 
-// Section types
-export type SectionId =
-  | 'hero'
-  | 'works'
-  | 'services'
-  | 'clients'
-  | 'about'
-  | 'contact';
+// Section types - exported from @/lib/sections
+export type { SectionId } from '@/lib/sections';
 
 // API types
 export interface EmailJSPayload {

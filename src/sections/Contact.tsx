@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { FormField } from '@/components/ui/FormField';
 import { EMAIL_CONFIG } from '@/config/constants';
+import { isValidEmail } from '@/utils';
 import type { ContactFormData, FormErrors, FormStatus } from '@/types';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -26,7 +27,7 @@ export function Contact() {
     const newErrors = {
       name: formData.name.trim() === '',
       lastName: formData.lastName.trim() === '',
-      email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email),
+      email: !isValidEmail(formData.email),
       message: formData.message.trim() === '',
     };
     setErrors(newErrors);

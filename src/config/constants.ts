@@ -1,8 +1,8 @@
 // EmailJS Configuration
 export const EMAIL_CONFIG = {
-  SERVICE_ID: 'service_jal7ujh',
-  TEMPLATE_ID: 'template_z527x3l',
-  PUBLIC_KEY: '_3QOseFGEi4azjh7v',
+  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
+  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '',
 } as const;
 
 // Social Links
