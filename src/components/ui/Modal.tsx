@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { IconX } from '@tabler/icons-react';
+import { IconArrowLeft, IconPointFilled } from '@tabler/icons-react';
 import { motion, useMotionValue } from 'motion/react';
-import { IconPointFilled } from '@tabler/icons-react';
+import { Button } from './Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -91,14 +91,18 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
               <IconPointFilled size={14} className="object-contain" />
               <span>Studio</span>
             </div>
-            <button
-              type="button"
-              aria-label="Cerrar modal"
+            <Button
+              size="xs"
               onClick={onClose}
-              className="text-klein ring-klein hover:bg-klein flex size-8 cursor-pointer items-center justify-center rounded-full ring-2 transition-colors hover:text-white"
+              className="group text-klein flex items-center gap-2"
+              aria-label="Back"
             >
-              <IconX size={20} />
-            </button>
+              <IconArrowLeft
+                size={20}
+                className="transition-transform duration-300 group-hover:-translate-x-1"
+              />
+              <span className="font-anton uppercase">Close</span>
+            </Button>
 
             {/* Scroll Progress Bar */}
             <motion.div

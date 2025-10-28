@@ -2,12 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Modal } from '@/components/ui/Modal';
 import { Pill } from '@/components/ui/Pill';
+import { IconCamera, IconCode, IconArrowUpRight } from '@tabler/icons-react';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/Button';
-import { IconArrowUpRight } from '@tabler/icons-react';
 import clsx from 'clsx';
+
+// Map tags to icons
+const TAG_ICONS: Record<string, React.ReactNode> = {
+  PHOTOGRAPHY: <IconCamera size={14} />,
+  'WEB DEVELOPMENT': <IconCode size={14} />,
+};
 
 export function Works() {
   const [items] = useState<Item[]>(itemsData);
@@ -106,7 +112,12 @@ export function Works() {
                     <h3 className="mb-2 text-base text-white md:text-lg">
                       {item.title}
                     </h3>
-                    <Pill label={item.tag} variant="light" size="sm" />
+                    <Pill
+                      label={item.tag}
+                      variant="light"
+                      size="sm"
+                      icon={TAG_ICONS[item.tag]}
+                    />
                   </div>
                 </button>
               </div>
@@ -127,7 +138,12 @@ export function Works() {
               )}
             </h2>
 
-            <Pill label={selected?.tag} variant="dark" size="sm" />
+            <Pill
+              label={selected?.tag}
+              variant="dark"
+              size="sm"
+              icon={selected?.tag ? TAG_ICONS[selected.tag] : undefined}
+            />
 
             <p className="text-sm text-gray-900 md:text-base">
               {selected?.desc}

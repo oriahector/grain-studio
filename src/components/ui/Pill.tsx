@@ -1,11 +1,12 @@
-import React from 'react';
 import clsx from 'clsx';
+import { IconTag } from '@tabler/icons-react';
 
 interface PillProps {
   label?: string | null;
   variant?: 'light' | 'dark';
   size?: 'sm' | 'md';
   className?: string;
+  icon?: React.ReactNode;
 }
 
 const VARIANT_CLASSES = {
@@ -23,6 +24,7 @@ export function Pill({
   variant = 'light',
   size = 'sm',
   className,
+  icon,
 }: PillProps) {
   if (!label) return null;
 
@@ -35,6 +37,7 @@ export function Pill({
         className
       )}
     >
+      {icon}
       {label}
     </span>
   );
