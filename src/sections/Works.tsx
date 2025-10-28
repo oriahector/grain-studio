@@ -136,11 +136,15 @@ export function Works() {
             {selected?.url && (
               <Button
                 size="xs"
-                className="font-anton text-klein flex items-center gap-1"
+                className="group font-anton text-klein flex items-center gap-1"
                 onClick={() => window.open(selected.url, '_blank')}
               >
                 Visit site
-                <IconArrowUpRight size={24} stroke={1} />
+                <IconArrowUpRight
+                  size={24}
+                  stroke={1}
+                  className="transition-transform duration-300 group-hover:rotate-45"
+                />
               </Button>
             )}
           </section>

@@ -43,11 +43,15 @@ export function Footer() {
             {socialLinks.map((social) => (
               <Button
                 size="xs"
-                className="flex items-center gap-1 !capitalize"
+                className="group flex items-center gap-1 !capitalize"
                 onClick={() => window.open(social.url, '_blank')}
               >
                 {social.name}
-                <IconArrowUpRight size={24} stroke={1} />
+                <IconArrowUpRight
+                  size={24}
+                  stroke={1}
+                  className="transition-transform duration-300 group-hover:rotate-45"
+                />
               </Button>
             ))}
           </div>
