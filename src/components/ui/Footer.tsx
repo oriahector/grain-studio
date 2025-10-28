@@ -1,11 +1,11 @@
-import { IconCopyright } from '@tabler/icons-react';
+import { IconCopyright, IconArrowUpRight } from '@tabler/icons-react';
+import { Button } from './Button';
 
 const socialLinks = [
   {
     name: 'Instagram' as const,
     url: 'https://instagram.com/wearegrainstudio',
   },
-  // Aquí puedes agregar más redes sociales según necesites
 ];
 
 export function Footer() {
@@ -41,16 +41,14 @@ export function Footer() {
           </div>
           <div className="flex gap-4">
             {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-80"
-                aria-label={`Follow us on ${social.name}`}
+              <Button
+                size="xs"
+                className="flex items-center gap-1 !capitalize"
+                onClick={() => window.open(social.url, '_blank')}
               >
-                Instagram
-              </a>
+                {social.name}
+                <IconArrowUpRight size={24} stroke={1} />
+              </Button>
             ))}
           </div>
         </div>
