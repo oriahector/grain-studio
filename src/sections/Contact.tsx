@@ -93,7 +93,7 @@ export function Contact() {
 
           <form
             noValidate
-            className="mx-auto mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl font-semibold md:text-2xl"
+            className="mx-auto mt-20 flex w-full max-w-3xl flex-col gap-4 text-xl md:text-2xl"
             onSubmit={(e) => {
               void handleSubmit(e);
             }}
@@ -144,17 +144,17 @@ export function Contact() {
                 setFormData((prev) => ({ ...prev, message: e.target.value }));
                 setErrors((prev) => ({ ...prev, message: false }));
               }}
-              placeholder="Let's talk about you have above your arms"
+              placeholder="What's on your mind?"
               error={errors.message}
               errorMessage="Field Required"
               textarea
-              className="resize-none"
+              className="-mb-2 resize-none"
               rows={5}
             />
 
             <div className="flex items-center justify-start gap-2 text-lg uppercase md:text-2xl">
               {status !== 'sending' && (
-                <Button size="lg" type="submit">
+                <Button size="lg" type="submit" className="font-semibold">
                   Send
                   <IconSend className="ml-2" />
                 </Button>
