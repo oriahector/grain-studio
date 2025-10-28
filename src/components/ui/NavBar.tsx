@@ -1,8 +1,11 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll } from 'motion/react';
 import clsx from 'clsx';
 import { IconPointFilled } from '@tabler/icons-react';
 import { Button } from './Button';
+import { floatAnimation } from '@/utils/animations';
+import { ANIMATION_DURATIONS } from '@/config/constants';
+import { scrollToSection, scrollToTop } from '@/utils/navigation';
 
 const LINKS = [
   { id: 'works', label: 'Works' },
@@ -12,9 +15,9 @@ const LINKS = [
 
 export function NavBar() {
   const { scrollYProgress } = useScroll();
-  const [hasScrolled, setHasScrolled] = React.useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 10);
     };
@@ -23,21 +26,17 @@ export function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(`#${id}`);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
   };
 
   return (
     <header
       className={clsx(
-        'font-anton fixed top-0 right-0 left-0 z-50 transition-colors duration-300',
+        `font-anton fixed top-0 right-0 left-0 z-50 transition-colors`,
         hasScrolled ? 'bg-klein text-white' : 'bg-transparent text-white'
       )}
+      style={{ transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms` }}
     >
       {/* Scroll Progress Bar */}
       <motion.div
@@ -58,22 +57,7 @@ export function NavBar() {
           >
             <span>Grain</span>
             <motion.span
-              animate={{
-                x: [0, 2, -2, 0],
-                y: [0, -3, 1, 0],
-              }}
-              transition={{
-                x: {
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: [0.42, 0, 0.58, 1],
-                },
-                y: {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: [0.42, 0, 0.58, 1],
-                },
-              }}
+              animate={floatAnimation}
               className="mx-0.5 inline-block"
             >
               <IconPointFilled size={14} className="object-contain" />

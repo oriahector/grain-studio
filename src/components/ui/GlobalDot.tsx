@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'motion/react';
 import { IconPointFilled } from '@tabler/icons-react';
+import { SECTION_IDS, type SectionId } from '@/lib/sections';
+import { floatAnimation, easings } from '@/utils/animations';
+import { MOTION_DURATIONS } from '@/config/constants';
 
-const SECTIONS = ['hero', 'works', 'services', 'contact'] as const;
+const DOT_SIZE = {
+  HERO: 70,
+  DEFAULT: 50,
+} as const;
 
 export function GlobalDot() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [size, setSize] = useState(50);
+  const [activeSection, setActiveSection] = useState<SectionId | null>(null);
+  const [size, setSize] = useState<number>(DOT_SIZE.DEFAULT);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,14 +23,14 @@ export function GlobalDot() {
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    SECTIONS.forEach((id) => {
+    SECTION_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
 
       const obs = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setSize(id === 'hero' ? 70 : 50);
+            setSize(id === 'hero' ? DOT_SIZE.HERO : DOT_SIZE.DEFAULT);
             setActiveSection(id);
           }
         },
@@ -52,30 +58,12 @@ export function GlobalDot() {
       initial={false}
       transition={{
         layout: {
-          duration: 2,
-          ease: [0.16, 1, 0.3, 1],
+          duration: MOTION_DURATIONS.LAYOUT,
+          ease: easings.easeOutExpo,
         },
       }}
     >
-      <motion.div
-        animate={{
-          x: [0, 2, -2, 0],
-          y: [0, -3, 1, 0],
-        }}
-        transition={{
-          x: {
-            duration: 4,
-            repeat: Infinity,
-            ease: [0.42, 0, 0.58, 1],
-          },
-          y: {
-            duration: 3,
-            repeat: Infinity,
-            ease: [0.42, 0, 0.58, 1],
-          },
-        }}
-        className="mx-0.5 inline-block"
-      >
+      <motion.div animate={floatAnimation} className="mx-0.5 inline-block">
         <IconPointFilled
           size={size}
           className={`drop-shadow-2xl ${activeSection === 'services' ? 'text-klein' : 'text-white'}`}

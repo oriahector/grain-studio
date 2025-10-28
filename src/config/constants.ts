@@ -5,15 +5,6 @@ export const EMAIL_CONFIG = {
   PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '',
 } as const;
 
-// Social Links
-export const SOCIAL_LINKS = [
-  {
-    name: 'Instagram',
-    url: 'https://instagram.com/wearegrainstudio',
-    icon: 'InstagramIcon',
-  },
-] as const;
-
 // Services
 export const SERVICES = [
   'Web Design',
@@ -23,18 +14,25 @@ export const SERVICES = [
   'UGC Content',
 ] as const;
 
-// Animation Durations
+// Animation Durations (in milliseconds)
 export const ANIMATION_DURATIONS = {
   PANEL: 520,
   OVERLAY: 320,
   FADE_IN: 1500,
+  FAST: 150,
+  NORMAL: 300,
+  SLOW: 800,
+  SLOWEST: 1500,
 } as const;
 
-// Breakpoints (matching Tailwind defaults)
-export const BREAKPOINTS = {
-  SM: 640,
-  MD: 768,
-  LG: 1024,
-  XL: 1280,
-  '2XL': 1536,
+// Animation Durations for Motion (in seconds)
+export const MOTION_DURATIONS = {
+  FAST: 0.15,
+  NORMAL: 0.3,
+  SLOW: 0.6,
+  SLOWER: 0.8,
+  SLOWEST: 1.5,
+  LAYOUT: 2,
+  FLOAT_X: 4,
+  FLOAT_Y: 3,
 } as const;

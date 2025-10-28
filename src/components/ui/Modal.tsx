@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { IconArrowLeft, IconPointFilled } from '@tabler/icons-react';
 import { motion, useMotionValue } from 'motion/react';
 import { Button } from './Button';
+import { fadeIn, scaleIn, easings } from '@/utils/animations';
+import { MOTION_DURATIONS, ANIMATION_DURATIONS } from '@/config/constants';
 
 interface ModalProps {
   isOpen: boolean;
@@ -64,7 +66,10 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        transition={{
+          duration: MOTION_DURATIONS.NORMAL,
+          ease: easings.easeOutExpo,
+        }}
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
       />
 
@@ -76,9 +81,9 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{
-          duration: 0.4,
-          ease: [0.16, 1, 0.3, 1],
-          opacity: { duration: 0.3 },
+          duration: MOTION_DURATIONS.NORMAL,
+          ease: easings.easeOutExpo,
+          opacity: { duration: MOTION_DURATIONS.NORMAL },
         }}
         className="relative flex h-full max-h-screen w-full flex-col bg-white shadow-2xl md:h-auto md:max-h-[92vh] md:rounded-lg"
         onClick={(e) => e.stopPropagation()}
@@ -99,7 +104,10 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
             >
               <IconArrowLeft
                 size={20}
-                className="transition-transform duration-300 group-hover:-translate-x-1"
+                className="transition-transform group-hover:-translate-x-1"
+                style={{
+                  transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                }}
               />
               <span className="font-anton uppercase">Close</span>
             </Button>

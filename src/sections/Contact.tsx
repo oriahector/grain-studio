@@ -1,88 +1,14 @@
-import React from 'react';
 import { Button } from '@/components/ui/Button';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { FormField } from '@/components/ui/FormField';
-import { EMAIL_CONFIG } from '@/config/constants';
-import { isValidEmail } from '@/utils';
-import type { ContactFormData, FormErrors, FormStatus } from '@/types';
+import { useContactForm } from '@/hooks/useContactForm';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { ANIMATION_DURATIONS, MOTION_DURATIONS } from '@/config/constants';
+
 export function Contact() {
-  const [formData, setFormData] = React.useState<ContactFormData>({
-    name: '',
-    lastName: '',
-    email: '',
-    message: '',
-  });
-  const [errors, setErrors] = React.useState<FormErrors>({
-    name: false,
-    lastName: false,
-    email: false,
-    message: false,
-  });
-  const [status, setStatus] = React.useState<FormStatus>('idle');
-  const [errorMsg, setErrorMsg] = React.useState('');
-
-  const handleValidateForm = () => {
-    const newErrors = {
-      name: formData.name.trim() === '',
-      lastName: formData.lastName.trim() === '',
-      email: !isValidEmail(formData.email),
-      message: formData.message.trim() === '',
-    };
-    setErrors(newErrors);
-    return !Object.values(newErrors).some((error) => error);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!handleValidateForm()) {
-      return;
-    }
-
-    setErrorMsg('');
-    setStatus('sending');
-
-    try {
-      if (
-        !EMAIL_CONFIG.SERVICE_ID ||
-        !EMAIL_CONFIG.TEMPLATE_ID ||
-        !EMAIL_CONFIG.PUBLIC_KEY
-      ) {
-        throw new Error('Faltan variables de entorno de EmailJS');
-      }
-
-      const payload = {
-        service_id: EMAIL_CONFIG.SERVICE_ID,
-        template_id: EMAIL_CONFIG.TEMPLATE_ID,
-        user_id: EMAIL_CONFIG.PUBLIC_KEY,
-        template_params: {
-          name: formData.name,
-          lastName: formData.lastName,
-          email: formData.email,
-          message: formData.message,
-        },
-      };
-
-      const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || 'Request failed');
-      }
-
-      setStatus('ok');
-      setFormData({ name: '', lastName: '', email: '', message: '' });
-    } catch (err: unknown) {
-      setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Error desconocido');
-    }
-  };
+  const { formData, errors, status, errorMsg, handleSubmit, updateField } =
+    useContactForm();
 
   return (
     <section id="contact" className="section text-white">
@@ -103,10 +29,7 @@ export function Contact() {
               <FormField
                 name="name"
                 value={formData.name}
-                onChange={(e) => {
-                  setFormData((prev) => ({ ...prev, name: e.target.value }));
-                  setErrors((prev) => ({ ...prev, name: false }));
-                }}
+                onChange={(e) => updateField('name', e.target.value)}
                 placeholder="Name"
                 error={errors.name}
                 errorMessage="Field Required"
@@ -114,13 +37,7 @@ export function Contact() {
               <FormField
                 name="lastName"
                 value={formData.lastName}
-                onChange={(e) => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    lastName: e.target.value,
-                  }));
-                  setErrors((prev) => ({ ...prev, lastName: false }));
-                }}
+                onChange={(e) => updateField('lastName', e.target.value)}
                 placeholder="Surname"
                 error={errors.lastName}
                 errorMessage="Field Required"
@@ -130,10 +47,7 @@ export function Contact() {
               name="email"
               type="email"
               value={formData.email}
-              onChange={(e) => {
-                setFormData((prev) => ({ ...prev, email: e.target.value }));
-                setErrors((prev) => ({ ...prev, email: false }));
-              }}
+              onChange={(e) => updateField('email', e.target.value)}
               placeholder="Email"
               error={errors.email}
               errorMessage="Valid Email required"
@@ -141,10 +55,7 @@ export function Contact() {
             <FormField
               name="message"
               value={formData.message}
-              onChange={(e) => {
-                setFormData((prev) => ({ ...prev, message: e.target.value }));
-                setErrors((prev) => ({ ...prev, message: false }));
-              }}
+              onChange={(e) => updateField('message', e.target.value)}
               placeholder="What's on your mind?"
               error={errors.message}
               errorMessage="Field Required"
@@ -163,7 +74,10 @@ export function Contact() {
                   Send
                   <IconArrowUpRight
                     stroke={1.5}
-                    className="size-7 transition-transform duration-300 group-hover:rotate-45 md:size-10"
+                    className="size-7 transition-transform group-hover:rotate-45 md:size-10"
+                    style={{
+                      transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                    }}
                   />
                 </Button>
               )}
@@ -176,7 +90,7 @@ export function Contact() {
                     className="py-2 text-xl md:text-3xl"
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 0 }}
-                    transition={{ duration: 3 }}
+                    transition={{ duration: MOTION_DURATIONS.FLOAT_X }}
                   >
                     &nbsp;| Message sent successfully!
                   </motion.p>

@@ -1,5 +1,7 @@
 import { IconCopyright, IconArrowUpRight } from '@tabler/icons-react';
 import { Button } from './Button';
+import { ANIMATION_DURATIONS } from '@/config/constants';
+import { openUrl } from '@/utils/navigation';
 
 const socialLinks = [
   {
@@ -18,7 +20,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/hmartinezoria/"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline transition-opacity hover:opacity-80"
+            className="underline"
           >
             Héctor
           </a>{' '}
@@ -27,7 +29,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/clara-morrondo/"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline transition-opacity hover:opacity-80"
+            className="underline"
           >
             Clara
           </a>
@@ -44,13 +46,16 @@ export function Footer() {
               <Button
                 size="xs"
                 className="group flex items-center gap-1 !capitalize"
-                onClick={() => window.open(social.url, '_blank')}
+                onClick={() => openUrl(social.url)}
               >
                 {social.name}
                 <IconArrowUpRight
                   size={24}
                   stroke={1}
-                  className="transition-transform duration-300 group-hover:rotate-45"
+                  className="transition-transform group-hover:rotate-45"
+                  style={{
+                    transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                  }}
                 />
               </Button>
             ))}

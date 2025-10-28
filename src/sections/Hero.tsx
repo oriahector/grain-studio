@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'motion/react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
+import { LAYOUT } from '@/config/layout';
+import { MOTION_DURATIONS } from '@/config/constants';
+import { easings } from '@/utils/animations';
 
 export function Hero() {
   const heroRef = useRef(null);
@@ -15,11 +18,13 @@ export function Hero() {
   });
 
   // Slow down the scroll transformation - maps scroll to a slower range
-  const slowScrollProgress = useTransform(scrollYProgress, [0, 1], [0, 0.3]);
+  const slowScrollProgress = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, LAYOUT.SCROLL.SLOW_PROGRESS_MAX]
+  );
 
-  // Number of clips per row (adjust as needed)
-  const clipsPerRow = 5;
-  const rows = 3;
+  const { CLIPS_PER_ROW, ROWS } = LAYOUT.GRID;
 
   // Mixed media assets (videos, images, and text)
   const mediaAssets = [
@@ -45,10 +50,10 @@ export function Hero() {
   ];
 
   // Generate media clips for each row
-  const rowMedia = Array.from({ length: rows }, (_, rowIndex) =>
-    Array.from({ length: clipsPerRow }, (_, colIndex) => {
+  const rowMedia = Array.from({ length: ROWS }, (_, rowIndex) =>
+    Array.from({ length: CLIPS_PER_ROW }, (_, colIndex) => {
       const assetIndex =
-        (rowIndex * clipsPerRow + colIndex) % mediaAssets.length;
+        (rowIndex * CLIPS_PER_ROW + colIndex) % mediaAssets.length;
       return {
         id: `media-${rowIndex}-${colIndex}`,
         ...mediaAssets[assetIndex],
@@ -72,9 +77,9 @@ export function Hero() {
               : { opacity: 0, y: 30, scale: 0.98 }
           }
           transition={{
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1],
-            opacity: { duration: 0.6 },
+            duration: MOTION_DURATIONS.SLOWER,
+            ease: easings.easeOutExpo,
+            opacity: { duration: MOTION_DURATIONS.SLOW },
           }}
           className="section-container"
         >
@@ -102,7 +107,15 @@ export function Hero() {
               const baseTranslate = useTransform(
                 slowScrollProgress,
                 [0, 1],
-                isOdd ? ['-20%', '-50%'] : ['-5%', '20%']
+                isOdd
+                  ? [
+                      LAYOUT.SCROLL.GRID_TRANSLATE.ODD_START,
+                      LAYOUT.SCROLL.GRID_TRANSLATE.ODD_END,
+                    ]
+                  : [
+                      LAYOUT.SCROLL.GRID_TRANSLATE.EVEN_START,
+                      LAYOUT.SCROLL.GRID_TRANSLATE.EVEN_END,
+                    ]
               );
 
               return (

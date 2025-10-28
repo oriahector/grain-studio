@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import clsx from 'clsx';
-import { IconTag } from '@tabler/icons-react';
 
 interface PillProps {
   label?: string | null;
@@ -19,7 +19,7 @@ const SIZE_CLASSES = {
   md: 'text-sm px-3 py-1',
 } as const;
 
-export function Pill({
+export const Pill = memo(function Pill({
   label,
   variant = 'light',
   size = 'sm',
@@ -41,4 +41,4 @@ export function Pill({
       {label}
     </span>
   );
-}
+});

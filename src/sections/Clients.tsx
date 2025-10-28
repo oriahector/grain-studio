@@ -1,78 +1,53 @@
-import React, { useRef, useState } from 'react';
-import clsx from 'clsx';
+import { useRef, useState } from 'react';
+import { motion, useAnimationFrame } from 'motion/react';
+import { CLIENTS } from '@/config/clients';
+import { useTooltip } from '@/hooks/useTooltip';
+import { MOTION_DURATIONS } from '@/config/constants';
 
-interface Client {
-  name: string;
-  type: string;
-}
-
-interface Tooltip {
-  visible: boolean;
-  text: string;
-  x: number;
-  y: number;
-}
-
-const CLIENTS: Client[] = [
-  { name: "Kiehl's", type: 'UGC Content' },
-  { name: "Group L'Oreal", type: 'UGC Content' },
-  { name: 'WETACA', type: 'UGC Content' },
-  { name: 'Grosso Napoletano', type: 'Photography' },
-  { name: 'Orna Group', type: 'Web Development' },
-  { name: 'CIRCA Waste', type: 'Web Development' },
-  { name: 'Tree Brothers', type: 'Web Development' },
-  { name: 'ScandicGo', type: 'Photography' },
-];
-
-const MARQUEE_OFFSET = -50; // -50% because content is duplicated
+const MARQUEE_SPEED = -50; // pixels per second
 
 export function Clients() {
-  const [tooltip, setTooltip] = useState<Tooltip>({
-    visible: false,
-    text: '',
-    x: 0,
-    y: 0,
-  });
-  const tipRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const {
+    tooltip,
+    tipRef,
+    handlePointerEnter,
+    handlePointerMove,
+    handlePointerLeave,
+  } = useTooltip();
 
-  const handlePointerEnter = (e: React.PointerEvent, name: string) => {
-    (e.target as Element).setPointerCapture?.(e.pointerId);
-    setTooltip((prev) => ({ ...prev, visible: true, text: name }));
-  };
+  useAnimationFrame((_, delta) => {
+    if (!containerRef.current || isPaused) return;
 
-  const handlePointerMove = (e: React.PointerEvent) => {
-    const offsetY = -18;
-    const offsetX = 18;
-    setTooltip((prev) => ({
-      ...prev,
-      x: e.clientX + offsetX,
-      y: e.clientY + offsetY,
-    }));
-  };
+    const currentX = parseFloat(
+      containerRef.current.style.transform
+        .replace('translateX(', '')
+        .replace('px)', '') || '0'
+    );
+    const newX = currentX + (MARQUEE_SPEED * delta) / 1000;
 
-  const handlePointerLeave = (e: React.PointerEvent) => {
-    try {
-      (e.target as Element).releasePointerCapture?.(e.pointerId);
-    } catch {
-      // Ignore error
+    // Reset position when scrolled past half the content (seamless loop)
+    const scrollWidth = containerRef.current.scrollWidth;
+    if (Math.abs(newX) >= scrollWidth / 2) {
+      containerRef.current.style.transform = 'translateX(0px)';
+    } else {
+      containerRef.current.style.transform = `translateX(${newX}px)`;
     }
-    setTooltip((prev) => ({ ...prev, visible: false }));
-  };
+  });
 
   return (
     <section className="text-klein bg-white">
       <div className="overflow-hidden">
         <div className="relative">
           {/* Marquee Track */}
-          <div
-            className="my-4 inline-block whitespace-nowrap"
-            style={
-              {
-                animation: 'marquee 22s linear infinite',
-                '--marquee-duration': '22s',
-              } as React.CSSProperties
-            }
+          <motion.div
+            ref={containerRef}
+            className="my-4 inline-flex whitespace-nowrap"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
             aria-hidden="false"
+            style={{ willChange: 'transform' }}
           >
             {/* First set of clients */}
             <div className="inline-flex items-center">
@@ -110,47 +85,40 @@ export function Clients() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Tooltip */}
-      <div
+      <motion.div
         ref={tipRef}
-        className={clsx(
-          'pointer-events-none fixed z-50 transition-opacity duration-150',
-          tooltip.visible ? 'opacity-100' : 'opacity-0'
-        )}
-        style={{ left: tooltip.x, top: tooltip.y }}
+        className="pointer-events-none fixed z-50"
         role="tooltip"
         aria-hidden={!tooltip.visible}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: tooltip.visible ? 1 : 0,
+          x: tooltip.x,
+          y: tooltip.y,
+        }}
+        transition={{
+          opacity: { duration: MOTION_DURATIONS.FAST },
+          x: { duration: 0 },
+          y: { duration: 0 },
+        }}
       >
-        <div className="rounded-md bg-black/60 px-3 py-1 text-sm font-semibold text-white shadow-lg backdrop-blur-md">
+        <motion.div
+          className="rounded-md bg-black/60 px-3 py-1 text-sm font-semibold text-white shadow-lg backdrop-blur-md"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{
+            scale: tooltip.visible ? 1 : 0.9,
+            opacity: tooltip.visible ? 1 : 0,
+          }}
+          transition={{ duration: MOTION_DURATIONS.FAST }}
+        >
           {tooltip.text}
-        </div>
-      </div>
-
-      {/* Marquee hover pause effect */}
-      <style>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(${MARQUEE_OFFSET}%);
-          }
-        }
-
-        [style*='animation: marquee']:hover {
-          animation-play-state: paused;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          [style*='animation: marquee'] {
-            animation: none !important;
-          }
-        }
-      `}</style>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
