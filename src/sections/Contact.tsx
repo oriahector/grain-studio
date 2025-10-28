@@ -4,7 +4,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { FormField } from '@/components/ui/FormField';
 import { EMAIL_CONFIG } from '@/config/constants';
 import type { ContactFormData, FormErrors, FormStatus } from '@/types';
-import { IconSend } from '@tabler/icons-react';
+import { IconArrowUpRight } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'motion/react';
 export function Contact() {
   const [formData, setFormData] = React.useState<ContactFormData>({
@@ -154,9 +154,16 @@ export function Contact() {
 
             <div className="flex items-center justify-start gap-2 text-lg uppercase md:text-2xl">
               {status !== 'sending' && (
-                <Button size="lg" type="submit" className="font-semibold">
+                <Button
+                  size="lg"
+                  type="submit"
+                  className="group flex items-center gap-1 font-semibold"
+                >
                   Send
-                  <IconSend className="ml-2" />
+                  <IconArrowUpRight
+                    stroke={1.5}
+                    className="size-7 transition-transform duration-300 group-hover:rotate-45 md:size-10"
+                  />
                 </Button>
               )}
               {status === 'sending' && (
