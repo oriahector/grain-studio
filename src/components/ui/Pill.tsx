@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import clsx from 'clsx';
 
 interface PillProps {
@@ -6,6 +6,7 @@ interface PillProps {
   variant?: 'light' | 'dark';
   size?: 'sm' | 'md';
   className?: string;
+  icon?: React.ReactNode;
 }
 
 const VARIANT_CLASSES = {
@@ -18,11 +19,12 @@ const SIZE_CLASSES = {
   md: 'text-sm px-3 py-1',
 } as const;
 
-export function Pill({
+export const Pill = memo(function Pill({
   label,
   variant = 'light',
   size = 'sm',
   className,
+  icon,
 }: PillProps) {
   if (!label) return null;
 
@@ -35,7 +37,8 @@ export function Pill({
         className
       )}
     >
+      {icon}
       {label}
     </span>
   );
-}
+});

@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { ANIMATION_DURATIONS } from '@/config/constants';
 
 interface FormFieldProps {
   name: string;
@@ -17,7 +18,7 @@ interface FormFieldProps {
 }
 
 const BASE_CLASSES =
-  'w-full border-b-2 border-white/40 bg-transparent p-3 uppercase transition-colors duration-300 focus:border-white focus:outline-none';
+  'w-full border-b-2 border-white/40 bg-transparent p-3 transition-colors focus:border-white focus:outline-none uppercase';
 
 export function FormField({
   name,
@@ -45,6 +46,7 @@ export function FormField({
           aria-invalid={error}
           aria-describedby={error ? `${name}-error` : undefined}
           className={inputClasses}
+          style={{ transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms` }}
         />
       ) : (
         <input
@@ -56,6 +58,7 @@ export function FormField({
           aria-invalid={error}
           aria-describedby={error ? `${name}-error` : undefined}
           className={inputClasses}
+          style={{ transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms` }}
         />
       )}
 
@@ -63,7 +66,7 @@ export function FormField({
         <span
           id={`${name}-error`}
           role="alert"
-          className="absolute top-1/2 right-0 -translate-y-1/2 text-sm font-semibold text-red-500 uppercase"
+          className="absolute top-0 right-0 -translate-y-1/2 text-sm font-semibold text-red-600 uppercase"
         >
           {errorMessage}
         </span>

@@ -6,11 +6,10 @@ import { Works } from '@/sections/Works';
 import { Services } from '@/sections/Services';
 import { Clients } from '@/sections/Clients';
 import { Contact } from '@/sections/Contact';
-import { SectionProvider } from '@/lib/sections';
 
 export default function App() {
   return (
-    <SectionProvider>
+    <>
       <GlobalDot />
       <NavBar />
       <main>
@@ -21,6 +20,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </SectionProvider>
+    </>
   );
 }

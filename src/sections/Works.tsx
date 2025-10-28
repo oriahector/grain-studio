@@ -2,11 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Modal } from '@/components/ui/Modal';
 import { Pill } from '@/components/ui/Pill';
+import { IconArrowUpRight } from '@tabler/icons-react';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/Button';
-import { IconArrowUpRight, IconLink } from '@tabler/icons-react';
+import { getTagIcon } from '@/config/tagIcons';
+import { LAYOUT } from '@/config/layout';
+import { ANIMATION_DURATIONS } from '@/config/constants';
+import { getGalleryItemAnimation } from '@/utils/animations';
+import { openUrl } from '@/utils/navigation';
 import clsx from 'clsx';
 
 export function Works() {
@@ -15,6 +20,16 @@ export function Works() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Item | null>(null);
   const closeTimer = useRef<number | null>(null);
+
+  const startClose = () => {
+    setOpen(false);
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(() => {
+      setMounted(false);
+      setSelected(null);
+      closeTimer.current = null;
+    }, ANIMATION_DURATIONS.PANEL);
+  };
 
   useEffect(() => {
     document.body.style.overflow = mounted ? 'hidden' : '';
@@ -25,7 +40,9 @@ export function Works() {
       }
     };
 
-    window.addEventListener('keydown', onKeyDown);
+    if (mounted) {
+      window.addEventListener('keydown', onKeyDown);
+    }
 
     return () => {
       window.removeEventListener('keydown', onKeyDown);
@@ -42,27 +59,12 @@ export function Works() {
     });
   };
 
-  const startClose = () => {
-    setOpen(false);
-    if (closeTimer.current) window.clearTimeout(closeTimer.current);
-    closeTimer.current = window.setTimeout(() => {
-      setMounted(false);
-      setSelected(null);
-      closeTimer.current = null;
-    }, 520);
-  };
-
   const closePanel = () => {
     startClose();
   };
 
-  const heights = [320, 420, 260, 360, 400, 300];
-
   return (
-    <section
-      id="works"
-      className="section bg-klein text-fg pt-10 pb-20 md:pt-24"
-    >
+    <section id="works" className="section bg-klein mt-20 text-white">
       <div className="section-container">
         <SectionTitle
           size="heading-2"
@@ -74,7 +76,7 @@ export function Works() {
 
         <div className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3">
           {items.map((item, idx) => {
-            const h = heights[idx % heights.length];
+            const h = LAYOUT.WORK.HEIGHTS[idx % LAYOUT.WORK.HEIGHTS.length];
 
             return (
               <div key={item.title} className="break-inside-avoid">
@@ -96,20 +98,32 @@ export function Works() {
                     className="relative w-full overflow-hidden rounded-lg"
                     style={{ height: `${h}px` }}
                   >
-                    <OptimizedImage
-                      src={item.image}
-                      alt={item.title}
-                      className="h-full w-full transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                    <div
+                      className="h-full w-full transition-transform group-hover:scale-105"
+                      style={{
+                        transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                      }}
+                    >
+                      <OptimizedImage
+                        src={item.image}
+                        alt={item.title}
+                        className="h-full w-full"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
 
                   {/* Title & Tag */}
                   <div className="mt-2">
-                    <h3 className="text-fg mb-2 text-base md:text-lg">
+                    <h3 className="mb-2 text-base text-white uppercase md:text-lg">
                       {item.title}
                     </h3>
-                    <Pill label={item.tag} variant="light" size="sm" />
+                    <Pill
+                      label={item.tag}
+                      variant="light"
+                      size="sm"
+                      icon={getTagIcon(item.tag)}
+                    />
                   </div>
                 </button>
               </div>
@@ -130,7 +144,12 @@ export function Works() {
               )}
             </h2>
 
-            <Pill label={selected?.tag} variant="dark" size="sm" />
+            <Pill
+              label={selected?.tag}
+              variant="dark"
+              size="sm"
+              icon={selected?.tag ? getTagIcon(selected.tag) : undefined}
+            />
 
             <p className="text-sm text-gray-900 md:text-base">
               {selected?.desc}
@@ -139,11 +158,18 @@ export function Works() {
             {selected?.url && (
               <Button
                 size="xs"
-                className="font-anton text-klein flex items-center gap-1"
-                onClick={() => window.open(selected.url, '_blank')}
+                className="group font-anton text-klein flex items-center gap-1"
+                onClick={() => openUrl(selected.url!)}
               >
                 Visit site
-                <IconArrowUpRight size={24} stroke={1} />
+                <IconArrowUpRight
+                  size={24}
+                  stroke={1}
+                  className="transition-transform group-hover:rotate-45"
+                  style={{
+                    transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                  }}
+                />
               </Button>
             )}
           </section>
@@ -155,13 +181,11 @@ export function Works() {
                 {selected.gallery?.map((item, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: index * 0.08 + 0.15,
-                      duration: 0.6,
-                      ease: [0.22, 1, 0.36, 1], // easeOutQuart
-                    }}
+                    {...getGalleryItemAnimation(
+                      index,
+                      LAYOUT.ANIMATIONS.GALLERY_STAGGER_DELAY,
+                      LAYOUT.ANIMATIONS.GALLERY_INITIAL_DELAY
+                    )}
                   >
                     <OptimizedImage
                       src={item.imgSrc}

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { IconX } from '@tabler/icons-react';
+import { IconArrowLeft, IconPointFilled } from '@tabler/icons-react';
 import { motion, useMotionValue } from 'motion/react';
-import { IconPointFilled } from '@tabler/icons-react';
+import { Button } from './Button';
+import { easings } from '@/utils/animations';
+import { MOTION_DURATIONS, ANIMATION_DURATIONS } from '@/config/constants';
 
 interface ModalProps {
   isOpen: boolean;
@@ -64,7 +66,10 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        transition={{
+          duration: MOTION_DURATIONS.NORMAL,
+          ease: easings.easeOutExpo,
+        }}
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
       />
 
@@ -76,11 +81,11 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{
-          duration: 0.4,
-          ease: [0.16, 1, 0.3, 1],
-          opacity: { duration: 0.3 },
+          duration: MOTION_DURATIONS.NORMAL,
+          ease: easings.easeOutExpo,
+          opacity: { duration: MOTION_DURATIONS.NORMAL },
         }}
-        className="relative flex h-full max-h-screen w-full flex-col bg-white shadow-2xl md:h-auto md:max-h-[92vh] md:rounded-xl"
+        className="relative flex h-full max-h-screen w-full flex-col bg-white shadow-2xl md:h-auto md:max-h-[92vh] md:rounded-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -91,14 +96,21 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
               <IconPointFilled size={14} className="object-contain" />
               <span>Studio</span>
             </div>
-            <button
-              type="button"
-              aria-label="Cerrar modal"
+            <Button
+              size="xs"
               onClick={onClose}
-              className="text-klein ring-klein hover:bg-klein flex size-8 cursor-pointer items-center justify-center rounded-full ring-2 transition-colors hover:text-white"
+              className="group text-klein flex items-center gap-2"
+              aria-label="Back"
             >
-              <IconX size={20} />
-            </button>
+              <IconArrowLeft
+                size={20}
+                className="transition-transform group-hover:-translate-x-1"
+                style={{
+                  transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                }}
+              />
+              <span className="font-anton uppercase">Close</span>
+            </Button>
 
             {/* Scroll Progress Bar */}
             <motion.div

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import type { ButtonProps } from '@/types';
 
@@ -19,7 +19,7 @@ const SIZE_CLASSES = {
   lg: 'text-xl md:text-3xl',
 } as const;
 
-export function Button({
+export const Button = memo(function Button({
   children,
   type = 'button',
   variant = 'primary',
@@ -46,4 +46,4 @@ export function Button({
       {children}
     </button>
   );
-}
+});
