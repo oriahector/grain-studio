@@ -8,8 +8,8 @@ interface TooltipState {
 }
 
 const TOOLTIP_OFFSET = {
-  X: 18,
-  Y: -18,
+  X: 0, // Will use CSS transform center
+  Y: 0, // Will use CSS transform -100%
 } as const;
 
 export function useTooltip() {
@@ -23,7 +23,12 @@ export function useTooltip() {
 
   const handlePointerEnter = (e: React.PointerEvent, text: string) => {
     (e.target as Element).setPointerCapture?.(e.pointerId);
-    setTooltip((prev) => ({ ...prev, visible: true, text }));
+    setTooltip({
+      visible: true,
+      text,
+      x: e.clientX + TOOLTIP_OFFSET.X,
+      y: e.clientY + TOOLTIP_OFFSET.Y,
+    });
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {

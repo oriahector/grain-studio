@@ -90,35 +90,28 @@ export function Clients() {
       </div>
 
       {/* Tooltip */}
-      <motion.div
-        ref={tipRef}
-        className="pointer-events-none fixed z-50"
-        role="tooltip"
-        aria-hidden={!tooltip.visible}
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: tooltip.visible ? 1 : 0,
-          x: tooltip.x,
-          y: tooltip.y,
-        }}
-        transition={{
-          opacity: { duration: MOTION_DURATIONS.FAST },
-          x: { duration: 0 },
-          y: { duration: 0 },
-        }}
-      >
+      {tooltip.visible && (
         <motion.div
-          className="rounded-md bg-black/60 px-3 py-1 text-sm font-semibold text-white shadow-lg backdrop-blur-md"
-          initial={{ scale: 0.9, opacity: 0 }}
+          ref={tipRef}
+          className="pointer-events-none fixed z-[9999]"
+          role="tooltip"
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{
-            scale: tooltip.visible ? 1 : 0.9,
-            opacity: tooltip.visible ? 1 : 0,
+            opacity: 1,
+            scale: 1,
           }}
           transition={{ duration: MOTION_DURATIONS.FAST }}
+          style={{
+            left: tooltip.x,
+            top: tooltip.y,
+            transform: 'translate(-50%, -100%)',
+          }}
         >
-          {tooltip.text}
+          <div className="rounded-md bg-black/80 px-3 py-1.5 text-sm font-semibold whitespace-nowrap text-white shadow-lg backdrop-blur-md">
+            {tooltip.text}
+          </div>
         </motion.div>
-      </motion.div>
+      )}
     </section>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { IconArrowLeft, IconPointFilled } from '@tabler/icons-react';
 import { motion, useMotionValue } from 'motion/react';
 import { Button } from './Button';
-import { fadeIn, scaleIn, easings } from '@/utils/animations';
+import { easings } from '@/utils/animations';
 import { MOTION_DURATIONS, ANIMATION_DURATIONS } from '@/config/constants';
 
 interface ModalProps {

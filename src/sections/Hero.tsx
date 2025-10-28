@@ -29,23 +29,22 @@ export function Hero() {
   // Mixed media assets (videos, images, and text)
   const mediaAssets = [
     { type: 'image', url: '/images/circa-waste/circa1.webp' },
-    { type: 'text', text: 'With' },
     { type: 'video', url: '/videos/tram.mp4' },
+    { type: 'text', text: 'with' },
     { type: 'image', url: '/images/general/disney2.webp' },
     { type: 'image', url: '/images/donde-alex/alex.webp' },
     // 2nd row
-    { type: 'text', text: 'rhythm' },
+
     { type: 'image', url: '/images/tree-brothers/tree.webp' },
+    { type: 'text', text: 'rhythm &' },
     { type: 'image', url: '/images/general/bucle.webp' },
     { type: 'video', url: '/videos/people.mp4' },
     { type: 'image', url: '/images/tree-brothers/treeshop.webp' },
-
     //3rd row
     { type: 'image', url: '/images/scandic-go/scandic2.webp' },
-    { type: 'text', text: '& precision' },
     { type: 'video', url: '/videos/tram.mp4' },
+    { type: 'text', text: 'precision' },
     { type: 'video', url: '/videos/metro.mp4' },
-
     { type: 'image', url: '/images/general/bucle.webp' },
   ];
 
@@ -131,7 +130,7 @@ export function Hero() {
                     >
                       {media.type === 'text' ? (
                         <div className="flex h-full w-full items-center justify-center bg-white">
-                          <span className="font-anton text-klein text-3xl font-bold uppercase md:text-5xl">
+                          <span className="text-klein text-2xl md:text-4xl">
                             {media.text}
                           </span>
                         </div>
