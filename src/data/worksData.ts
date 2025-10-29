@@ -76,7 +76,7 @@ export const itemsData: Item[] = [
     tag: 'PHOTOGRAPHY',
     image: 'images/grosso-napoletano/grosso.webp',
     desc: "Event photography for Grosso Napoletano's unveiling of a limited-edition pizza. The session highlighted the craftsmanship, lively ambiance, and brand personality through candid and detail-rich shots.",
-    year: '2024',
+    year: '2025',
     gallery: [
       {
         imgSrc: 'images/grosso-napoletano/grosso1.webp',
