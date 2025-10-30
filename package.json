@@ -11,9 +11,12 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "convert:webp": "node scripts/convert-to-webp.js",
-    "cleanup:originals": "node scripts/cleanup-original-images.js"
+    "cleanup:originals": "node scripts/cleanup-original-images.js",
+    "hero:thumbnails": "node scripts/create-hero-thumbnails.js"
   },
   "dependencies": {
+    "@fontsource/anton": "^5.2.7",
+    "@fontsource/pt-mono": "^5.2.8",
     "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.14",
     "clsx": "^2.1.1",

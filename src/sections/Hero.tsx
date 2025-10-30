@@ -28,20 +28,20 @@ export function Hero() {
 
   // Mixed media assets (videos, images, and text)
   const mediaAssets = [
-    { type: 'image', url: '/images/circa-waste/circa5.webp' },
+    { type: 'image', url: '/images/hero-grid/circa5.webp' },
     { type: 'video', url: '/videos/tram.mp4' },
     { type: 'text', text: 'with' },
-    { type: 'image', url: '/images/general/disney2.webp' },
+    { type: 'image', url: '/images/hero-grid/disney2.webp' },
 
     // 2nd row
-    { type: 'image', url: '/images/tree-brothers/tree.webp' },
+    { type: 'image', url: '/images/hero-grid/tree.webp' },
     { type: 'text', text: 'rhythm &' },
-    { type: 'image', url: '/images/scandic-go/scandic1.webp' },
+    { type: 'image', url: '/images/hero-grid/scandic1.webp' },
     { type: 'video', url: '/videos/people.mp4' },
 
     //3rd row
-    { type: 'image', url: '/images/scandic-go/scandic2.webp' },
-    { type: 'image', url: '/images/orna-group/orna_phone.webp' },
+    { type: 'image', url: '/images/hero-grid/scandic2.webp' },
+    { type: 'image', url: '/images/hero-grid/orna_phone.webp' },
     { type: 'text', text: 'precision' },
     { type: 'video', url: '/videos/metro.mp4' },
   ];

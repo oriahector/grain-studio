@@ -3,10 +3,10 @@
 @theme {
   /* Typography */
   --font-mono:
-    'PT Mono', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
-  --font-anton: 'Anton', sans-serif;
+    'PT Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+  --font-anton:
+    'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   /* Colors */
   --color-klein: #002fa7;
   /* Responsive sizing */
