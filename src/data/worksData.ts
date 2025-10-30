@@ -35,7 +35,7 @@ export const itemsData: Item[] = [
     gallery: [
       { imgSrc: 'images/tree-brothers/tree1.webp', alt: 'Tree ' },
       {
-        imgSrc: 'images/tree-brothers/treebrothers.gif',
+        imgSrc: 'images/tree-brothers/treebrothers.webm',
         alt: 'Tree Brothers Gif',
       },
       { imgSrc: 'images/tree-brothers/treeshop.webp', alt: 'Tree Shop' },

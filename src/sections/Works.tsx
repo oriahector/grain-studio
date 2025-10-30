@@ -14,6 +14,48 @@ import { getGalleryItemAnimation } from '@/utils/animations';
 import { openUrl } from '@/utils/navigation';
 import clsx from 'clsx';
 
+// Helper function to detect video files
+const isVideo = (url: string) => url.endsWith('.webm') || url.endsWith('.mp4');
+
+// Gallery item component
+const GalleryItem = ({
+  src,
+  alt,
+  index,
+}: {
+  src: string;
+  alt?: string;
+  index: number;
+}) => (
+  <motion.div
+    {...getGalleryItemAnimation(
+      index,
+      LAYOUT.ANIMATIONS.GALLERY_STAGGER_DELAY,
+      LAYOUT.ANIMATIONS.GALLERY_INITIAL_DELAY
+    )}
+  >
+    {isVideo(src) ? (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full rounded-lg"
+      >
+        Your browser does not support the video tag.
+      </video>
+    ) : (
+      <OptimizedImage
+        src={src}
+        alt={alt || `Gallery image ${index + 1}`}
+        className="w-full rounded-lg"
+        loading="lazy"
+      />
+    )}
+  </motion.div>
+);
+
 export function Works() {
   const [items] = useState<Item[]>(itemsData);
   const [mounted, setMounted] = useState(false);
@@ -59,8 +101,13 @@ export function Works() {
     });
   };
 
-  const closePanel = () => {
-    startClose();
+  const closePanel = () => startClose();
+
+  const canOpenPanel = (item: Item) =>
+    Boolean(item.url || item.urlSecondary || item.gallery);
+
+  const handleItemClick = (item: Item) => {
+    if (canOpenPanel(item)) openPanel(item);
   };
 
   return (
@@ -82,15 +129,10 @@ export function Works() {
               <div key={item.title} className="break-inside-avoid">
                 <button
                   type="button"
-                  onClick={() => {
-                    if (item.url || item.urlSecondary || item.gallery) {
-                      openPanel(item);
-                    }
-                  }}
+                  onClick={() => handleItemClick(item)}
                   className={clsx(
                     'group relative block w-full overflow-hidden text-left focus:outline-none',
-                    (item.url || item.urlSecondary || item.gallery) &&
-                      'cursor-pointer'
+                    canOpenPanel(item) && 'cursor-pointer'
                   )}
                 >
                   {/* Image Container */}
@@ -179,21 +221,12 @@ export function Works() {
             {selected && (
               <div className="flex flex-col gap-4">
                 {selected.gallery?.map((item, index) => (
-                  <motion.div
+                  <GalleryItem
                     key={index}
-                    {...getGalleryItemAnimation(
-                      index,
-                      LAYOUT.ANIMATIONS.GALLERY_STAGGER_DELAY,
-                      LAYOUT.ANIMATIONS.GALLERY_INITIAL_DELAY
-                    )}
-                  >
-                    <OptimizedImage
-                      src={item.imgSrc}
-                      alt={item.alt || `Gallery image ${index + 1}`}
-                      className="w-full rounded-lg"
-                      loading="lazy"
-                    />
-                  </motion.div>
+                    src={item.imgSrc}
+                    alt={item.alt}
+                    index={index}
+                  />
                 ))}
               </div>
             )}
