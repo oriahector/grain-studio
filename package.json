@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "convert:webp": "node scripts/convert-to-webp.js",
-    "cleanup:originals": "node scripts/cleanup-original-images.js"
+    "cleanup:originals": "node scripts/cleanup-original-images.js",
+    "hero:thumbnails": "node scripts/create-hero-thumbnails.js"
   },
   "dependencies": {
     "@fontsource/anton": "^5.2.7",

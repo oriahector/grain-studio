@@ -5,7 +5,8 @@
   --font-mono:
     'PT Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
     'Liberation Mono', monospace;
-  --font-anton: 'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  --font-anton:
+    'Anton', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   /* Colors */
   --color-klein: #002fa7;
   /* Responsive sizing */
