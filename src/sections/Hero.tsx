@@ -1,9 +1,74 @@
-import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react';
+import { useRef, useMemo, memo } from 'react';
+import { motion, useInView, useScroll, useTransform, MotionValue } from 'motion/react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { LAYOUT } from '@/config/layout';
 import { MOTION_DURATIONS } from '@/config/constants';
 import { easings } from '@/utils/animations';
+
+// Componente para cada fila del grid - permite usar hooks correctamente
+const HeroGridRow = memo(function HeroGridRow({
+  row,
+  rowIndex,
+  slowScrollProgress,
+}: {
+  row: Array<{ id: string; type: string; url?: string; text?: string }>;
+  rowIndex: number;
+  slowScrollProgress: MotionValue<number>;
+}) {
+  const isOdd = rowIndex % 2 === 0;
+  const baseTranslate = useTransform(
+    slowScrollProgress,
+    [0, 1],
+    isOdd
+      ? [
+          LAYOUT.SCROLL.GRID_TRANSLATE.ODD_START,
+          LAYOUT.SCROLL.GRID_TRANSLATE.ODD_END,
+        ]
+      : [
+          LAYOUT.SCROLL.GRID_TRANSLATE.EVEN_START,
+          LAYOUT.SCROLL.GRID_TRANSLATE.EVEN_END,
+        ]
+  );
+
+  return (
+    <motion.div
+      style={{ x: baseTranslate }}
+      className="flex gap-2 md:gap-4"
+    >
+      {[...row, ...row].map((media, mediaIndex) => (
+        <motion.div
+          key={`${media.id}-${mediaIndex}`}
+          className="aspect-video w-[180px] flex-shrink-0 overflow-hidden rounded-lg md:w-[400px]"
+        >
+          {media.type === 'text' ? (
+            <div className="flex h-full w-full items-center justify-center bg-white">
+              <span className="text-klein text-2xl md:text-4xl">
+                {media.text}
+              </span>
+            </div>
+          ) : media.type === 'video' ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-full w-full object-cover opacity-80"
+            >
+              <source src={media.url} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={media.url}
+              alt="Project showcase"
+              className="h-full w-full object-cover opacity-90"
+              loading="lazy"
+            />
+          )}
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+});
 
 export function Hero() {
   const heroRef = useRef(null);
@@ -46,16 +111,20 @@ export function Hero() {
     { type: 'video', url: '/videos/metro.mp4' },
   ];
 
-  // Generate media clips for each row
-  const rowMedia = Array.from({ length: ROWS }, (_, rowIndex) =>
-    Array.from({ length: CLIPS_PER_ROW }, (_, colIndex) => {
-      const assetIndex =
-        (rowIndex * CLIPS_PER_ROW + colIndex) % mediaAssets.length;
-      return {
-        id: `media-${rowIndex}-${colIndex}`,
-        ...mediaAssets[assetIndex],
-      };
-    })
+  // Generate media clips for each row - memoized for performance
+  const rowMedia = useMemo(
+    () =>
+      Array.from({ length: ROWS }, (_, rowIndex) =>
+        Array.from({ length: CLIPS_PER_ROW }, (_, colIndex) => {
+          const assetIndex =
+            (rowIndex * CLIPS_PER_ROW + colIndex) % mediaAssets.length;
+          return {
+            id: `media-${rowIndex}-${colIndex}`,
+            ...mediaAssets[assetIndex],
+          };
+        })
+      ),
+    [ROWS, CLIPS_PER_ROW]
   );
 
   return (
@@ -103,61 +172,14 @@ export function Hero() {
       >
         <div className="section-container">
           <div ref={videoGridRef} className="flex flex-col gap-2 md:gap-4">
-            {rowMedia.map((row, rowIndex) => {
-              const isOdd = rowIndex % 2 === 0;
-              const baseTranslate = useTransform(
-                slowScrollProgress,
-                [0, 1],
-                isOdd
-                  ? [
-                      LAYOUT.SCROLL.GRID_TRANSLATE.ODD_START,
-                      LAYOUT.SCROLL.GRID_TRANSLATE.ODD_END,
-                    ]
-                  : [
-                      LAYOUT.SCROLL.GRID_TRANSLATE.EVEN_START,
-                      LAYOUT.SCROLL.GRID_TRANSLATE.EVEN_END,
-                    ]
-              );
-
-              return (
-                <motion.div
-                  key={`row-${rowIndex}`}
-                  style={{ x: baseTranslate }}
-                  className="flex gap-2 md:gap-4"
-                >
-                  {[...row, ...row].map((media, mediaIndex) => (
-                    <motion.div
-                      key={`${media.id}-${mediaIndex}`}
-                      className="aspect-video w-[180px] flex-shrink-0 overflow-hidden rounded-lg md:w-[400px]"
-                    >
-                      {media.type === 'text' ? (
-                        <div className="flex h-full w-full items-center justify-center bg-white">
-                          <span className="text-klein text-2xl md:text-4xl">
-                            {media.text}
-                          </span>
-                        </div>
-                      ) : media.type === 'video' ? (
-                        <video
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          className="h-full w-full object-cover opacity-80"
-                        >
-                          <source src={media.url} type="video/mp4" />
-                        </video>
-                      ) : (
-                        <img
-                          src={media.url}
-                          alt="Project showcase"
-                          className="h-full w-full object-cover opacity-90"
-                        />
-                      )}
-                    </motion.div>
-                  ))}
-                </motion.div>
-              );
-            })}
+            {rowMedia.map((row, rowIndex) => (
+              <HeroGridRow
+                key={`row-${rowIndex}`}
+                row={row}
+                rowIndex={rowIndex}
+                slowScrollProgress={slowScrollProgress}
+              />
+            ))}
           </div>
         </div>
       </section>

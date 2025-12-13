@@ -30,6 +30,13 @@ export function NavBar() {
     scrollToTop();
   };
 
+  const handleLogoKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollToTop();
+    }
+  };
+
   return (
     <header
       className={clsx(
@@ -43,6 +50,8 @@ export function NavBar() {
         id="scroll-indicator"
         style={{ scaleX: scrollYProgress, originX: 0 }}
         className="fixed top-0 right-0 left-0 h-1 bg-white"
+        aria-hidden="true"
+        role="presentation"
       />
 
       <div className="mx-auto flex h-20 items-center justify-between">
@@ -51,6 +60,7 @@ export function NavBar() {
           <div
             className="flex cursor-pointer items-center text-lg uppercase md:text-2xl"
             onClick={handleLogoClick}
+            onKeyDown={handleLogoKeyDown}
             role="button"
             tabIndex={0}
             aria-label="Grain Studio - Go to top"
