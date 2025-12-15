@@ -25,7 +25,10 @@ export const TabGroup = memo(function TabGroup({
 }: TabGroupProps) {
   return (
     <div
-      className={clsx('flex items-center justify-center gap-2 md:gap-4', className)}
+      className={clsx(
+        'flex items-center justify-center gap-2 md:gap-4',
+        className
+      )}
       role="tablist"
     >
       {tabs.map((tab) => {
@@ -57,5 +60,3 @@ export const TabGroup = memo(function TabGroup({
     </div>
   );
 });
-
-
