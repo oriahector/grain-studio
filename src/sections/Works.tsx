@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Modal } from '@/components/ui/Modal';
 import { Pill } from '@/components/ui/Pill';
+import { TabGroup, type Tab } from '@/components/ui/TabGroup';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Item, itemsData } from '../data/worksData';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/Button';
 import { getTagIcon } from '@/config/tagIcons';
 import { LAYOUT } from '@/config/layout';
@@ -13,6 +14,15 @@ import { ANIMATION_DURATIONS } from '@/config/constants';
 import { getGalleryItemAnimation } from '@/utils/animations';
 import { openUrl } from '@/utils/navigation';
 import clsx from 'clsx';
+
+// Tabs para filtrar works
+const WORKS_TABS: Tab[] = [
+  { id: 'all', label: 'All' },
+  { id: 'web', label: 'Web Development' },
+  { id: 'photo', label: 'Photography' },
+] as const;
+
+type WorksTabId = 'all' | 'web' | 'photo';
 
 // Helper function to detect video files
 const isVideo = (url: string) => url.endsWith('.webm') || url.endsWith('.mp4');
@@ -57,11 +67,18 @@ const GalleryItem = ({
 );
 
 export function Works() {
-  const [items] = useState<Item[]>(itemsData);
+  const [activeTab, setActiveTab] = useState<WorksTabId>('all');
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Item | null>(null);
   const closeTimer = useRef<number | null>(null);
+
+  // Filtrar items según la pestaña activa
+  const filteredItems = useMemo(() => {
+    if (activeTab === 'all') return itemsData;
+    if (activeTab === 'web') return itemsData.filter((item) => item.tag === 'WEB DEVELOPMENT');
+    return itemsData.filter((item) => item.tag === 'PHOTOGRAPHY');
+  }, [activeTab]);
 
   const startClose = () => {
     setOpen(false);
@@ -116,17 +133,37 @@ export function Works() {
         <SectionTitle
           size="heading-2"
           sectionId="works"
-          className="pb-10 text-center"
+          className="pb-6 text-center"
         >
           WORKS
         </SectionTitle>
 
-        <div className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3">
-          {items.map((item, idx) => {
+        {/* Tabs de filtrado */}
+        <TabGroup
+          tabs={WORKS_TABS}
+          activeTab={activeTab}
+          onChange={(tabId) => setActiveTab(tabId as WorksTabId)}
+          className="mb-10"
+        />
+
+        <motion.div
+          layout
+          className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3"
+        >
+          <AnimatePresence mode="popLayout">
+          {filteredItems.map((item, idx) => {
             const h = LAYOUT.WORK.HEIGHTS[idx % LAYOUT.WORK.HEIGHTS.length];
 
             return (
-              <div key={item.title} className="break-inside-avoid">
+              <motion.div
+                key={item.title}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="break-inside-avoid"
+              >
                 <button
                   type="button"
                   onClick={() => handleItemClick(item)}
@@ -168,10 +205,11 @@ export function Works() {
                     />
                   </div>
                 </button>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Works Modal */}
