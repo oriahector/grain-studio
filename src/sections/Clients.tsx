@@ -60,7 +60,7 @@ export function Clients() {
 
   return (
     <>
-      <section className="text-klein bg-white">
+      <section id="clients" className="text-klein bg-white">
         <div className="overflow-hidden">
           <motion.div
             ref={containerRef}

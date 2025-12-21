@@ -5,10 +5,18 @@ import { GlobalDot } from '@/components/ui/GlobalDot';
 import { Hero } from '@/sections/Hero';
 
 // Lazy load sections below the fold para mejor performance
-const Works = lazy(() => import('@/sections/Works').then(m => ({ default: m.Works })));
-const Services = lazy(() => import('@/sections/Services').then(m => ({ default: m.Services })));
-const Clients = lazy(() => import('@/sections/Clients').then(m => ({ default: m.Clients })));
-const Contact = lazy(() => import('@/sections/Contact').then(m => ({ default: m.Contact })));
+const Works = lazy(() =>
+  import('@/sections/Works').then((m) => ({ default: m.Works }))
+);
+const Services = lazy(() =>
+  import('@/sections/Services').then((m) => ({ default: m.Services }))
+);
+const Clients = lazy(() =>
+  import('@/sections/Clients').then((m) => ({ default: m.Clients }))
+);
+const Contact = lazy(() =>
+  import('@/sections/Contact').then((m) => ({ default: m.Contact }))
+);
 
 // Loading fallback minimalista para lazy loaded components
 const SectionLoader = () => (

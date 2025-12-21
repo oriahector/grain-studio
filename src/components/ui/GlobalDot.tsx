@@ -23,24 +23,39 @@ export function GlobalDot() {
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    SECTION_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    const setupObservers = () => {
+      // Limpiar observers anteriores
+      observers.forEach((o) => o.disconnect());
+      observers.length = 0;
 
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setSize(id === 'hero' ? DOT_SIZE.HERO : DOT_SIZE.DEFAULT);
-            setActiveSection(id);
-          }
-        },
-        { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
+      SECTION_IDS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
 
-    return () => observers.forEach((o) => o.disconnect());
+        const obs = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setSize(id === 'hero' ? DOT_SIZE.HERO : DOT_SIZE.DEFAULT);
+              setActiveSection(id);
+            }
+          },
+          { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0 }
+        );
+        obs.observe(el);
+        observers.push(obs);
+      });
+    };
+
+    // Setup inicial
+    setupObservers();
+
+    // Re-setup después de que los lazy components se carguen
+    const timer = setTimeout(setupObservers, 500);
+
+    return () => {
+      clearTimeout(timer);
+      observers.forEach((o) => o.disconnect());
+    };
   }, []);
 
   if (!activeSection || !mounted) return null;

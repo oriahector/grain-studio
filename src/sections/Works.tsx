@@ -76,7 +76,8 @@ export function Works() {
   // Filtrar items según la pestaña activa
   const filteredItems = useMemo(() => {
     if (activeTab === 'all') return itemsData;
-    if (activeTab === 'web') return itemsData.filter((item) => item.tag === 'WEB DEVELOPMENT');
+    if (activeTab === 'web')
+      return itemsData.filter((item) => item.tag === 'WEB DEVELOPMENT');
     return itemsData.filter((item) => item.tag === 'PHOTOGRAPHY');
   }, [activeTab]);
 
@@ -151,63 +152,63 @@ export function Works() {
           className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3"
         >
           <AnimatePresence mode="popLayout">
-          {filteredItems.map((item, idx) => {
-            const h = LAYOUT.WORK.HEIGHTS[idx % LAYOUT.WORK.HEIGHTS.length];
+            {filteredItems.map((item, idx) => {
+              const h = LAYOUT.WORK.HEIGHTS[idx % LAYOUT.WORK.HEIGHTS.length];
 
-            return (
-              <motion.div
-                key={item.title}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="break-inside-avoid"
-              >
-                <button
-                  type="button"
-                  onClick={() => handleItemClick(item)}
-                  className={clsx(
-                    'group relative block w-full overflow-hidden text-left focus:outline-none',
-                    canOpenPanel(item) && 'cursor-pointer'
-                  )}
+              return (
+                <motion.div
+                  key={item.title}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="break-inside-avoid"
                 >
-                  {/* Image Container */}
-                  <div
-                    className="relative w-full overflow-hidden rounded-lg"
-                    style={{ height: `${h}px` }}
+                  <button
+                    type="button"
+                    onClick={() => handleItemClick(item)}
+                    className={clsx(
+                      'group relative block w-full overflow-hidden text-left focus:outline-none',
+                      canOpenPanel(item) && 'cursor-pointer'
+                    )}
                   >
+                    {/* Image Container */}
                     <div
-                      className="h-full w-full transition-transform group-hover:scale-105"
-                      style={{
-                        transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
-                      }}
+                      className="relative w-full overflow-hidden rounded-lg"
+                      style={{ height: `${h}px` }}
                     >
-                      <OptimizedImage
-                        src={item.image}
-                        alt={item.title}
-                        className="h-full w-full"
-                        loading="lazy"
+                      <div
+                        className="h-full w-full transition-transform group-hover:scale-105"
+                        style={{
+                          transitionDuration: `${ANIMATION_DURATIONS.NORMAL}ms`,
+                        }}
+                      >
+                        <OptimizedImage
+                          src={item.image}
+                          alt={item.title}
+                          className="h-full w-full"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Title & Tag */}
+                    <div className="mt-2">
+                      <h3 className="mb-2 text-base text-white uppercase md:text-lg">
+                        {item.title}
+                      </h3>
+                      <Pill
+                        label={item.tag}
+                        variant="light"
+                        size="sm"
+                        icon={getTagIcon(item.tag)}
                       />
                     </div>
-                  </div>
-
-                  {/* Title & Tag */}
-                  <div className="mt-2">
-                    <h3 className="mb-2 text-base text-white uppercase md:text-lg">
-                      {item.title}
-                    </h3>
-                    <Pill
-                      label={item.tag}
-                      variant="light"
-                      size="sm"
-                      icon={getTagIcon(item.tag)}
-                    />
-                  </div>
-                </button>
-              </motion.div>
-            );
-          })}
+                  </button>
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </motion.div>
       </div>
@@ -257,14 +258,26 @@ export function Works() {
           {/* Right Panel - Gallery (Scrollable) */}
           <aside className="flex-1 md:pl-8">
             {selected && (
-              <div className="flex flex-col gap-4">
+              <div
+                className={
+                  selected.galleryColumns === 2
+                    ? 'columns-1 gap-4 space-y-4 md:columns-2'
+                    : 'flex flex-col gap-4'
+                }
+              >
                 {selected.gallery?.map((item, index) => (
-                  <GalleryItem
+                  <div
                     key={index}
-                    src={item.imgSrc}
-                    alt={item.alt}
-                    index={index}
-                  />
+                    className={
+                      selected.galleryColumns === 2 ? 'break-inside-avoid' : ''
+                    }
+                  >
+                    <GalleryItem
+                      src={item.imgSrc}
+                      alt={item.alt}
+                      index={index}
+                    />
+                  </div>
                 ))}
               </div>
             )}

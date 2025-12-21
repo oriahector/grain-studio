@@ -1,5 +1,11 @@
 import { useRef, useMemo, memo } from 'react';
-import { motion, useInView, useScroll, useTransform, MotionValue } from 'motion/react';
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  MotionValue,
+} from 'motion/react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { LAYOUT } from '@/config/layout';
 import { MOTION_DURATIONS } from '@/config/constants';
@@ -31,10 +37,7 @@ const HeroGridRow = memo(function HeroGridRow({
   );
 
   return (
-    <motion.div
-      style={{ x: baseTranslate }}
-      className="flex gap-2 md:gap-4"
-    >
+    <motion.div style={{ x: baseTranslate }} className="flex gap-2 md:gap-4">
       {[...row, ...row].map((media, mediaIndex) => (
         <motion.div
           key={`${media.id}-${mediaIndex}`}

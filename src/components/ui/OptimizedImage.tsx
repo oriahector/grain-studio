@@ -10,6 +10,7 @@ interface OptimizedImageProps {
   height?: number;
   fetchPriority?: 'high' | 'low' | 'auto';
   decoding?: 'async' | 'auto' | 'sync';
+  objectFit?: 'cover' | 'contain' | 'none';
 }
 
 /**
@@ -18,6 +19,12 @@ interface OptimizedImageProps {
  * - Soporta fetchPriority para imágenes críticas
  * - Decoding async para mejor performance
  */
+const OBJECT_FIT_CLASSES = {
+  cover: 'object-cover',
+  contain: 'object-contain',
+  none: '',
+} as const;
+
 export const OptimizedImage = memo(function OptimizedImage({
   src,
   alt,
@@ -27,6 +34,7 @@ export const OptimizedImage = memo(function OptimizedImage({
   height,
   fetchPriority = 'auto',
   decoding = 'async',
+  objectFit = 'cover',
 }: OptimizedImageProps) {
   // Asegurar que siempre usamos WebP
   const webpSrc = src.endsWith('.webp')
@@ -37,7 +45,7 @@ export const OptimizedImage = memo(function OptimizedImage({
     <img
       src={webpSrc}
       alt={alt}
-      className={clsx('object-cover', className)}
+      className={clsx(OBJECT_FIT_CLASSES[objectFit], className)}
       loading={loading}
       width={width}
       height={height}

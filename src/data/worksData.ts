@@ -7,6 +7,7 @@ export type Item = {
   desc?: string;
   year?: string;
   gallery?: { imgSrc: string; alt?: string }[];
+  galleryColumns?: 1 | 2;
 };
 
 export const itemsData: Item[] = [
@@ -107,6 +108,64 @@ export const itemsData: Item[] = [
       { imgSrc: 'images/donde-alex/alex2.webp', alt: 'Donde Alex' },
       { imgSrc: 'images/donde-alex/alex3.webp', alt: 'Donde Alex' },
       { imgSrc: 'images/donde-alex/alex4.webp', alt: 'Donde Alex' },
+    ],
+  },
+  {
+    title: 'Columbia x Zentir',
+    tag: 'PHOTOGRAPHY',
+    image: 'images/columbia-zentir/columbia1.webp',
+    desc: 'Photography session for Columbia x Zentir.',
+    year: '2025',
+    galleryColumns: 2,
+    gallery: [
+      {
+        imgSrc: 'images/columbia-zentir/columbia1.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia2.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia3.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia4.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia5.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia6.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia7.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia8.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia9.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia10.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia11.webp',
+        alt: 'Columbia x Zentir',
+      },
+      {
+        imgSrc: 'images/columbia-zentir/columbia12.webp',
+        alt: 'Columbia x Zentir',
+      },
     ],
   },
 ];
