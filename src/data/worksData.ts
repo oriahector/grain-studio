@@ -114,7 +114,7 @@ export const itemsData: Item[] = [
     title: 'Columbia x Zentir',
     tag: 'PHOTOGRAPHY',
     image: 'images/columbia-zentir/columbia1.webp',
-    desc: 'Photography session for Columbia x Zentir.',
+    desc: 'Photography session for Columbia x Zentir. Outdoor adventure through Chorreras de San Mamés in the Sierra de Madrid, organized by Columbia and Grupo Zentir. Capturing the energy, landscapes, and authentic moments of the trail experience.',
     year: '2025',
     galleryColumns: 2,
     gallery: [
