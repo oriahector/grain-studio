@@ -58,59 +58,7 @@ export const itemsData: Item[] = [
       { imgSrc: 'images/orna-group/orna1.webp', alt: 'ORNA Group' },
     ],
   },
-  {
-    title: 'ScandicGo',
-    tag: 'PHOTOGRAPHY',
-    image: 'images/scandic-go/scandic.webp',
-    desc: "Content photography for Scandic Go Stockholm, reflecting the hotel's personality and the welcoming, contemporary style of the Scandic brand.",
-    year: '2025',
-    gallery: [
-      { imgSrc: 'images/scandic-go/scandic1.webp', alt: 'Scandic Go' },
-      { imgSrc: 'images/scandic-go/scandic2.webp', alt: 'Scandic Go' },
-      { imgSrc: 'images/scandic-go/scandic3.webp', alt: 'Scandic Go' },
-      { imgSrc: 'images/scandic-go/scandic4.webp', alt: 'Scandic Go' },
-      { imgSrc: 'images/scandic-go/scandic5.webp', alt: 'Scandic Go' },
-    ],
-  },
-  {
-    title: 'Grosso Napoletano',
-    tag: 'PHOTOGRAPHY',
-    image: 'images/grosso-napoletano/grosso.webp',
-    desc: "Event photography for Grosso Napoletano's unveiling of a limited-edition pizza. The session highlighted the craftsmanship, lively ambiance, and brand personality through candid and detail-rich shots.",
-    year: '2025',
-    gallery: [
-      {
-        imgSrc: 'images/grosso-napoletano/grosso1.webp',
-        alt: 'Grosso Napoletano 1',
-      },
-      {
-        imgSrc: 'images/grosso-napoletano/grosso2.webp',
-        alt: 'Grosso Napoletano 2',
-      },
-      {
-        imgSrc: 'images/grosso-napoletano/grosso3.webp',
-        alt: 'Grosso Napoletano 3',
-      },
-      {
-        imgSrc: 'images/grosso-napoletano/grosso4.webp',
-        alt: 'Grosso Napoletano 4',
-      },
-    ],
-  },
-  {
-    title: 'Donde Álex Barbería',
-    tag: 'PHOTOGRAPHY',
-    image: 'images/donde-alex/alex.webp',
-    desc: "Lifestyle photoshoot for a men's barbershop, capturing the textures, precision, and character of the space to build engaging social media content.",
-    year: '2025',
-    gallery: [
-      { imgSrc: 'images/donde-alex/alex1.webp', alt: 'Donde Alex' },
-      { imgSrc: 'images/donde-alex/alex2.webp', alt: 'Donde Alex' },
-      { imgSrc: 'images/donde-alex/alex3.webp', alt: 'Donde Alex' },
-      { imgSrc: 'images/donde-alex/alex4.webp', alt: 'Donde Alex' },
-    ],
-  },
-  {
+    {
     title: 'Columbia x Zentir',
     tag: 'PHOTOGRAPHY',
     image: 'images/columbia-zentir/columbia1.webp',
@@ -168,4 +116,151 @@ export const itemsData: Item[] = [
       },
     ],
   },
+    {
+    title: 'ScandicGo',
+    tag: 'PHOTOGRAPHY',
+    image: 'images/scandic-go/scandic.webp',
+    desc: "Content photography for Scandic Go Stockholm, reflecting the hotel's personality and the welcoming, contemporary style of the Scandic brand.",
+    year: '2025',
+    gallery: [
+      { imgSrc: 'images/scandic-go/scandic1.webp', alt: 'Scandic Go' },
+      { imgSrc: 'images/scandic-go/scandic2.webp', alt: 'Scandic Go' },
+      { imgSrc: 'images/scandic-go/scandic3.webp', alt: 'Scandic Go' },
+      { imgSrc: 'images/scandic-go/scandic4.webp', alt: 'Scandic Go' },
+      { imgSrc: 'images/scandic-go/scandic5.webp', alt: 'Scandic Go' },
+    ],
+  },
+  {
+    title: 'Duplat',
+    tag: 'PHOTOGRAPHY',
+    image: 'images/duplat/duplat1.webp',
+    desc: 'Photography session for Duplat, capturing the artisanal process and exquisite details of their handcrafted new ceramic pieces. Emphasized the textures, colors, and unique characteristics that define Duplat’s brand identity.',
+    year: '2025',
+    galleryColumns: 2,
+    gallery: [
+      {
+        imgSrc: 'images/duplat/duplat1.webp',
+        alt: 'Duplat',
+      },
+      {
+        imgSrc: 'images/duplat/duplat2.webp',
+        alt: 'Duplat',
+      },
+      {
+        imgSrc: 'images/duplat/duplat5.webp',
+        alt: 'Duplat',
+      },
+      {
+        imgSrc: 'images/duplat/duplat7.webp',
+        alt: 'Duplat',
+      },
+            {
+        imgSrc: 'images/duplat/duplat4.webp',
+        alt: 'Duplat',
+      },
+            {
+        imgSrc: 'images/duplat/duplat3.webp',
+        alt: 'Duplat',
+      },
+      {
+        imgSrc: 'images/duplat/duplat6.webp',
+        alt: 'Duplat',
+      },
+            {
+        imgSrc: 'images/duplat/duplat8.webp',
+        alt: 'Duplat',
+      },
+    ],
+  },
+
+  
+  {
+    title: 'Grosso Napoletano',
+    tag: 'PHOTOGRAPHY',
+    image: 'images/grosso-napoletano/grosso.webp',
+    desc: "Event photography for Grosso Napoletano's unveiling of a limited-edition pizza. The session highlighted the craftsmanship, lively ambiance, and brand personality through candid and detail-rich shots.",
+    year: '2025',
+    gallery: [
+      {
+        imgSrc: 'images/grosso-napoletano/grosso1.webp',
+        alt: 'Grosso Napoletano 1',
+      },
+      {
+        imgSrc: 'images/grosso-napoletano/grosso2.webp',
+        alt: 'Grosso Napoletano 2',
+      },
+      {
+        imgSrc: 'images/grosso-napoletano/grosso3.webp',
+        alt: 'Grosso Napoletano 3',
+      },
+      {
+        imgSrc: 'images/grosso-napoletano/grosso4.webp',
+        alt: 'Grosso Napoletano 4',
+      },
+    ],
+  },
+
+     {
+    title: 'Appetit Candle Lab',
+    tag: 'PHOTOGRAPHY',
+    image: 'images/appetit/appetit.webp',
+    desc: 'Photography session for Appetit Candle Lab, capturing the essence of their handcrafted candles. Focused on highlighting the textures, colors, and ambiance created by the candles to enhance brand storytelling.',
+    year: '2025',
+    galleryColumns: 2,
+    gallery: [
+      {
+        imgSrc: 'images/appetit/appetit.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit6.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit3.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit2.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit4.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit5.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit7.webp',
+        alt: 'Appetit Candle Lab',
+      },
+      {
+        imgSrc: 'images/appetit/appetit8.webp',
+        alt: 'Appetit Candle Lab',
+      },
+         {
+        imgSrc: 'images/appetit/appetit9.webp',
+        alt: 'Appetit Candle Lab',
+      },
+               {
+        imgSrc: 'images/appetit/appetit10.webp',
+        alt: 'Appetit Candle Lab',
+      }
+    ],
+  },
+  {
+    title: 'Donde Álex Barbería',
+    tag: 'PHOTOGRAPHY',
+    image: 'images/donde-alex/alex.webp',
+    desc: "Lifestyle photoshoot for a men's barbershop, capturing the textures, precision, and character of the space to build engaging social media content.",
+    year: '2025',
+    gallery: [
+      { imgSrc: 'images/donde-alex/alex1.webp', alt: 'Donde Alex' },
+      { imgSrc: 'images/donde-alex/alex2.webp', alt: 'Donde Alex' },
+      { imgSrc: 'images/donde-alex/alex3.webp', alt: 'Donde Alex' },
+      { imgSrc: 'images/donde-alex/alex4.webp', alt: 'Donde Alex' },
+    ],
+  }
 ];
