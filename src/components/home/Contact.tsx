@@ -2,24 +2,27 @@
 
 import { useActionState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { SITE } from '@/config/site';
 import { sendEmail } from '@/services/emailService';
+import type { ContactFormData } from '@/types';
 
-type State = { status: 'idle' | 'ok' | 'error'; message?: string };
+type State = { status: 'idle' | 'ok' | 'error'; fields?: ContactFormData };
 
 async function submit(_: State, form: FormData): Promise<State> {
+  const fields: ContactFormData = {
+    name: String(form.get('name')),
+    lastName: String(form.get('lastName')),
+    email: String(form.get('email')),
+    message: String(form.get('message')),
+  };
   try {
-    await sendEmail({
-      name: String(form.get('name')),
-      lastName: String(form.get('lastName')),
-      email: String(form.get('email')),
-      message: String(form.get('message')),
-    });
+    await sendEmail(fields);
     return { status: 'ok' };
   } catch (err) {
-    return {
-      status: 'error',
-      message: err instanceof Error ? err.message : 'Unknown error',
-    };
+    console.error('Contact form:', err);
+    // React resets the form after the action; hand the values back as
+    // defaultValue so a failed send doesn't wipe what the visitor wrote.
+    return { status: 'error', fields };
   }
 }
 
@@ -56,6 +59,7 @@ export function Contact() {
               <span className="sr-only">Name</span>
               <input
                 name="name"
+                defaultValue={state.fields?.name}
                 required
                 autoComplete="given-name"
                 placeholder="Name"
@@ -66,6 +70,7 @@ export function Contact() {
               <span className="sr-only">Surname</span>
               <input
                 name="lastName"
+                defaultValue={state.fields?.lastName}
                 required
                 autoComplete="family-name"
                 placeholder="Surname"
@@ -77,6 +82,7 @@ export function Contact() {
             <span className="sr-only">Email</span>
             <input
               name="email"
+              defaultValue={state.fields?.email}
               type="email"
               required
               autoComplete="email"
@@ -88,6 +94,7 @@ export function Contact() {
             <span className="sr-only">Message</span>
             <textarea
               name="message"
+              defaultValue={state.fields?.message}
               required
               rows={4}
               placeholder="What's on your mind?"
@@ -97,8 +104,18 @@ export function Contact() {
 
           <div className="mt-4 flex items-center justify-between gap-4">
             {state.status === 'error' ? (
-              <p role="alert" className="eyebrow text-red-700">
-                Couldn&apos;t send: {state.message}
+              <p role="alert" className="max-w-xs eyebrow text-red-700">
+                Something went wrong sending your message. Try again or write to
+                us on{' '}
+                <a
+                  href={SITE.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Instagram
+                </a>
+                .
               </p>
             ) : (
               <span />
