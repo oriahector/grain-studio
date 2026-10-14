@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-paper: oklch(0.977 0.002 90);
+  --color-ink: oklch(0.19 0.003 90);
+  --color-muted: oklch(0.51 0.003 90);
+  --color-line: oklch(0.85 0.003 90);
+  --color-wash: oklch(0.94 0.002 90);
+  --color-klein: #002fa7;
+
+  --font-sans: var(--font-dm-sans), Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-klein text-white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Small uppercase mono label used across the site */
+@utility eyebrow {
+  @apply font-mono text-[10px] leading-relaxed uppercase;
+}
+
+/* Page gutter + max width shared by every section */
+@utility container-page {
+  @apply mx-auto w-full max-w-[1800px] px-5 md:px-8 xl:px-12;
+}
+
+/* Scroll progress bar: CSS scroll-driven animation, no JS.
+   Browsers without support simply don't show it. */
+@utility scroll-progress {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+
+  @supports (animation-timeline: scroll()) {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes grow-x {
+  to {
+    transform: scaleX(1);
+  }
+}

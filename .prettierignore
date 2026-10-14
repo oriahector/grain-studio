@@ -11,3 +11,5 @@ node_modules
 .DS_Store
 pnpm-lock.yaml
 package-lock.json
+.next
+out
