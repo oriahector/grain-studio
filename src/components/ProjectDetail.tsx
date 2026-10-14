@@ -63,7 +63,7 @@ export function ProjectDetail({
                 ? '(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
                 : '(min-width: 768px) 66vw, 100vw'
             }
-            className="mb-4 h-auto w-full break-inside-avoid bg-wash"
+            className="mb-4 h-auto w-full reveal break-inside-avoid bg-wash"
           />
         ))}
       </div>

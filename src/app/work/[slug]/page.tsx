@@ -83,7 +83,7 @@ export default async function ProjectPage({
           <ArrowRight
             aria-hidden="true"
             strokeWidth={1.2}
-            className="size-10 transition-transform group-hover:translate-x-2 md:size-16"
+            className="size-10 transition-[translate] duration-200 ease-out group-hover:translate-x-2 md:size-16"
           />
         </Link>
       </main>

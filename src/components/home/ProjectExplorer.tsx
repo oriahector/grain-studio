@@ -20,6 +20,9 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
   // Only the active cover loads up front; the rest mount (and start loading)
   // once the visitor reaches for the list, so hovering then crossfades instantly.
   const [warm, setWarm] = useState(false);
+  // The list staggers in on first paint; after a filter change only the
+  // newly mounted items animate, and without the intro delay.
+  const [filtered, setFiltered] = useState(false);
 
   const visible = projects.filter(
     (p) => filter === 'All' || p.category === filter
@@ -53,14 +56,17 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
               key={item}
               type="button"
               aria-pressed={filter === item}
-              onClick={() => setFilter(item)}
-              className="inline-flex cursor-pointer items-center gap-1.5 eyebrow text-[11px] transition-colors hover:text-klein aria-pressed:text-klein"
+              onClick={() => {
+                setFilter(item);
+                setFiltered(true);
+              }}
+              className="inline-flex cursor-pointer items-center gap-1.5 eyebrow text-[11px] transition-[color,scale] duration-150 ease-out hover:text-klein active:scale-[0.97] aria-pressed:text-klein"
             >
               {item}
               {filter === item && (
                 <span
                   aria-hidden="true"
-                  className="size-1.5 rounded-full bg-klein"
+                  className="size-1.5 animate-fade rounded-full bg-klein [animation-duration:200ms]"
                 />
               )}
             </button>
@@ -74,7 +80,7 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
             <Link
               href={`/work/${active.slug}`}
               onClick={(e) => openModal(e, active)}
-              className="group relative block aspect-[4/5] overflow-hidden bg-wash md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
+              className="group relative block aspect-[4/5] overflow-hidden bg-wash transition-[scale] duration-150 ease-out active:scale-[0.99] md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
             >
               {projects
                 .filter((p) => warm || p.slug === active.slug)
@@ -84,12 +90,12 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
                     media={p.cover}
                     priority={p === projects[0]}
                     sizes="(min-width: 768px) 48vw, 100vw"
-                    className={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${
+                    className={`absolute inset-0 size-full object-cover transition-opacity duration-300 ${
                       p.slug === active.slug ? 'opacity-100' : 'opacity-0'
                     }`}
                   />
                 ))}
-              <span className="absolute right-5 bottom-5 grid size-11 place-items-center rounded-full bg-paper transition-transform duration-300 group-hover:rotate-45">
+              <span className="absolute right-5 bottom-5 grid size-11 place-items-center rounded-full bg-paper transition-[rotate] duration-200 ease-out group-hover:rotate-45">
                 <ArrowUpRight aria-hidden="true" className="size-5" />
                 <span className="sr-only">View {active.name}</span>
               </span>
@@ -106,8 +112,14 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
             onPointerEnter={() => setWarm(true)}
             onFocus={() => setWarm(true)}
           >
-            {visible.map((p) => (
-              <li key={p.slug} className="border-b border-line last:border-0">
+            {visible.map((p, i) => (
+              <li
+                key={p.slug}
+                className="animate-rise border-b border-line last:border-0"
+                style={{
+                  animationDelay: `${filtered ? i * 30 : 320 + i * 40}ms`,
+                }}
+              >
                 <Link
                   href={`/work/${p.slug}`}
                   aria-current={p.slug === active?.slug ? 'true' : undefined}
@@ -124,7 +136,7 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
                   </span>
                   <ArrowUpRight
                     aria-hidden="true"
-                    className="opacity-0 transition-opacity group-hover:opacity-100 group-aria-[current]:opacity-100"
+                    className="-translate-x-1 translate-y-1 opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-aria-[current]:translate-x-0 group-aria-[current]:translate-y-0 group-aria-[current]:opacity-100"
                   />
                 </Link>
               </li>

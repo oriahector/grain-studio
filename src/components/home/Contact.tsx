@@ -38,7 +38,7 @@ export function Contact() {
       aria-labelledby="contact-heading"
       className="grid gap-10 pt-11 pb-14 md:grid-cols-[1fr_1.07fr] md:gap-10 md:pt-16 lg:gap-16"
     >
-      <div>
+      <div className="reveal">
         <p className="eyebrow">Have something in mind?</p>
         <h2
           id="contact-heading"
@@ -49,7 +49,7 @@ export function Contact() {
       </div>
 
       {state.status === 'ok' ? (
-        <p role="status" className="self-end text-xl md:text-2xl">
+        <p role="status" className="animate-rise self-end text-xl md:text-2xl">
           Thanks — your message is on its way. We&apos;ll get back to you soon.
         </p>
       ) : (
@@ -104,7 +104,10 @@ export function Contact() {
 
           <div className="mt-4 flex items-center justify-between gap-4">
             {state.status === 'error' ? (
-              <p role="alert" className="max-w-xs eyebrow text-red-700">
+              <p
+                role="alert"
+                className="max-w-xs animate-fade eyebrow text-red-700"
+              >
                 Something went wrong sending your message. Try again or write to
                 us on{' '}
                 <a
@@ -123,12 +126,12 @@ export function Contact() {
             <button
               type="submit"
               disabled={pending}
-              className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-klein px-6 py-3 font-mono text-xs text-white uppercase transition-opacity disabled:cursor-wait disabled:opacity-60"
+              className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-klein px-6 py-3 font-mono text-xs text-white uppercase transition-[opacity,scale] duration-150 ease-out active:scale-[0.97] disabled:cursor-wait disabled:opacity-60"
             >
               {pending ? 'Sending…' : 'Send'}
               <ArrowUpRight
                 aria-hidden="true"
-                className="size-4 transition-transform duration-300 group-hover:rotate-45"
+                className="size-4 transition-[rotate] duration-200 ease-out group-hover:rotate-45"
               />
             </button>
           </div>

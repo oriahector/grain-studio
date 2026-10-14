@@ -28,7 +28,7 @@ export function ClientMarquee() {
   return (
     <section
       aria-label="Selected clients"
-      className="flex flex-col gap-4 border-y border-line py-7 md:flex-row md:items-center md:gap-10"
+      className="flex reveal flex-col gap-4 border-y border-line py-7 md:flex-row md:items-center md:gap-10"
     >
       <p className="shrink-0 eyebrow text-muted">In good company</p>
       <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] motion-reduce:[mask-image:none]">

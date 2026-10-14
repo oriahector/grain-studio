@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
@@ -20,10 +20,18 @@ export function ProjectModal({ projects }: { projects: Project[] }) {
   const slug = /^\/work\/([^/]+)/.exec(pathname)?.[1];
   const project = projects.find((p) => p.slug === slug);
 
+  // Keep rendering the last project while the dialog animates out,
+  // otherwise the exit transition would show an empty box.
+  const [shown, setShown] = useState(project);
+  if (project && project !== shown) setShown(project);
+
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    if (project && !dialog.open) dialog.showModal();
+    if (project && !dialog.open) {
+      dialog.scrollTop = 0;
+      dialog.showModal();
+    }
     if (!project && dialog.open) dialog.close();
   }, [project]);
 
@@ -32,7 +40,7 @@ export function ProjectModal({ projects }: { projects: Project[] }) {
   return (
     <dialog
       ref={dialogRef}
-      aria-labelledby={project ? `project-${project.slug}` : undefined}
+      aria-labelledby={shown ? `project-${shown.slug}` : undefined}
       onCancel={(e) => {
         e.preventDefault();
         close();
@@ -40,13 +48,13 @@ export function ProjectModal({ projects }: { projects: Project[] }) {
       onClick={(e) => {
         if (e.target === e.currentTarget) close();
       }}
-      className="m-0 size-full max-h-none max-w-none bg-paper p-0 text-ink backdrop:bg-ink/40 open:animate-[dialog-in_300ms_ease-out] md:m-auto md:h-[90dvh] md:w-[min(1400px,92vw)]"
+      className="project-dialog m-0 size-full max-h-none max-w-none bg-paper p-0 text-ink md:m-auto md:h-[90dvh] md:w-[min(1400px,92vw)]"
     >
-      {project && (
+      {shown && (
         <div className="container-page py-6 md:py-8">
           <div className="mb-8 flex items-center justify-between">
             <Link
-              href={`/work/${project.slug}`}
+              href={`/work/${shown.slug}`}
               className="eyebrow text-[11px] text-muted hover:text-klein"
             >
               Open project page
@@ -54,16 +62,16 @@ export function ProjectModal({ projects }: { projects: Project[] }) {
             <button
               type="button"
               onClick={close}
-              className="grid size-10 cursor-pointer place-items-center rounded-full border border-line transition-colors hover:border-klein hover:text-klein"
+              className="grid size-10 cursor-pointer place-items-center rounded-full border border-line transition-[color,border-color,scale] duration-150 ease-out hover:border-klein hover:text-klein active:scale-[0.95]"
             >
               <X aria-hidden="true" className="size-5" />
               <span className="sr-only">Close</span>
             </button>
           </div>
           <ProjectDetail
-            project={project}
+            project={shown}
             as="h2"
-            headingId={`project-${project.slug}`}
+            headingId={`project-${shown.slug}`}
           />
         </div>
       )}

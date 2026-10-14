@@ -11,8 +11,32 @@
   --font-sans: var(--font-dm-sans), Arial, sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 
+  /* Strong curves: the built-in ones lack punch. Overriding --ease-out also
+     upgrades Tailwind's `ease-out` utility everywhere. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
   /* Brand dot in the masthead: a slow, gentle bob */
   --animate-float: float 3s ease-in-out infinite;
+
+  /* One-off entrances (first paint, mounted items). Blur bridges the gap
+     between hidden and shown so text doesn't just pop in. */
+  --animate-rise: rise 700ms var(--ease-out) both;
+  --animate-fade: fade 400ms var(--ease-out) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.4rem);
+      filter: blur(6px);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
 
   @keyframes float {
     0%,
@@ -40,10 +64,23 @@
     @apply bg-klein text-white;
   }
 
+  /* Lets `block-size: auto` transition (details accordion) */
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  /* Reduced motion = no movement, but keep gentle fades that aid comprehension */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
+  }
+}
+
+/* Unlayered so it beats the animate-rise utility: fade only, no movement */
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation-name: fade;
   }
 }
 
@@ -69,15 +106,100 @@
   }
 }
 
+/* Scroll-linked reveal: content eases in as it enters the viewport.
+   Scrubbed by scroll (no JS, no observers); skipped where unsupported. */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
 /* Lock page scroll while the project quick view is open */
 html:has(dialog[open]) {
   overflow: hidden;
 }
 
-@keyframes dialog-in {
-  from {
+/* Project quick view: CSS transitions + @starting-style, so it animates in
+   and out without JS and stays interruptible. Exit is faster than enter.
+   Centered origin on purpose: a modal isn't anchored to its trigger. */
+.project-dialog {
+  transition:
+    opacity 180ms ease,
+    transform 180ms var(--ease-out),
+    display 180ms allow-discrete,
+    overlay 180ms allow-discrete;
+
+  &:not([open]) {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(0.5rem);
+  }
+
+  &[open] {
+    opacity: 1;
+    transform: none;
+    transition-duration: 300ms;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(1.5rem) scale(0.98);
+    }
+  }
+
+  &::backdrop {
+    background: oklch(0.19 0.003 90 / 0);
+    transition:
+      background-color 180ms ease,
+      display 180ms allow-discrete,
+      overlay 180ms allow-discrete;
+  }
+
+  &[open]::backdrop {
+    background: oklch(0.19 0.003 90 / 0.4);
+    transition-duration: 300ms;
+
+    @starting-style {
+      background: oklch(0.19 0.003 90 / 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &[open] {
+      transform: none;
+    }
+  }
+}
+
+/* Services accordion: native <details>, height eased where supported */
+.service::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    block-size 250ms var(--ease-out),
+    opacity 200ms ease,
+    content-visibility 250ms allow-discrete;
+}
+
+.service[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service::details-content {
+    transition-property: opacity, content-visibility;
   }
 }
 

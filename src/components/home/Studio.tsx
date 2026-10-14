@@ -32,7 +32,7 @@ export function Studio() {
       aria-labelledby="studio-heading"
       className="grid gap-2 border-t border-line pt-9 pb-12 md:grid-cols-[1fr_1.07fr] md:gap-10 md:pb-18 lg:gap-16"
     >
-      <div>
+      <div className="reveal">
         <p className="eyebrow">The studio</p>
         <h2
           id="studio-heading"
@@ -44,7 +44,7 @@ export function Studio() {
         </h2>
       </div>
 
-      <div>
+      <div className="reveal">
         <p className="mt-5 mb-8 max-w-[31rem] text-[17px] leading-relaxed md:mt-10 md:text-[19px]">
           Behind Grain Studio are{' '}
           <a
@@ -74,13 +74,13 @@ export function Studio() {
           <details
             key={service.name}
             name="services"
-            className="group border-b border-line"
+            className="service group border-b border-line"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between py-4.5 text-[17px] transition-colors hover:text-klein [&::-webkit-details-marker]:hidden">
               {service.name}
               <Plus
                 aria-hidden="true"
-                className="size-4 transition-transform duration-300 group-open:rotate-45"
+                className="size-4 transition-[rotate] duration-200 ease-out group-open:rotate-45"
               />
             </summary>
             <p className="pb-4 text-sm leading-relaxed text-muted">
