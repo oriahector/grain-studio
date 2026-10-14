@@ -2,8 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,45 +12,54 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+      # Version comes from "packageManager" in package.json
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
         with:
-          version: 9.15.4
+          node-version: 24
+          cache: pnpm
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - run: pnpm install --frozen-lockfile
+
+      # AVIF variants are slow to encode; reuse them across runs.
+      # scripts/images.mjs only re-encodes sources whose content hash changed.
+      - uses: actions/cache@v6
         with:
-          node-version: 20
-          cache: 'pnpm'
+          path: public/img
+          key: images-${{ hashFiles('assets/images/**', 'scripts/images.mjs') }}
+          restore-keys: images-
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
 
-      - name: Build project
-        run: pnpm run build
+      - run: pnpm lint
 
-      - name: Upload build artifacts
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request'
         with:
-          path: ./dist
+          path: ./out
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - id: deployment
+        uses: actions/deploy-pages@v5

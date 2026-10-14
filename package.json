@@ -9,7 +9,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/images.mjs",
     "build": "next build",
-    "start": "npx serve@latest out",
+    "start": "npx -y serve@14 out -l 3000",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write ."
