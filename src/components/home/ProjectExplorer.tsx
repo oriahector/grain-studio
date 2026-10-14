@@ -17,6 +17,9 @@ const isPlainClick = (e: MouseEvent) =>
 export function ProjectExplorer({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<Filter>('All');
   const [activeSlug, setActiveSlug] = useState(projects[0]?.slug);
+  // Only the active cover loads up front; the rest mount (and start loading)
+  // once the visitor reaches for the list, so hovering then crossfades instantly.
+  const [warm, setWarm] = useState(false);
 
   const visible = projects.filter(
     (p) => filter === 'All' || p.category === filter
@@ -73,18 +76,19 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
               onClick={(e) => openModal(e, active)}
               className="group relative block aspect-[4/5] overflow-hidden bg-wash md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
             >
-              {/* All covers stay mounted so hovering the list crossfades instantly */}
-              {projects.map((p, i) => (
-                <ProjectMedia
-                  key={p.slug}
-                  media={p.cover}
-                  priority={i === 0}
-                  sizes="(min-width: 768px) 48vw, 100vw"
-                  className={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${
-                    p.slug === active.slug ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-              ))}
+              {projects
+                .filter((p) => warm || p.slug === active.slug)
+                .map((p) => (
+                  <ProjectMedia
+                    key={p.slug}
+                    media={p.cover}
+                    priority={p === projects[0]}
+                    sizes="(min-width: 768px) 48vw, 100vw"
+                    className={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${
+                      p.slug === active.slug ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
               <span className="absolute right-5 bottom-5 grid size-11 place-items-center rounded-full bg-paper transition-transform duration-300 group-hover:rotate-45">
                 <ArrowUpRight aria-hidden="true" className="size-5" />
                 <span className="sr-only">View {active.name}</span>
@@ -98,7 +102,10 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
         )}
 
         <div className="flex flex-col">
-          <ul>
+          <ul
+            onPointerEnter={() => setWarm(true)}
+            onFocus={() => setWarm(true)}
+          >
             {visible.map((p) => (
               <li key={p.slug} className="border-b border-line last:border-0">
                 <Link

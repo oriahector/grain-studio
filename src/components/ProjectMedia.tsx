@@ -31,6 +31,8 @@ export function ProjectMedia({ media, sizes, priority, className }: Props) {
       height={media.height}
       sizes={sizes}
       priority={priority}
+      placeholder={media.blur ? 'blur' : 'empty'}
+      blurDataURL={media.blur}
       className={className}
     />
   );

@@ -9,6 +9,8 @@ export interface Media {
   kind: 'image' | 'video';
   width?: number;
   height?: number;
+  /** Tiny base64 preview shown while the image loads */
+  blur?: string;
 }
 
 export interface Project {
@@ -29,7 +31,8 @@ type ProjectInput = Omit<Project, 'number' | 'cover' | 'gallery'> & {
   gallery: string[];
 };
 
-const sizes: Record<string, { width: number; height: number }> = imageSizes;
+const sizes: Record<string, { width: number; height: number; blur: string }> =
+  imageSizes;
 
 const media = (name: string, src: string, index?: number): Media => ({
   src,
@@ -78,7 +81,7 @@ const PROJECTS: ProjectInput[] = [
     cover: '/images/tree-brothers/tree.webp',
     gallery: [
       '/images/tree-brothers/tree1.webp',
-      '/images/tree-brothers/treebrothers.webm',
+      '/videos/treebrothers.webm',
       '/images/tree-brothers/treeshop.webp',
       '/images/tree-brothers/tree.webp',
       '/images/tree-brothers/ornacirca.webp',

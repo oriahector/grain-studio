@@ -7,8 +7,13 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   typedRoutes: true,
   images: {
-    // No image optimizer at runtime on Pages; variants are generated at build time.
-    unoptimized: true,
+    // No image optimizer at runtime on Pages: scripts/images.mjs pre-generates
+    // AVIF variants and this loader points srcset at them.
+    loader: 'custom',
+    loaderFile: './src/lib/image-loader.ts',
+    // Must match WIDTHS in scripts/images.mjs
+    deviceSizes: [640, 1080, 1920],
+    imageSizes: [],
   },
 };
 

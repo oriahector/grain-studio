@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "images": "node scripts/image-manifest.mjs",
-    "predev": "node scripts/image-manifest.mjs",
+    "images": "node scripts/images.mjs",
+    "predev": "node scripts/images.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/image-manifest.mjs",
+    "prebuild": "node scripts/images.mjs",
     "build": "next build",
     "start": "npx serve@latest out",
     "typecheck": "tsc --noEmit",
