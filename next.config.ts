@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     loader: 'custom',
     loaderFile: './src/lib/image-loader.ts',
     // Must match WIDTHS in scripts/images.mjs
-    deviceSizes: [640, 1080, 1920],
+    deviceSizes: [640, 828, 1080, 1920],
     imageSizes: [],
   },
 };

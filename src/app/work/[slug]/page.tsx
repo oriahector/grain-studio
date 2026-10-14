@@ -5,7 +5,10 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ProjectDetail } from '@/components/ProjectDetail';
+import { JsonLd } from '@/components/JsonLd';
+import { SITE } from '@/config/site';
 import { getProject, projects } from '@/lib/projects';
+import { projectSchema } from '@/lib/structured-data';
 
 export const dynamicParams = false;
 
@@ -25,14 +28,24 @@ export async function generateMetadata({
     title,
     description: project.description,
     alternates: { canonical: url },
+    // Replaces the layout's openGraph entirely, so repeat the shared fields
     openGraph: {
       type: 'article',
+      siteName: SITE.name,
+      locale: 'en',
       url,
       title,
       description: project.description,
-      images: [{ url: project.cover.src, alt: project.cover.alt }],
+      images: [
+        { url: `${url}og.jpg`, width: 1200, height: 630, alt: project.name },
+      ],
     },
-    twitter: { title, description: project.description },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: project.description,
+      images: [`${url}og.jpg`],
+    },
   };
 }
 
@@ -46,6 +59,7 @@ export default async function ProjectPage({
 
   return (
     <>
+      <JsonLd data={projectSchema(project)} />
       <Header />
       <main className="container-page pt-6 pb-16">
         <Link

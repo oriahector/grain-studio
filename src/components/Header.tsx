@@ -10,11 +10,11 @@ export function Header() {
     <header className="container-page flex h-18 items-center justify-between md:h-22">
       <Link
         href="/"
-        aria-label="Grain Studio, home"
         className="flex items-center gap-[0.3em] text-[17px] font-bold md:text-[22px]"
       >
-        grain
-        <span aria-hidden="true" className="size-1.5 rounded-full bg-klein" />
+        {/* The spaces collapse visually in flex but keep the name "grain studio" */}
+        grain{' '}
+        <span aria-hidden="true" className="size-1.5 rounded-full bg-klein" />{' '}
         studio
       </Link>
 

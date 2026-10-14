@@ -11,7 +11,7 @@ import { availableParallelism } from 'node:os';
 import { dirname, join, sep } from 'node:path';
 import sharp from 'sharp';
 
-export const WIDTHS = [640, 1080, 1920];
+export const WIDTHS = [640, 828, 1080, 1920];
 
 const root = join(import.meta.dirname, '..');
 const srcDir = join(root, 'assets', 'images');
