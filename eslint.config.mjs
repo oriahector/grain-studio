@@ -12,5 +12,9 @@ export default defineConfig([
       'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
   },
+  {
+    files: ['scripts/**'],
+    rules: { 'no-console': 'off' },
+  },
   globalIgnores(['.next/**', 'out/**', 'next-env.d.ts']),
 ]);

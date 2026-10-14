@@ -56,6 +56,24 @@
   }
 }
 
+/* Lock page scroll while the project quick view is open */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes grow-x {
   to {
     transform: scaleX(1);

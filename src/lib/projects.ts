@@ -1,3 +1,5 @@
+import imageSizes from './image-manifest.json';
+
 export const CATEGORIES = ['Web development', 'Photography'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -5,6 +7,8 @@ export interface Media {
   src: string;
   alt: string;
   kind: 'image' | 'video';
+  width?: number;
+  height?: number;
 }
 
 export interface Project {
@@ -25,10 +29,13 @@ type ProjectInput = Omit<Project, 'number' | 'cover' | 'gallery'> & {
   gallery: string[];
 };
 
+const sizes: Record<string, { width: number; height: number }> = imageSizes;
+
 const media = (name: string, src: string, index?: number): Media => ({
   src,
   alt: index === undefined ? name : `${name}, image ${index + 1}`,
   kind: /\.(webm|mp4)$/.test(src) ? 'video' : 'image',
+  ...sizes[src],
 });
 
 const PROJECTS: ProjectInput[] = [
