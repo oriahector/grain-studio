@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/claramorrondo/projects/grain-studio/src/app/opengraph-image.alt.txt.mjs%20(text%20content)"],"sourcesContent":["export default \"Grain Studio — independent creative studio\";"],"names":[],"mappings":";;;;uCAAe"}}]
+}

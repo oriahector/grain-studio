@@ -1,0 +1,53 @@
+1:"$Sreact.fragment"
+2:"/_next/static/chunks/0q_1_3939aac0.js"
+3:I[87766,["$2"],"default"]
+4:I[19216,["$2"],"default"]
+5:"/_next/static/chunks/1l4v2qdhsn77e.js"
+6:I[78530,["$5"],""]
+7:I[46904,["$5"],"default"]
+13:"ViewportBoundary"
+14:I[43071,["$2"],"$13"]
+15:"MetadataBoundary"
+16:I[43071,["$2"],"$15"]
+17:"$Sreact.suspense"
+:HL["/_next/static/chunks/3i-25-fq_-0r-.css","style"]
+9:X
+c:X
+c:C
+d:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[[["$","header",null,{"className":"container-page flex h-18 items-center justify-between md:h-22","children":[["$","$L6",null,{"href":"/","className":"flex items-center gap-[0.3em] text-[17px] font-bold md:text-[22px]","children":["grain"," ",["$","span",null,{"aria-hidden":"true","className":"size-1.5 rounded-full bg-klein"}]," ","studio"]}],["$","nav",null,{"aria-label":"Main","className":"ml-auto flex gap-4 md:gap-9","children":[["$","$L6",null,{"href":"/#work","className":"eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein","children":["Work",["$","span",null,{"className":"text-muted","children":["(","09",")"]}]]}],["$","$L6",null,{"href":"/#studio","className":"eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein","children":"Studio"}],["$","$L6",null,{"href":"/#contact","className":"eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein","children":["Let's talk",["$","$L7",null,{"icon":"$0:t:t:d:r:props:children:1:props:children:props:children:1:props:notFound:0:0:props:children:1:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","main",null,{"className":"container-page flex min-h-[60vh] flex-col justify-center gap-6 py-16","children":[["$","p",null,{"className":"eyebrow text-muted","children":"Error 404"}],["$","h1",null,{"className":"text-[clamp(2.75rem,8vw,7rem)] leading-[1.05]","children":"Lost a grain."}],["$","$L6",null,{"href":"/","className":"inline-flex items-center gap-1 self-start eyebrow text-[11px] text-klein hover:underline hover:underline-offset-4","children":["Back to the studio","$Le"]}]]}],"$Lf"],["$L10"],"$L11"]}],"p":"$@12","v":null,"s":"$9"}}]]
+a:[["children",{"s":"/_not-found","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}]}]]}],"p":"$@b","v":"$c","s":"$9"},"c":"$Qd"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3i-25-fq_-0r-.css","precedence":"next"}]],["$","html",null,{"lang":"en","className":"_30ab_W_variable xwJ8La_variable","children":["$","body",null,{"children":[["$","div",null,{"aria-hidden":"true","className":"fixed inset-x-0 top-0 z-50 h-1 scroll-progress bg-klein"}],["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}],"notFound":[[["$","header",null,{"className":"container-page flex h-18 items-center justify-between md:h-22","children":[["$","$L6",null,{"href":"/","className":"flex items-center gap-[0.3em] text-[17px] font-bold md:text-[22px]","children":["grain"," ",["$","span",null,{"aria-hidden":"true","className":"size-1.5 rounded-full bg-klein"}]," ","studio"]}],["$","nav",null,{"aria-label":"Main","className":"ml-auto flex gap-4 md:gap-9","children":[["$","$L6",null,{"href":"/#work","className":"eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein","children":["Work",["$","span",null,{"className":"text-muted","children":["(","09",")"]}]]}],["$","$L6",null,{"href":"/#studio","className":"eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein","children":"Studio"}],["$","$L6",null,{"href":"/#contact","className":"eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein","children":["Let's talk",["$","$L7",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","main",null,{"className":"container-page flex min-h-[60vh] flex-col justify-center gap-6 py-16","children":[["$","p",null,{"className":"eyebrow text-muted","children":"Error 404"}],["$","h1",null,{"className":"text-[clamp(2.75rem,8vw,7rem)] leading-[1.05]","children":"Lost a grain."}],["$","$L6",null,{"href":"/","className":"inline-flex items-center gap-1 self-start eyebrow text-[11px] text-klein hover:underline hover:underline-offset-4","children":["Back to the studio",["$","$L7",null,{"icon":"$0:t:t:d:r:props:children:1:props:children:props:children:1:props:notFound:0:0:props:children:1:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}],["$","footer",null,{"className":"container-page","children":["$","div",null,{"className":"flex flex-wrap justify-between gap-5 border-t border-line py-5.5 eyebrow","children":[["$","span",null,{"children":["© ",2026," Grain Studio"]}],["$","span",null,{"className":"text-muted","children":"With rhythm & precision."}],["$","a",null,{"href":"https://www.instagram.com/wearegrainstudio/","target":"_blank","rel":"noreferrer","className":"inline-flex items-center gap-1 hover:text-klein","children":["Instagram",["$","$L7",null,{"icon":"$0:t:t:d:r:props:children:1:props:children:props:children:1:props:notFound:0:0:props:children:1:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]}]],[]]}]]}]}]]}],"p":"$@8","v":null,"s":"$9"},"c":"$Qa"},"h":{"r":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L14",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#002fa7"}],["$","meta","3",{"name":"color-scheme","content":"light"}]]}],["$","$L16",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$17",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found — Grain Studio"}],["$","meta","1",{"name":"description","content":"Independent creative studio by Héctor and Clara. Web design & development, brand strategy, photography and UGC content — grain by grain, with rhythm & precision."}],["$","meta","2",{"name":"application-name","content":"Grain Studio"}],["$","link","3",{"rel":"author","href":"https://wearegrainstudio.com"}],["$","meta","4",{"name":"author","content":"Grain Studio"}],["$","link","5",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","6",{"name":"robots","content":"noindex"}],["$","meta","7",{"property":"og:title","content":"Grain Studio — Digital experiences & photography"}],["$","meta","8",{"property":"og:description","content":"Independent creative studio by Héctor and Clara. Web design & development, brand strategy, photography and UGC content — grain by grain, with rhythm & precision."}],["$","meta","9",{"property":"og:url","content":"https://wearegrainstudio.com/"}],["$","meta","10",{"property":"og:site_name","content":"Grain Studio"}],["$","meta","11",{"property":"og:locale","content":"en"}],"$L18","$L19","$L1a","$L1b","$L1c","$L1d","$L1e","$L1f","$L20","$L21","$L22","$L23","$L24","$L25","$L26","$L27","$L28","$L29"]}]}],null]}],"$L2a"]}],"p":"$@2b","v":null,"s":"$9"}},"a":"$@2c","u":"$@2d","b":"auGE5MIX2bblOkP1iIBaG"}
+2e:I[43071,["$2"],"OutletBoundary"]
+30:I[20231,["$2"],"IconMark"]
+e:["$","$L7",null,{"icon":"$0:t:t:d:r:props:children:1:props:children:props:children:1:props:notFound:0:0:props:children:1:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]
+f:["$","footer",null,{"className":"container-page","children":["$","div",null,{"className":"flex flex-wrap justify-between gap-5 border-t border-line py-5.5 eyebrow","children":[["$","span",null,{"children":["© ",2026," Grain Studio"]}],["$","span",null,{"className":"text-muted","children":"With rhythm & precision."}],["$","a",null,{"href":"https://www.instagram.com/wearegrainstudio/","target":"_blank","rel":"noreferrer","className":"inline-flex items-center gap-1 hover:text-klein","children":["Instagram",["$","$L7",null,{"icon":"$0:t:t:d:r:props:children:1:props:children:props:children:1:props:notFound:0:0:props:children:1:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]}]
+10:["$","script","script-0",{"src":"/_next/static/chunks/1l4v2qdhsn77e.js","async":true}]
+11:["$","$L2e",null,{"children":["$","$17",null,{"name":"Next.MetadataOutlet","children":"$@2f"}]}]
+18:["$","meta","12",{"property":"og:image","content":"https://wearegrainstudio.com/opengraph-image.png?opengraph-image.3hoohr2nnp0rh.png"}]
+19:["$","meta","13",{"property":"og:image:type","content":"image/png"}]
+1a:["$","meta","14",{"property":"og:image:width","content":"1200"}]
+1b:["$","meta","15",{"property":"og:image:height","content":"630"}]
+1c:["$","meta","16",{"property":"og:image:alt","content":"Grain Studio — independent creative studio"}]
+1d:["$","meta","17",{"property":"og:type","content":"website"}]
+1e:["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}]
+1f:["$","meta","19",{"name":"twitter:title","content":"Grain Studio — Digital experiences & photography"}]
+20:["$","meta","20",{"name":"twitter:description","content":"Independent creative studio by Héctor and Clara. Web design & development, brand strategy, photography and UGC content — grain by grain, with rhythm & precision."}]
+21:["$","meta","21",{"name":"twitter:image","content":"https://wearegrainstudio.com/opengraph-image.png?opengraph-image.3hoohr2nnp0rh.png"}]
+22:["$","meta","22",{"name":"twitter:image:alt","content":"Grain Studio — independent creative studio"}]
+23:["$","meta","23",{"name":"twitter:image:type","content":"image/png"}]
+24:["$","meta","24",{"name":"twitter:image:width","content":"1200"}]
+25:["$","meta","25",{"name":"twitter:image:height","content":"630"}]
+26:["$","link","26",{"rel":"icon","href":"/favicon.ico?favicon.28c8yaqn-i_nz.ico","sizes":"16x16","type":"image/x-icon"}]
+27:["$","link","27",{"rel":"icon","href":"/icon.png?icon.3ve8ng2seg90k.png","sizes":"310x310","type":"image/png"}]
+28:["$","link","28",{"rel":"apple-touch-icon","href":"/apple-icon.png?apple-icon.0s5j21kr6_fbm.png","sizes":"180x180","type":"image/png"}]
+29:["$","$L30","29",{}]
+2a:["$","meta",null,{"name":"next-size-adjust","content":""}]
+9:300
+2f:null
+2d:true
+9:C
+2c:0
+b:"$undefined"
+8:"$undefined"
+2b:"$undefined"
+12:"$undefined"

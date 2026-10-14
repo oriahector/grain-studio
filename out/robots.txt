@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://wearegrainstudio.com
+Sitemap: https://wearegrainstudio.com/sitemap.xml
