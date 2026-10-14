@@ -10,6 +10,19 @@
 
   --font-sans: var(--font-dm-sans), Arial, sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+
+  /* Brand dot in the masthead: a slow, gentle bob */
+  --animate-float: float 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-0.12em);
+    }
+  }
 }
 
 @layer base {

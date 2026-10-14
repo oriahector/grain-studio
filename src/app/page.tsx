@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <Header />
+      <Header showLogo={false} />
       <main className="container-page">
         <Masthead />
         <section
