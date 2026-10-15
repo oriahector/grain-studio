@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Mono, DM_Sans } from 'next/font/google';
+import Script from 'next/script';
 import { SITE } from '@/config/site';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import './globals.css';
@@ -50,6 +51,18 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`}>
       <body>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-75ZKE9DTVJ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-75ZKE9DTVJ');
+          `}
+        </Script>
         <ScrollProgress />
         {children}
       </body>
