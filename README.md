@@ -6,6 +6,7 @@ Portfolio for [Grain Studio](https://wearegrainstudio.com) — Next.js 16 (App R
 
 - **Next.js 16** App Router, `output: 'export'` (every page prerendered to HTML)
 - **React 19**, Server Components by default; client code only in the project explorer, quick-view modal and contact form
+- React `<ViewTransition>` slides between pages, direction set per link (`src/components/PageTransition.tsx`)
 - **Tailwind CSS 4**, configured in CSS (`src/app/globals.css`, no JS config)
 - **TypeScript 6** (TS 7 drops the JS API Next.js and typescript-eslint rely on)
 - `next/font` (DM Sans, DM Mono), `lucide-react`, EmailJS for the contact form

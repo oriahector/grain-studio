@@ -7,6 +7,7 @@ import { Studio } from '@/components/home/Studio';
 import { ClientMarquee } from '@/components/home/ClientMarquee';
 import { Contact } from '@/components/home/Contact';
 import { JsonLd } from '@/components/JsonLd';
+import { PageTransition } from '@/components/PageTransition';
 import { projects } from '@/content/projects';
 import { organizationSchema } from '@/lib/structured-data';
 
@@ -27,19 +28,21 @@ export default function HomePage() {
     <>
       <JsonLd data={organizationSchema()} />
       <Header showLogo={false} />
-      <main className="container-page">
-        <Masthead />
-        <section
-          id="work"
-          aria-labelledby="work-heading"
-          className="border-t border-line"
-        >
-          <ProjectExplorer projects={explorerProjects} />
-        </section>
-        <Studio />
-        <ClientMarquee />
-        <Contact />
-      </main>
+      <PageTransition>
+        <main className="container-page">
+          <Masthead />
+          <section
+            id="work"
+            aria-labelledby="work-heading"
+            className="border-t border-line"
+          >
+            <ProjectExplorer projects={explorerProjects} />
+          </section>
+          <Studio />
+          <ClientMarquee />
+          <Contact />
+        </main>
+      </PageTransition>
       <Footer />
     </>
   );

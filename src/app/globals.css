@@ -266,3 +266,63 @@ html:has(dialog[open]) body > .scroll-progress {
     transform: scaleX(1);
   }
 }
+
+/* Page slides (PageTransition): content moves in the direction of travel,
+   short offset so the eye doesn't have to chase it */
+::view-transition {
+  /* Clicks during the slide reach the live page instead of the overlay */
+  pointer-events: none;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-old(.nav-back) {
+  animation:
+    150ms ease-in both fade reverse,
+    400ms var(--ease-in-out) both slide reverse;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-new(.nav-back) {
+  animation:
+    210ms var(--ease-out) 150ms both fade,
+    400ms var(--ease-in-out) both slide;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+}
+
+/* The header is the fixed reference while content slides */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+@keyframes slide {
+  from {
+    translate: var(--slide-offset);
+  }
+}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '@/content/projects';
+import { NAV_BACK } from './PageTransition';
 
 const navLink =
   'eyebrow inline-flex items-center gap-1 text-mini transition-colors hover:text-klein';
@@ -8,10 +9,15 @@ const navLink =
 /** `showLogo` is off on the home, where the masthead already carries the name */
 export function Header({ showLogo = true }: { showLogo?: boolean }) {
   return (
-    <header className="container-page flex h-18 items-center justify-between md:h-22">
+    // Named so it stays put while page content slides (globals.css)
+    <header
+      style={{ viewTransitionName: 'site-header' }}
+      className="container-page flex h-18 items-center justify-between md:h-22"
+    >
       {showLogo && (
         <Link
           href="/"
+          transitionTypes={NAV_BACK}
           className="flex items-center gap-[0.3em] text-body font-bold md:text-logo"
         >
           {/* The spaces collapse visually in flex but keep the name "grain studio" */}
