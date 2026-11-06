@@ -31,15 +31,32 @@ type ProjectInput = Omit<Project, 'number' | 'cover' | 'gallery'> & {
   gallery: string[];
 };
 
-const sizes: Record<string, { width: number; height: number; blur: string }> =
+const images: Record<string, { width: number; height: number; blur: string }> =
   imageSizes;
 
-const media = (name: string, src: string, index?: number): Media => ({
-  src,
-  alt: index === undefined ? name : `${name}, image ${index + 1}`,
-  kind: /\.(webm|mp4)$/.test(src) ? 'video' : 'image',
-  ...sizes[src],
-});
+// scripts/images.mjs only handles images; videos declare their size here so
+// the page reserves their space before they load.
+const videos: Record<string, { width: number; height: number }> = {
+  '/videos/treebrothers.webm': { width: 1280, height: 720 },
+};
+
+function media(name: string, src: string, index?: number): Media {
+  const kind = /\.(webm|mp4)$/.test(src) ? 'video' : 'image';
+  const size = kind === 'video' ? videos[src] : images[src];
+  if (!size) {
+    throw new Error(
+      kind === 'video'
+        ? `${src}: add its width and height to \`videos\` in src/lib/projects.ts`
+        : `${src}: not in the image manifest. Is it in assets${src}? Run \`pnpm images\`.`
+    );
+  }
+  return {
+    src,
+    alt: index === undefined ? name : `${name}, ${kind} ${index + 1}`,
+    kind,
+    ...size,
+  };
+}
 
 const PROJECTS: ProjectInput[] = [
   {

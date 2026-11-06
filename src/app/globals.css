@@ -54,6 +54,9 @@
     scroll-behavior: smooth;
     scroll-padding-top: 2rem;
     color-scheme: light;
+    /* Reserve the scrollbar's space so locking scroll (open dialog) doesn't
+       shift the layout sideways */
+    scrollbar-gutter: stable;
   }
 
   body {

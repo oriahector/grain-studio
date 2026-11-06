@@ -12,7 +12,7 @@ const dmSans = DM_Sans({
 
 const dmMono = DM_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: '400',
   variable: '--font-dm-mono',
 });
 
@@ -49,7 +49,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`}>
+    // data-scroll-behavior: smooth scrolling is for in-page anchors; route
+    // changes should jump to the top instantly
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${dmSans.variable} ${dmMono.variable}`}
+    >
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-75ZKE9DTVJ"

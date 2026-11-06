@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { Media } from '@/lib/projects';
+import { LoopVideo } from './LoopVideo';
 
 interface Props {
   media: Media;
@@ -12,13 +13,11 @@ interface Props {
 export function ProjectMedia({ media, sizes, priority, className }: Props) {
   if (media.kind === 'video') {
     return (
-      <video
+      <LoopVideo
         src={media.src}
-        aria-label={media.alt}
-        autoPlay
-        muted
-        loop
-        playsInline
+        label={media.alt}
+        width={media.width}
+        height={media.height}
         className={className}
       />
     );
