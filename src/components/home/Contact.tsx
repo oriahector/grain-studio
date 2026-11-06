@@ -3,12 +3,15 @@
 import { useActionState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { SITE } from '@/config/site';
-import { sendEmail } from '@/services/emailService';
-import type { ContactFormData } from '@/types';
+import { sendEmail, type ContactFormData } from '@/lib/contact';
 
 type State = { status: 'idle' | 'ok' | 'error'; fields?: ContactFormData };
 
 async function submit(_: State, form: FormData): Promise<State> {
+  // Honeypot: people never see this field, naive bots fill it in. Look
+  // successful so they don't retry.
+  if (form.get('website')) return { status: 'ok' };
+
   const fields: ContactFormData = {
     name: String(form.get('name')),
     lastName: String(form.get('lastName')),
@@ -58,6 +61,7 @@ export function Contact() {
                 name="name"
                 defaultValue={state.fields?.name}
                 required
+                maxLength={80}
                 autoComplete="given-name"
                 placeholder="Name"
                 className={field}
@@ -69,6 +73,7 @@ export function Contact() {
                 name="lastName"
                 defaultValue={state.fields?.lastName}
                 required
+                maxLength={80}
                 autoComplete="family-name"
                 placeholder="Surname"
                 className={field}
@@ -82,6 +87,7 @@ export function Contact() {
               defaultValue={state.fields?.email}
               type="email"
               required
+              maxLength={254}
               autoComplete="email"
               placeholder="Email"
               className={field}
@@ -93,10 +99,16 @@ export function Contact() {
               name="message"
               defaultValue={state.fields?.message}
               required
+              maxLength={5000}
               rows={4}
               placeholder="What's on your mind?"
               className={`${field} resize-none`}
             />
+          </label>
+
+          <label aria-hidden="true" className="absolute -left-[9999px]">
+            Leave this empty
+            <input name="website" tabIndex={-1} autoComplete="off" />
           </label>
 
           <div className="mt-4 flex items-center justify-between gap-4">

@@ -5,6 +5,10 @@ export const SITE = {
   description:
     'Independent creative studio by Héctor and Clara. Web design & development, brand strategy, photography and UGC content — grain by grain, with rhythm & precision.',
   instagram: 'https://www.instagram.com/wearegrainstudio/',
+  founders: [
+    { name: 'Héctor', linkedin: 'https://www.linkedin.com/in/hmartinezoria/' },
+    { name: 'Clara', linkedin: 'https://www.linkedin.com/in/clara-morrondo/' },
+  ],
 } as const;
 
 /**

@@ -7,12 +7,20 @@ import { Studio } from '@/components/home/Studio';
 import { ClientMarquee } from '@/components/home/ClientMarquee';
 import { Contact } from '@/components/home/Contact';
 import { JsonLd } from '@/components/JsonLd';
-import { projects } from '@/lib/projects';
+import { projects } from '@/content/projects';
 import { organizationSchema } from '@/lib/structured-data';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
+
+// The quick view (a client component) needs every project's gallery, so it
+// all travels in the home's HTML. Gallery blur placeholders aren't worth
+// those bytes there; covers and the project pages keep theirs.
+const explorerProjects = projects.map((p) => ({
+  ...p,
+  gallery: p.gallery.map(({ blur: _blur, ...media }) => media),
+}));
 
 export default function HomePage() {
   return (
@@ -26,7 +34,7 @@ export default function HomePage() {
           aria-labelledby="work-heading"
           className="border-t border-line"
         >
-          <ProjectExplorer projects={projects} />
+          <ProjectExplorer projects={explorerProjects} />
         </section>
         <Studio />
         <ClientMarquee />

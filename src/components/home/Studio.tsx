@@ -1,27 +1,7 @@
+import { Fragment } from 'react';
 import { Plus } from 'lucide-react';
-
-const SERVICES = [
-  {
-    name: 'Web design & development',
-    description:
-      'Thoughtful digital experiences, from the first idea to the final interaction.',
-  },
-  {
-    name: 'Brand strategy',
-    description:
-      'Finding the connection between your brand, your story and your audience.',
-  },
-  {
-    name: 'Photography',
-    description:
-      'People, places and products. A considered eye for the details that make a brand.',
-  },
-  {
-    name: 'UGC content',
-    description:
-      'Original, human content that brings brands closer to their communities.',
-  },
-];
+import { SITE } from '@/config/site';
+import { SERVICES } from '@/content/services';
 
 const person = 'underline underline-offset-4 hover:text-klein';
 
@@ -47,23 +27,19 @@ export function Studio() {
       <div className="reveal">
         <p className="mt-5 mb-8 max-w-124 text-body leading-relaxed md:mt-10 md:text-body-lg">
           Behind Grain Studio are{' '}
-          <a
-            className={person}
-            href="https://www.linkedin.com/in/hmartinezoria/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Héctor
-          </a>{' '}
-          and{' '}
-          <a
-            className={person}
-            href="https://www.linkedin.com/in/clara-morrondo/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Clara
-          </a>
+          {SITE.founders.map((founder, i) => (
+            <Fragment key={founder.name}>
+              {i > 0 && ' and '}
+              <a
+                className={person}
+                href={founder.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {founder.name}
+              </a>
+            </Fragment>
+          ))}
           . Two perspectives, one shared approach: making thoughtful work that
           brings people and brands together.
         </p>

@@ -1,4 +1,4 @@
-import imageSizes from './image-manifest.json';
+import imageSizes from '@/lib/image-manifest.json';
 
 export const CATEGORIES = ['Web development', 'Photography'] as const;
 export type Category = (typeof CATEGORIES)[number];
@@ -46,7 +46,7 @@ function media(name: string, src: string, index?: number): Media {
   if (!size) {
     throw new Error(
       kind === 'video'
-        ? `${src}: add its width and height to \`videos\` in src/lib/projects.ts`
+        ? `${src}: add its width and height to \`videos\` in src/content/projects.ts`
         : `${src}: not in the image manifest. Is it in assets${src}? Run \`pnpm images\`.`
     );
   }

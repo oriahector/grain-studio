@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { projects } from '@/lib/projects';
+import { projects } from '@/content/projects';
 
 const navLink =
   'eyebrow inline-flex items-center gap-1 text-mini transition-colors hover:text-klein';

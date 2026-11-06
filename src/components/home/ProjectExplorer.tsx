@@ -3,7 +3,7 @@
 import { useState, type MouseEvent } from 'react';
 import Link from 'next/link';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { CATEGORIES, type Category, type Project } from '@/lib/projects';
+import { CATEGORIES, type Category, type Project } from '@/content/projects';
 import { ProjectMedia } from '@/components/ProjectMedia';
 import { ProjectModal } from './ProjectModal';
 

@@ -7,7 +7,7 @@ import { Footer } from '@/components/Footer';
 import { ProjectDetail } from '@/components/ProjectDetail';
 import { JsonLd } from '@/components/JsonLd';
 import { SITE } from '@/config/site';
-import { getProject, projects } from '@/lib/projects';
+import { getProject, projects } from '@/content/projects';
 import { projectSchema } from '@/lib/structured-data';
 
 export const dynamicParams = false;
@@ -32,7 +32,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'article',
       siteName: SITE.name,
-      locale: 'en',
+      locale: 'en_US',
       url,
       title,
       description: project.description,

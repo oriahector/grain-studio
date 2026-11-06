@@ -1,4 +1,4 @@
-import { CLIENTS } from '@/config/clients';
+import { CLIENTS } from '@/content/clients';
 
 function ClientList({ hidden }: { hidden?: boolean }) {
   return (

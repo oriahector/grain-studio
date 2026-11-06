@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { Media } from '@/lib/projects';
+import type { Media } from '@/content/projects';
 import { LoopVideo } from './LoopVideo';
 
 interface Props {

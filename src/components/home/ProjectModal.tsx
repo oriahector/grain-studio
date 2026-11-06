@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
-import type { Project } from '@/lib/projects';
+import type { Project } from '@/content/projects';
 import { ProjectDetail } from '@/components/ProjectDetail';
 
 /**

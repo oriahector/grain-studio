@@ -10,6 +10,12 @@ export default defineConfig([
   {
     rules: {
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+      // `_name` marks deliberately unused bindings, e.g. omitting a key
+      // with a rest destructure
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
     },
   },
   {

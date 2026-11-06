@@ -9,6 +9,7 @@ Portfolio for [Grain Studio](https://wearegrainstudio.com) — Next.js 16 (App R
 - **Tailwind CSS 4**, configured in CSS (`src/app/globals.css`, no JS config)
 - **TypeScript 6** (TS 7 drops the JS API Next.js and typescript-eslint rely on)
 - `next/font` (DM Sans, DM Mono), `lucide-react`, EmailJS for the contact form
+- Node 24, pnpm via corepack (`packageManager` in package.json)
 
 ## Development
 
@@ -39,15 +40,15 @@ src/app/                   Routes, metadata, sitemap/robots/manifest, icons
   work/[slug]/             Project pages + og.jpg route (built per project)
 src/components/            Header, Footer, ProjectDetail, ProjectMedia…
   home/                    Home sections
-src/lib/projects.ts        Portfolio content — single source of truth
-src/lib/structured-data.ts JSON-LD
-src/config/                Site constants, clients, EmailJS env
+src/content/               Site copy as data: projects, clients, services
+src/config/site.ts         Name, URLs, founders, brand colors for non-CSS uses
+src/lib/                   Contact (EmailJS), JSON-LD, image loader + manifest
 ```
 
 ## Adding a project
 
 1. Drop its images in `assets/images/<project>/`.
-2. Add an entry to `src/lib/projects.ts` (slug, name, category, year, description, cover, gallery).
+2. Add an entry to `src/content/projects.ts` (slug, name, category, year, description, cover, gallery).
 
 The build generates the AVIF variants, blur placeholders, `/work/<slug>/` page, its `og.jpg` and the sitemap entry.
 

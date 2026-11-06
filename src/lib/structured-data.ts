@@ -1,5 +1,5 @@
 import { SITE } from '@/config/site';
-import type { Project } from './projects';
+import type { Project } from '@/content/projects';
 
 const ORG_ID = `${SITE.url}/#organization`;
 
@@ -16,18 +16,11 @@ export function organizationSchema() {
     image: `${SITE.url}/opengraph-image.png`,
     description: SITE.description,
     sameAs: [SITE.instagram],
-    founder: [
-      {
-        '@type': 'Person',
-        name: 'Héctor',
-        sameAs: 'https://www.linkedin.com/in/hmartinezoria/',
-      },
-      {
-        '@type': 'Person',
-        name: 'Clara',
-        sameAs: 'https://www.linkedin.com/in/clara-morrondo/',
-      },
-    ],
+    founder: SITE.founders.map((f) => ({
+      '@type': 'Person',
+      name: f.name,
+      sameAs: f.linkedin,
+    })),
     knowsAbout: [
       'Web design',
       'Web development',

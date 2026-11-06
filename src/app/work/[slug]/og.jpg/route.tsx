@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import sharp from 'sharp';
 import { BRAND } from '@/config/site';
-import { getProject, projects } from '@/lib/projects';
+import { getProject, projects } from '@/content/projects';
 
 // Rendered once per project at build time and exported as /work/<slug>/og.jpg.
 // JPEG rather than PNG/AVIF: smaller, and every social scraper reads it.
