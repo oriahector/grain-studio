@@ -40,7 +40,16 @@ jobs:
           restore-keys: images-
 
       - name: Build
-        run: pnpm build
+        # Missing keys get inlined as '' and ship a form that always fails: stop
+        # a deploy here instead. PRs from forks and bots get no secrets, so they
+        # only need to build.
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != pull_request ]; then
+            : "${NEXT_PUBLIC_EMAILJS_SERVICE_ID:?EMAILJS_SERVICE_ID secret is not set}"
+            : "${NEXT_PUBLIC_EMAILJS_TEMPLATE_ID:?EMAILJS_TEMPLATE_ID secret is not set}"
+            : "${NEXT_PUBLIC_EMAILJS_PUBLIC_KEY:?EMAILJS_PUBLIC_KEY secret is not set}"
+          fi
+          pnpm build
         env:
           NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}

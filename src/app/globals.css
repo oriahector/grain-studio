@@ -173,12 +173,22 @@ html:has(dialog[open]) {
     }
   }
 
+  /* The quick view scrolls on its own: its bar tracks the dialog, not the page */
+  & .scroll-progress {
+    animation-timeline: scroll(nearest block);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     &,
     &[open] {
       transform: none;
     }
   }
+}
+
+/* Page bar would sit frozen behind the backdrop while the quick view is open */
+html:has(dialog[open]) body > .scroll-progress {
+  visibility: hidden;
 }
 
 /* Services accordion: native <details>, height eased where supported */
@@ -209,7 +219,12 @@ html:has(dialog[open]) {
   }
 }
 
+/* Explicit `from`: with an implicit one WebKit scrubs scaleX quadratically
+   (50% scrolled showed a 25% bar on iOS) */
 @keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
   to {
     transform: scaleX(1);
   }

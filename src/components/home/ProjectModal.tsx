@@ -50,6 +50,10 @@ export function ProjectModal({ projects }: { projects: Project[] }) {
       }}
       className="project-dialog m-0 size-full max-h-none max-w-none bg-paper p-0 text-ink md:m-auto md:h-[90dvh] md:w-[min(1400px,92vw)]"
     >
+      <div
+        aria-hidden="true"
+        className="sticky top-0 z-10 -mb-1 h-1 scroll-progress bg-klein"
+      />
       {shown && (
         <div className="container-page py-6 md:py-8">
           <div className="mb-8 flex items-center justify-between">
