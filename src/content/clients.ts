@@ -1,12 +1,10 @@
-/**
- * Clients Data
- */
 export interface Client {
   name: string;
   type: string;
 }
 
-export const CLIENTS: Client[] = [
+/** "In good company" marquee on the home */
+export const CLIENTS = [
   { name: "Kiehl's", type: 'UGC Content' },
   { name: "Group L'Oreal", type: 'UGC Content' },
   { name: 'WETACA', type: 'UGC Content' },
@@ -15,4 +13,4 @@ export const CLIENTS: Client[] = [
   { name: 'CIRCA Waste', type: 'Web Development' },
   { name: 'Tree Brothers', type: 'Web Development' },
   { name: 'ScandicGo', type: 'Photography' },
-] as const;
+] as const satisfies readonly Client[];

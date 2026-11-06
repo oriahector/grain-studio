@@ -11,6 +11,25 @@
   --font-sans: var(--font-dm-sans), Arial, sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 
+  /* Type scale: the steps the design uses that Tailwind's default lacks.
+     Display sizes carry their own tight line-height. */
+  --text-micro: 0.625rem; /* 10px: eyebrow labels */
+  --text-mini: 0.6875rem; /* 11px: nav and action labels */
+  --text-lede: 0.9375rem; /* 15px */
+  --text-body: 1.0625rem; /* 17px */
+  --text-body-lg: 1.1875rem; /* 19px */
+  --text-logo: 1.375rem; /* 22px */
+  --text-list: 1.6875rem; /* 27px: project list */
+  --text-list-xl: 2.125rem; /* 34px */
+  --text-title: 2.625rem; /* 42px: section titles */
+  --text-title--line-height: 1.12;
+  --text-title-lg: 3.125rem; /* 50px */
+  --text-title-lg--line-height: 1.12;
+  --text-display: clamp(3.25rem, 7vw, 6.25rem);
+  --text-display--line-height: 1.05;
+  --text-hero: clamp(2.75rem, 10.5vw, 12rem);
+  --text-hero--line-height: 1.02;
+
   /* Strong curves: the built-in ones lack punch. Overriding --ease-out also
      upgrades Tailwind's `ease-out` utility everywhere. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -23,6 +42,10 @@
      between hidden and shown so text doesn't just pop in. */
   --animate-rise: rise 700ms var(--ease-out) both;
   --animate-fade: fade 400ms var(--ease-out) both;
+  --animate-fade-fast: fade 200ms var(--ease-out) both;
+
+  /* Client list: two copies shifted by half their width loop seamlessly */
+  --animate-marquee: marquee 40s linear infinite;
 
   @keyframes rise {
     from {
@@ -35,6 +58,12 @@
   @keyframes fade {
     from {
       opacity: 0;
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
     }
   }
 
@@ -54,6 +83,9 @@
     scroll-behavior: smooth;
     scroll-padding-top: 2rem;
     color-scheme: light;
+    /* Reserve the scrollbar's space so locking scroll (open dialog) doesn't
+       shift the layout sideways */
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -86,7 +118,16 @@
 
 /* Small uppercase mono label used across the site */
 @utility eyebrow {
-  @apply font-mono text-[10px] leading-relaxed uppercase;
+  @apply font-mono text-micro leading-relaxed uppercase;
+}
+
+/* Staggered entrances: animation-delay-80 = 80ms */
+@utility animation-delay-* {
+  animation-delay: calc(--value(integer) * 1ms);
+}
+
+@utility animation-paused {
+  animation-play-state: paused;
 }
 
 /* Page gutter + max width shared by every section */
@@ -156,6 +197,8 @@ html:has(dialog[open]) {
     }
   }
 
+  /* Literal ink instead of var(--color-ink): ::backdrop only inherits custom
+     properties since Safari 17.4 / Chrome 122 */
   &::backdrop {
     background: oklch(0.19 0.003 90 / 0);
     transition:
@@ -173,12 +216,22 @@ html:has(dialog[open]) {
     }
   }
 
+  /* The quick view scrolls on its own: its bar tracks the dialog, not the page */
+  & .scroll-progress {
+    animation-timeline: scroll(nearest block);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     &,
     &[open] {
       transform: none;
     }
   }
+}
+
+/* Page bar would sit frozen behind the backdrop while the quick view is open */
+html:has(dialog[open]) body > .scroll-progress {
+  visibility: hidden;
 }
 
 /* Services accordion: native <details>, height eased where supported */
@@ -203,14 +256,73 @@ html:has(dialog[open]) {
   }
 }
 
-@keyframes marquee {
+/* Explicit `from`: with an implicit one WebKit scrubs scaleX quadratically
+   (50% scrolled showed a 25% bar on iOS) */
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
   to {
-    transform: translateX(-50%);
+    transform: scaleX(1);
   }
 }
 
-@keyframes grow-x {
-  to {
-    transform: scaleX(1);
+/* Page slides (PageTransition): content moves in the direction of travel,
+   short offset so the eye doesn't have to chase it */
+::view-transition {
+  /* Clicks during the slide reach the live page instead of the overlay */
+  pointer-events: none;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-old(.nav-back) {
+  animation:
+    150ms ease-in both fade reverse,
+    400ms var(--ease-in-out) both slide reverse;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-new(.nav-back) {
+  animation:
+    210ms var(--ease-out) 150ms both fade,
+    400ms var(--ease-in-out) both slide;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+}
+
+/* The header is the fixed reference while content slides */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+@keyframes slide {
+  from {
+    translate: var(--slide-offset);
   }
 }

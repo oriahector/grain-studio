@@ -3,7 +3,7 @@
 import { useState, type MouseEvent } from 'react';
 import Link from 'next/link';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { CATEGORIES, type Category, type Project } from '@/lib/projects';
+import { CATEGORIES, type Category, type Project } from '@/content/projects';
 import { ProjectMedia } from '@/components/ProjectMedia';
 import { ProjectModal } from './ProjectModal';
 
@@ -60,13 +60,13 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
                 setFilter(item);
                 setFiltered(true);
               }}
-              className="inline-flex cursor-pointer items-center gap-1.5 eyebrow text-[11px] transition-[color,scale] duration-150 ease-out hover:text-klein active:scale-[0.97] aria-pressed:text-klein"
+              className="inline-flex cursor-pointer items-center gap-1.5 eyebrow text-mini transition-[color,scale] duration-150 ease-out hover:text-klein active:scale-[0.97] aria-pressed:text-klein"
             >
               {item}
               {filter === item && (
                 <span
                   aria-hidden="true"
-                  className="size-1.5 animate-fade rounded-full bg-klein [animation-duration:200ms]"
+                  className="size-1.5 animate-fade-fast rounded-full bg-klein"
                 />
               )}
             </button>
@@ -80,7 +80,7 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
             <Link
               href={`/work/${active.slug}`}
               onClick={(e) => openModal(e, active)}
-              className="group relative block aspect-[4/5] overflow-hidden bg-wash transition-[scale] duration-150 ease-out active:scale-[0.99] md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
+              className="group relative block aspect-4/5 overflow-hidden bg-wash transition-[scale] duration-150 ease-out active:scale-[0.99] md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
             >
               {projects
                 .filter((p) => warm || p.slug === active.slug)
@@ -122,21 +122,23 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
               >
                 <Link
                   href={`/work/${p.slug}`}
-                  aria-current={p.slug === active?.slug ? 'true' : undefined}
+                  // Highlight only: aria-current would announce "current" on
+                  // whatever the pointer last touched
+                  data-active={p.slug === active?.slug || undefined}
                   onMouseEnter={() => setActiveSlug(p.slug)}
                   onFocus={() => setActiveSlug(p.slug)}
                   onClick={(e) => openModal(e, p)}
-                  className="group grid min-h-14 grid-cols-[2rem_minmax(0,1fr)_1.5rem] items-center gap-3 py-3 transition-colors hover:text-klein aria-[current]:text-klein xl:min-h-17"
+                  className="group grid min-h-14 grid-cols-[2rem_minmax(0,1fr)_1.5rem] items-center gap-3 py-3 transition-colors hover:text-klein data-active:text-klein xl:min-h-17"
                 >
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-micro text-muted">
                     {p.number}
                   </span>
-                  <span className="text-2xl leading-tight md:text-[27px] xl:text-[34px]">
+                  <span className="text-2xl leading-tight md:text-list xl:text-list-xl">
                     {p.name}
                   </span>
                   <ArrowUpRight
                     aria-hidden="true"
-                    className="-translate-x-1 translate-y-1 opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-aria-[current]:translate-x-0 group-aria-[current]:translate-y-0 group-aria-[current]:opacity-100"
+                    className="-translate-x-1 translate-y-1 opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-data-active:translate-x-0 group-data-active:translate-y-0 group-data-active:opacity-100"
                   />
                 </Link>
               </li>

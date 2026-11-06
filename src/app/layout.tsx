@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Mono, DM_Sans } from 'next/font/google';
 import Script from 'next/script';
-import { SITE } from '@/config/site';
+import { BRAND, SITE } from '@/config/site';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import './globals.css';
 
@@ -12,7 +12,7 @@ const dmSans = DM_Sans({
 
 const dmMono = DM_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: '400',
   variable: '--font-dm-mono',
 });
 
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: SITE.name,
-    locale: 'en',
+    locale: 'en_US',
     url: '/',
     title: SITE.title,
     description: SITE.description,
@@ -43,13 +43,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: SITE.themeColor,
+  themeColor: BRAND.klein,
   colorScheme: 'light',
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`}>
+    // data-scroll-behavior: smooth scrolling is for in-page anchors; route
+    // changes should jump to the top instantly
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${dmSans.variable} ${dmMono.variable}`}
+    >
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-75ZKE9DTVJ"

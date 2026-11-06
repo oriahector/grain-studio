@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import sharp from 'sharp';
-import { getProject, projects } from '@/lib/projects';
+import { BRAND } from '@/config/site';
+import { getProject, projects } from '@/content/projects';
 
 // Rendered once per project at build time and exported as /work/<slug>/og.jpg.
 // JPEG rather than PNG/AVIF: smaller, and every social scraper reads it.
@@ -46,8 +47,8 @@ export async function GET(
           display: 'flex',
           width: '100%',
           height: '100%',
-          background: '#f8f7f5',
-          color: '#1c1c1b',
+          background: BRAND.paper,
+          color: BRAND.ink,
           fontFamily: 'DM Sans',
         }}
       >
@@ -82,7 +83,7 @@ export async function GET(
                 width: 9,
                 height: 9,
                 borderRadius: 9,
-                background: '#002fa7',
+                background: BRAND.klein,
               }}
             />
             studio
@@ -93,7 +94,7 @@ export async function GET(
                 fontSize: 18,
                 letterSpacing: 1.5,
                 textTransform: 'uppercase',
-                color: '#6f6f6c',
+                color: BRAND.muted,
               }}
             >
               {`Selected work / ${project.number}`}
@@ -106,7 +107,7 @@ export async function GET(
                 fontSize: 18,
                 letterSpacing: 1.5,
                 textTransform: 'uppercase',
-                color: '#002fa7',
+                color: BRAND.klein,
               }}
             >
               {`${project.category} · ${project.year}`}

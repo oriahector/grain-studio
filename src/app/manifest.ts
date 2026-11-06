@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { SITE } from '@/config/site';
+import { BRAND, SITE } from '@/config/site';
 
 export const dynamic = 'force-static';
 
@@ -10,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: SITE.description,
     start_url: '/',
     display: 'browser',
-    background_color: '#f8f7f5',
-    theme_color: SITE.themeColor,
+    background_color: BRAND.paper,
+    theme_color: BRAND.klein,
     icons: [{ src: '/icon.png', sizes: '310x310', type: 'image/png' }],
   };
 }

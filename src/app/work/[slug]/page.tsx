@@ -6,8 +6,13 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ProjectDetail } from '@/components/ProjectDetail';
 import { JsonLd } from '@/components/JsonLd';
+import {
+  NAV_BACK,
+  NAV_FORWARD,
+  PageTransition,
+} from '@/components/PageTransition';
 import { SITE } from '@/config/site';
-import { getProject, projects } from '@/lib/projects';
+import { getProject, projects } from '@/content/projects';
 import { projectSchema } from '@/lib/structured-data';
 
 export const dynamicParams = false;
@@ -32,7 +37,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'article',
       siteName: SITE.name,
-      locale: 'en',
+      locale: 'en_US',
       url,
       title,
       description: project.description,
@@ -61,32 +66,36 @@ export default async function ProjectPage({
     <>
       <JsonLd data={projectSchema(project)} />
       <Header />
-      <main className="container-page pt-6 pb-16">
-        <Link
-          href="/#work"
-          className="mb-10 inline-flex items-center gap-1.5 eyebrow text-[11px] hover:text-klein"
-        >
-          <ArrowLeft aria-hidden="true" className="size-3.5" />
-          All work
-        </Link>
+      <PageTransition key={project.slug}>
+        <main className="container-page pt-6 pb-16">
+          <Link
+            href="/#work"
+            transitionTypes={NAV_BACK}
+            className="mb-10 inline-flex items-center gap-1.5 eyebrow text-mini hover:text-klein"
+          >
+            <ArrowLeft aria-hidden="true" className="size-3.5" />
+            All work
+          </Link>
 
-        <ProjectDetail project={project} />
+          <ProjectDetail project={project} />
 
-        <Link
-          href={`/work/${next.slug}`}
-          className="group mt-16 flex items-center justify-between border-t border-line pt-6 hover:text-klein"
-        >
-          <span>
-            <span className="block eyebrow text-muted">Next project</span>
-            <span className="text-3xl md:text-5xl">{next.name}</span>
-          </span>
-          <ArrowRight
-            aria-hidden="true"
-            strokeWidth={1.2}
-            className="size-10 transition-[translate] duration-200 ease-out group-hover:translate-x-2 md:size-16"
-          />
-        </Link>
-      </main>
+          <Link
+            href={`/work/${next.slug}`}
+            transitionTypes={NAV_FORWARD}
+            className="group mt-16 flex items-center justify-between border-t border-line pt-6 hover:text-klein"
+          >
+            <span>
+              <span className="block eyebrow text-muted">Next project</span>
+              <span className="text-3xl md:text-5xl">{next.name}</span>
+            </span>
+            <ArrowRight
+              aria-hidden="true"
+              strokeWidth={1.2}
+              className="size-10 transition-[translate] duration-200 ease-out group-hover:translate-x-2 md:size-16"
+            />
+          </Link>
+        </main>
+      </PageTransition>
       <Footer />
     </>
   );
