@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Mono, DM_Sans } from 'next/font/google';
 import Script from 'next/script';
-import { SITE } from '@/config/site';
+import { BRAND, SITE } from '@/config/site';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import './globals.css';
 
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: SITE.themeColor,
+  themeColor: BRAND.klein,
   colorScheme: 'light',
 };
 

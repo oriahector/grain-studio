@@ -64,7 +64,7 @@ export default async function ProjectPage({
       <main className="container-page pt-6 pb-16">
         <Link
           href="/#work"
-          className="mb-10 inline-flex items-center gap-1.5 eyebrow text-[11px] hover:text-klein"
+          className="mb-10 inline-flex items-center gap-1.5 eyebrow text-mini hover:text-klein"
         >
           <ArrowLeft aria-hidden="true" className="size-3.5" />
           All work

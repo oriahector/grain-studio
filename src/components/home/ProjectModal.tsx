@@ -59,7 +59,7 @@ export function ProjectModal({ projects }: { projects: Project[] }) {
           <div className="mb-8 flex items-center justify-between">
             <Link
               href={`/work/${shown.slug}`}
-              className="eyebrow text-[11px] text-muted hover:text-klein"
+              className="eyebrow text-mini text-muted hover:text-klein"
             >
               Open project page
             </Link>

@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { projects } from '@/lib/projects';
 
 const navLink =
-  'eyebrow inline-flex items-center gap-1 text-[11px] transition-colors hover:text-klein';
+  'eyebrow inline-flex items-center gap-1 text-mini transition-colors hover:text-klein';
 
 /** `showLogo` is off on the home, where the masthead already carries the name */
 export function Header({ showLogo = true }: { showLogo?: boolean }) {
@@ -12,7 +12,7 @@ export function Header({ showLogo = true }: { showLogo?: boolean }) {
       {showLogo && (
         <Link
           href="/"
-          className="flex items-center gap-[0.3em] text-[17px] font-bold md:text-[22px]"
+          className="flex items-center gap-[0.3em] text-body font-bold md:text-logo"
         >
           {/* The spaces collapse visually in flex but keep the name "grain studio" */}
           grain{' '}

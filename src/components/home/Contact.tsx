@@ -40,10 +40,7 @@ export function Contact() {
     >
       <div className="reveal">
         <p className="eyebrow">Have something in mind?</p>
-        <h2
-          id="contact-heading"
-          className="mt-5 text-[clamp(3.25rem,7vw,6.25rem)] leading-[1.05]"
-        >
+        <h2 id="contact-heading" className="mt-5 text-display">
           Let&apos;s make it.
         </h2>
       </div>

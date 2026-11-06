@@ -44,7 +44,7 @@ export function ProjectDetail({
             href={project.url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1 self-start eyebrow text-[11px] text-klein hover:underline hover:underline-offset-4"
+            className="inline-flex items-center gap-1 self-start eyebrow text-mini text-klein hover:underline hover:underline-offset-4"
           >
             Visit site
             <ArrowUpRight aria-hidden="true" className="size-3.5" />

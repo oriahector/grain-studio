@@ -60,13 +60,13 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
                 setFilter(item);
                 setFiltered(true);
               }}
-              className="inline-flex cursor-pointer items-center gap-1.5 eyebrow text-[11px] transition-[color,scale] duration-150 ease-out hover:text-klein active:scale-[0.97] aria-pressed:text-klein"
+              className="inline-flex cursor-pointer items-center gap-1.5 eyebrow text-mini transition-[color,scale] duration-150 ease-out hover:text-klein active:scale-[0.97] aria-pressed:text-klein"
             >
               {item}
               {filter === item && (
                 <span
                   aria-hidden="true"
-                  className="size-1.5 animate-fade rounded-full bg-klein [animation-duration:200ms]"
+                  className="size-1.5 animate-fade-fast rounded-full bg-klein"
                 />
               )}
             </button>
@@ -80,7 +80,7 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
             <Link
               href={`/work/${active.slug}`}
               onClick={(e) => openModal(e, active)}
-              className="group relative block aspect-[4/5] overflow-hidden bg-wash transition-[scale] duration-150 ease-out active:scale-[0.99] md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
+              className="group relative block aspect-4/5 overflow-hidden bg-wash transition-[scale] duration-150 ease-out active:scale-[0.99] md:aspect-auto md:h-[clamp(28rem,40vw,42rem)]"
             >
               {projects
                 .filter((p) => warm || p.slug === active.slug)
@@ -130,10 +130,10 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
                   onClick={(e) => openModal(e, p)}
                   className="group grid min-h-14 grid-cols-[2rem_minmax(0,1fr)_1.5rem] items-center gap-3 py-3 transition-colors hover:text-klein data-active:text-klein xl:min-h-17"
                 >
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-micro text-muted">
                     {p.number}
                   </span>
-                  <span className="text-2xl leading-tight md:text-[27px] xl:text-[34px]">
+                  <span className="text-2xl leading-tight md:text-list xl:text-list-xl">
                     {p.name}
                   </span>
                   <ArrowUpRight

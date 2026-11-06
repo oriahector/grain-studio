@@ -36,7 +36,7 @@ export function Studio() {
         <p className="eyebrow">The studio</p>
         <h2
           id="studio-heading"
-          className="mt-6 max-w-[32rem] text-[42px] leading-[1.12] md:text-[50px]"
+          className="mt-6 max-w-lg text-title md:text-title-lg"
         >
           Small by design.
           <br />
@@ -45,7 +45,7 @@ export function Studio() {
       </div>
 
       <div className="reveal">
-        <p className="mt-5 mb-8 max-w-[31rem] text-[17px] leading-relaxed md:mt-10 md:text-[19px]">
+        <p className="mt-5 mb-8 max-w-124 text-body leading-relaxed md:mt-10 md:text-body-lg">
           Behind Grain Studio are{' '}
           <a
             className={person}
@@ -76,7 +76,7 @@ export function Studio() {
             name="services"
             className="service group border-b border-line"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between py-4.5 text-[17px] transition-colors hover:text-klein [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between py-4.5 text-body transition-colors hover:text-klein [&::-webkit-details-marker]:hidden">
               {service.name}
               <Plus
                 aria-hidden="true"
